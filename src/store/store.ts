@@ -10,6 +10,10 @@ const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 
 export const useStore = defineStore("counter", () => {
+    const settings = ref({
+        stripes: false,
+    });
+
     const activeCell = ref({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
@@ -75,6 +79,8 @@ export const useStore = defineStore("counter", () => {
     }
 
     return {
+        settings,
+
         activeCell,
         selectCell,
         selectCellLeft,
