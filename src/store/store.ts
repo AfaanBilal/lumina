@@ -10,7 +10,7 @@ const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 
 export const useStore = defineStore("counter", () => {
-    const selectedCell = ref({ rowIndex: 0, cellIndex: 0 });
+    const activeCell = ref({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
@@ -20,8 +20,36 @@ export const useStore = defineStore("counter", () => {
     const maxRows = computed(() => sheet.value.rows.length);
 
     function selectCell(rowIndex: number, cellIndex: number) {
-        selectedCell.value.rowIndex = rowIndex;
-        selectedCell.value.cellIndex = cellIndex;
+        activeCell.value.rowIndex = rowIndex;
+        activeCell.value.cellIndex = cellIndex;
+    }
+
+    function selectCellLeft() {
+        if (activeCell.value.cellIndex <= 0) return;
+
+        activeCell.value.cellIndex -= 1;
+    }
+
+    function selectCellRight() {
+        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
+            addColumn();
+        }
+
+        activeCell.value.cellIndex += 1;
+    }
+
+    function selectCellUp() {
+        if (activeCell.value.rowIndex <= 0) return;
+
+        activeCell.value.rowIndex -= 1;
+    }
+
+    function selectCellDown() {
+        if (activeCell.value.rowIndex >= maxRows.value - 1) {
+            addRow();
+        }
+
+        activeCell.value.rowIndex += 1;
     }
 
     function updateCell(rowIndex: number, cellIndex: number, cell: ILuminaCell) {
@@ -49,8 +77,12 @@ export const useStore = defineStore("counter", () => {
     }
 
     return {
-        selectedCell,
+        activeCell,
         selectCell,
+        selectCellLeft,
+        selectCellRight,
+        selectCellUp,
+        selectCellDown,
         updateCell,
 
         sheet,

@@ -15,8 +15,35 @@ import type { ILuminaSheet } from "../App.d";
 import { useStore } from "../store/store";
 import LuminaRow from "./LuminaRow.vue";
 import LuminaHeader from "./LuminaHeader.vue";
+import { onMounted, onUnmounted } from "vue";
 
 defineProps<{ sheet: ILuminaSheet }>();
 
 const store = useStore();
+
+const navKeyListener = (e: KeyboardEvent) => {
+    if (document.activeElement && document.activeElement.tagName.toLowerCase() === "input") return;
+
+    switch (e.key) {
+        case "ArrowUp":
+            e.preventDefault();
+            store.selectCellUp();
+            break;
+        case "ArrowDown":
+            e.preventDefault();
+            store.selectCellDown();
+            break;
+        case "ArrowLeft":
+            e.preventDefault();
+            store.selectCellLeft();
+            break;
+        case "ArrowRight":
+            e.preventDefault();
+            store.selectCellRight();
+            break;
+    }
+};
+
+onMounted(() => window.addEventListener("keydown", navKeyListener));
+onUnmounted(() => window.removeEventListener("keydown", navKeyListener));
 </script>
