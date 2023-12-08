@@ -3,8 +3,8 @@ import { computed, ref } from "vue";
 import { ulid } from "ulid";
 import { ILuminaCell, ILuminaRow, ILuminaSheet } from "../App.d";
 
-const INITIAL_ROW_COUNT = 20;
-const INITIAL_COLUMN_COUNT = 15;
+const INITIAL_ROW_COUNT = 100;
+const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
 
 const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });

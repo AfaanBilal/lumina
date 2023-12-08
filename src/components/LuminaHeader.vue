@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <div class="flex items-center flex-shrink-0 w-8 h-6 border p-0.5 bg-slate-200">&nbsp;</div>
+        <div class="flex items-center flex-shrink-0 w-10 h-6 border p-0.5 bg-slate-200">&nbsp;</div>
         <div v-for="i in store.maxColumns" :key="i" class="flex flex-shrink-0 items-center justify-center font-semibold w-20 h-6 border p-0.5 bg-slate-100">
             {{ indexToColumn(i - 1) }}
         </div>
