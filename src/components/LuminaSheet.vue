@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-full border">
+    <div class="flex flex-col w-full overflow-x-scroll border">
         <LuminaHeader />
         <LuminaRow v-for="(row, i) of sheet.rows" :key="row.id" :row="row" :index="i" />
         <button @click="store.addRow()">Add Row</button>
