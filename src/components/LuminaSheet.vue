@@ -10,12 +10,12 @@
 
 <script setup lang="ts">
 import { IconPlus } from "@tabler/icons-vue";
+import { onMounted, onUnmounted } from "vue";
 
-import type { ILuminaSheet } from "../App.d";
 import { useStore } from "../store/store";
+import type { ILuminaSheet } from "../App.d";
 import LuminaRow from "./LuminaRow.vue";
 import LuminaHeader from "./LuminaHeader.vue";
-import { onMounted, onUnmounted } from "vue";
 
 defineProps<{ sheet: ILuminaSheet }>();
 

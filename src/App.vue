@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import LuminaSheet from "./components/LuminaSheet.vue";
 import { useStore } from "./store/store";
+import LuminaSheet from "./components/LuminaSheet.vue";
 
 const store = useStore();
 </script>

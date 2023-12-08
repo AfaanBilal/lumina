@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { IconPlus } from "@tabler/icons-vue";
+
 import { useStore } from "../store/store";
 import { indexToColumn } from "../utils/helpers";
 
