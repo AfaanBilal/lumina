@@ -24,20 +24,6 @@ export const useStore = defineStore("counter", () => {
         activeCell.value.cellIndex = cellIndex;
     }
 
-    function selectCellLeft() {
-        if (activeCell.value.cellIndex <= 0) return;
-
-        activeCell.value.cellIndex -= 1;
-    }
-
-    function selectCellRight() {
-        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
-            addColumn();
-        }
-
-        activeCell.value.cellIndex += 1;
-    }
-
     function selectCellUp() {
         if (activeCell.value.rowIndex <= 0) return;
 
@@ -50,6 +36,20 @@ export const useStore = defineStore("counter", () => {
         }
 
         activeCell.value.rowIndex += 1;
+    }
+
+    function selectCellLeft() {
+        if (activeCell.value.cellIndex <= 0) return;
+
+        activeCell.value.cellIndex -= 1;
+    }
+
+    function selectCellRight() {
+        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
+            addColumn();
+        }
+
+        activeCell.value.cellIndex += 1;
     }
 
     function updateCell(rowIndex: number, cellIndex: number, cell: ILuminaCell) {
