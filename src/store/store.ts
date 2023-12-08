@@ -7,7 +7,7 @@ const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const generateEmptyCells = (cellCount: number): Array<ILuminaCell> => [...Array(cellCount).keys()].map(() => emptyCell());
 
 export const useStore = defineStore("counter", () => {
-    const selectedCell = ref("");
+    const selectedCell = ref({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
         rows: [
@@ -33,8 +33,9 @@ export const useStore = defineStore("counter", () => {
     const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
     const maxRows = computed(() => sheet.value.rows.length);
 
-    function selectCell(id: string) {
-        selectedCell.value = id;
+    function selectCell(rowIndex: number, cellIndex: number) {
+        selectedCell.value.rowIndex = rowIndex;
+        selectedCell.value.cellIndex = cellIndex;
     }
 
     function updateCell(rowIndex: number, cellIndex: number, cell: ILuminaCell) {

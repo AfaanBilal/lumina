@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center w-20 h-6 border p-0.5" :class="{ 'border-2 border-blue-500': isSelected }" @click="store.selectCell(cell.id)">
+    <div class="flex items-center w-20 h-6 border p-0.5" :class="{ 'border-2 border-blue-500': isSelected }" @click="store.selectCell(rowIndex, index)">
         <div v-show="!isSelected">{{ cell.value }}</div>
         <div v-if="isSelected">
             <input v-model="value" type="text" class="w-full h-5 p-0.5 outline-none">
@@ -16,7 +16,7 @@ const props = defineProps<{ index: number; rowIndex: number; cell: ILuminaCell; 
 
 const store = useStore();
 
-const isSelected = computed(() => store.selectedCell === props.cell.id);
+const isSelected = computed(() => store.selectedCell.rowIndex === props.rowIndex && store.selectedCell.cellIndex === props.index);
 
 const value = computed<TLuminaCellValue>({
     get() {
