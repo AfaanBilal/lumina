@@ -12,6 +12,8 @@ const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cell
 export const useStore = defineStore("counter", () => {
     const settings = ref({
         stripes: false,
+        rowBand: false,
+        colBand: false,
     });
 
     const activeCell = ref({ rowIndex: 0, cellIndex: 0 });

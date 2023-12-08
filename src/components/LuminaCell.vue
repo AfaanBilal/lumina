@@ -1,5 +1,13 @@
 <template>
-    <div class="flex flex-shrink-0 text-sm items-center w-20 h-6 border p-0.5" :class="{ 'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1, 'border-2 border-blue-500': isSelected, 'border-x-slate-400': store.activeCell.cellIndex === index && store.activeCell.rowIndex > rowIndex, 'border-y-slate-400': store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > index }" @click="cellClick">
+    <div
+        class="flex flex-shrink-0 text-sm items-center w-20 h-6 border p-0.5"
+        :class="{
+            'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
+            'border-2 border-blue-500': isSelected,
+            'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > index,
+            'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === index && store.activeCell.rowIndex > rowIndex,
+        }"
+        @click="cellClick">
         <div v-show="!isSelected" class="w-full overflow-clip">{{ cell.value }}</div>
         <div v-if="isSelected">
             <input ref="input" v-model="value" type="text" class="w-full h-5 outline-none" @keyup.enter="store.selectCellDown()">
