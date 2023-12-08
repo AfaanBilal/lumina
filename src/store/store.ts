@@ -1,33 +1,19 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { ILuminaCell, ILuminaSheet, LuminaCellType } from "../App.d";
+import { ILuminaCell, ILuminaRow, ILuminaSheet } from "../App.d";
+
+const INITIAL_ROW_COUNT = 20;
+const INITIAL_COLUMN_COUNT = 15;
 
 const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
-const generateEmptyCells = (cellCount: number): Array<ILuminaCell> => [...Array(cellCount).keys()].map(() => emptyCell());
+const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 
 export const useStore = defineStore("counter", () => {
     const selectedCell = ref({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
-        rows: [
-            {
-                id: "r1",
-                cells: [
-                    { id: "c1", value: "A1", type: LuminaCellType.Text },
-                    { id: "c2", value: "B1", type: LuminaCellType.Text },
-                    { id: "c3", value: "C1", type: LuminaCellType.Text },
-                ],
-            },
-            {
-                id: "r2",
-                cells: [
-                    { id: "c4", value: "A2", type: LuminaCellType.Text },
-                    { id: "c5", value: "B2", type: LuminaCellType.Text },
-                    { id: "c6", value: "C2", type: LuminaCellType.Text },
-                ],
-            },
-        ],
+        rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
     });
 
     const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
@@ -43,12 +29,10 @@ export const useStore = defineStore("counter", () => {
     }
 
     function addRow(index?: number) {
-        const emptyRow = { id: "row_" + ulid(), cells: generateEmptyCells(maxColumns.value) };
-
         if (index) {
-            sheet.value.rows.splice(index, 0, emptyRow);
+            sheet.value.rows.splice(index, 0, emptyRow(maxColumns.value));
         } else {
-            sheet.value.rows.push(emptyRow);
+            sheet.value.rows.push(emptyRow(maxColumns.value));
         }
     }
 
