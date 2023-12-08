@@ -67,9 +67,7 @@ export const useStore = defineStore("counter", () => {
     function addColumn(index?: number) {
         for (let i = 0; i < sheet.value.rows.length; i++) {
             if (index) {
-                if (i === index) {
-                    sheet.value.rows[i].cells.push(emptyCell());
-                }
+                sheet.value.rows[i].cells.splice(index, 0, emptyCell());
             } else {
                 sheet.value.rows[i].cells.push(emptyCell());
             }
