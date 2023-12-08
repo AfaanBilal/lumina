@@ -1,8 +1,8 @@
 <template>
-    <div class="flex items-center w-20 h-6 border p-0.5" :class="{ 'border-blue-500': isSelected }" @click="store.selectCell(cell.id)">
+    <div class="flex items-center w-20 h-6 border p-0.5" :class="{ 'border-2 border-blue-500': isSelected }" @click="store.selectCell(cell.id)">
         <div v-show="!isSelected">{{ cell.value }}</div>
         <div v-show="isSelected">
-            <input v-model="value" type="text" class="w-20 h-6 p-0.5">
+            <input v-model="value" type="text" class="w-full h-5 p-0.5 outline-none">
         </div>
     </div>
 </template>
