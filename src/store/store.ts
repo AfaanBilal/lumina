@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { ILuminaCell, ILuminaRow, ILuminaSheet } from "../App.d";
+import { ILuminaCell, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
 
 const INITIAL_ROW_COUNT = 100;
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
@@ -10,11 +10,16 @@ const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 
 export const useStore = defineStore("counter", () => {
-    const settings = ref({
-        stripes: false,
-        rowBand: false,
-        colBand: false,
+    const settings = ref<Settings>({
+        autofocus: true,
+        stripes: true,
+        rowBand: true,
+        colBand: true,
     });
+
+    function updateSettings(key: keyof Settings, value: boolean) {
+        settings.value[key] = value;
+    }
 
     const activeCell = ref({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
@@ -82,6 +87,7 @@ export const useStore = defineStore("counter", () => {
 
     return {
         settings,
+        updateSettings,
 
         activeCell,
         selectCell,

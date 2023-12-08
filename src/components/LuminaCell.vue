@@ -38,6 +38,9 @@ const value = computed<TLuminaCellValue>({
 const input = ref<HTMLInputElement | null>(null);
 const cellClick = () => {
     store.selectCell(props.rowIndex, props.index);
-    nextTick(() => input.value?.focus());
+
+    if (store.settings.autofocus) {
+        nextTick(() => input.value?.focus());
+    }
 };
 </script>

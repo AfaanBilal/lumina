@@ -20,3 +20,10 @@ export interface ILuminaSheet {
     id: string;
     rows: Array<ILuminaRow>;
 }
+
+export interface Settings {
+    autofocus: boolean;
+    stripes: boolean;
+    rowBand: boolean;
+    colBand: boolean;
+}
