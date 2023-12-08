@@ -33,7 +33,14 @@ module.exports = {
         "vue/max-attributes-per-line": "off",
         "vue/html-indent": [
             "error",
-            4
+            4,
+            {
+                "attribute": 1,
+                "baseIndent": 1,
+                "closeBracket": 0,
+                "alignAttributesVertically": false,
+                "ignores": []
+            },
         ],
         "indent": [
             "error",

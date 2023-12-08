@@ -10,6 +10,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
   },
   "dependencies": {
+    "clsx": "^2.0.0",
+    "pinia": "^2.1.7",
+    "ulid": "^2.3.0",
     "vue": "^3.3.8"
   },
   "devDependencies": {
