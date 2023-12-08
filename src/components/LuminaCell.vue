@@ -8,14 +8,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import type { ILuminaCell } from "../App.d";
+import { computed } from "vue";
 import { useStore } from "../store/store";
+import type { ILuminaCell, TLuminaCellValue } from "../App.d";
 
 const props = defineProps<{ index: number; rowIndex: number; cell: ILuminaCell; }>();
 
 const store = useStore();
 
 const isSelected = computed(() => store.selectedCell === props.cell.id);
-const value = ref(props.cell.value);
+
+const value = computed<TLuminaCellValue>({
+    get() {
+        return props.cell.value;
+    },
+    set(v: TLuminaCellValue) {
+        store.updateCell(props.rowIndex, props.index, { ...props.cell, value: v });
+    },
+});
 </script>

@@ -3,10 +3,12 @@ export enum LuminaCellType {
     Number = "number",
 }
 
+export type TLuminaCellValue = string | number;
+
 export interface ILuminaCell {
     id: string;
     type?: LuminaCellType;
-    value: string | number;
+    value: TLuminaCellValue;
 }
 
 export interface ILuminaRow {

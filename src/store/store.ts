@@ -37,6 +37,10 @@ export const useStore = defineStore("counter", () => {
         selectedCell.value = id;
     }
 
+    function updateCell(rowIndex: number, cellIndex: number, cell: ILuminaCell) {
+        sheet.value.rows[rowIndex].cells[cellIndex] = cell;
+    }
+
     function addRow(index?: number) {
         const emptyRow = { id: "row_" + ulid(), cells: generateEmptyCells(maxColumns.value) };
 
@@ -62,6 +66,7 @@ export const useStore = defineStore("counter", () => {
     return {
         selectedCell,
         selectCell,
+        updateCell,
 
         sheet,
         maxRows,
