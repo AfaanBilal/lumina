@@ -1,7 +1,7 @@
 <template>
     <div class="flex">
         <div class="flex items-center flex-shrink-0 w-10 h-6 border p-0.5 bg-slate-200">&nbsp;</div>
-        <div v-for="i in store.maxColumns" :key="i" class="relative flex flex-shrink-0 items-center justify-center font-medium w-20 h-6 border p-0.5 bg-slate-100 group" :class="{ 'bg-slate-200': i - 1 === store.activeCell.cellIndex }">
+        <div v-for="i in store.maxColumns" :key="i" class="relative text-sm flex flex-shrink-0 items-center justify-center font-medium w-20 h-6 border p-0.5 bg-slate-100 group" :class="{ 'bg-slate-200': i - 1 === store.activeCell.cellIndex }">
             <button class="absolute items-center justify-center p-0.5 left-1 bg-slate-300 hidden group-hover:flex" title="Add a colum to the left" @click="store.addColumn(i-1)">
                 <IconPlus :size="12" />
             </button>
