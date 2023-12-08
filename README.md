@@ -1,5 +1,5 @@
-Lumina
-======
+<img src="./public/logo.png" width="32"> Lumina
+===============================================
 
 Author: **[Afaan Bilal](https://afaan.dev)**
 

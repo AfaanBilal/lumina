@@ -1,6 +1,9 @@
 <template>
     <div class="flex items-center justify-between p-2">
-        <h1 class="text-2xl">Lumina</h1>
+        <div class="flex items-center gap-2">
+            <img src="/public/logo.png" alt="logo" class="w-8">
+            <h1 class="text-2xl font-semibold">Lumina</h1>
+        </div>
         <a href="https://afaan.dev" target="_blank" rel="noopener" class="text-lg text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
     </div>
     <LuminaSheet :sheet="store.sheet" />
