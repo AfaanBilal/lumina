@@ -1,7 +1,17 @@
 <template>
-    <div class="flex flex-col overflow-x-scroll border">
+    <div
+        class="grid overflow-x-auto border"
+        :style="`
+            grid-template-rows: repeat(${sheet.rows.length}, 1.5rem);
+            grid-template-columns: 2.5rem repeat(${sheet.rows[0].cells.length}, 5rem);
+        `">
         <LuminaHeader />
-        <LuminaRow v-for="(row, i) of sheet.rows" :key="row.id" :row="row" :index="i" />
+
+        <template v-for="(row, i) of sheet.rows" :key="row.id">
+            <LuminaIndexCell :index="i" />
+            <LuminaCell v-for="(cell, j) of row.cells" :key="cell.id" :cell="cell" :index="j" :row-index="i" />
+        </template>
+
         <button class="flex items-center justify-center h-6 px-2 w-fit bg-slate-300" @click="store.addRow()">
             <IconPlus :size="16" />
         </button>
@@ -14,8 +24,9 @@ import { onMounted, onUnmounted } from "vue";
 
 import { useStore } from "../store/store";
 import type { ILuminaSheet } from "../App.d";
-import LuminaRow from "./LuminaRow.vue";
 import LuminaHeader from "./LuminaHeader.vue";
+import LuminaCell from "./LuminaCell.vue";
+import LuminaIndexCell from "./LuminaIndexCell.vue";
 
 defineProps<{ sheet: ILuminaSheet }>();
 
