@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-shrink-0 text-sm items-center w-20 h-6 border p-0.5"
+        class="flex flex-shrink-0 text-sm items-center w-20 h-6 border p-0.5 animate-[fadeIn_.3s_ease-in-out]"
         :class="{
             'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
             'border-2 border-blue-500': isSelected,
