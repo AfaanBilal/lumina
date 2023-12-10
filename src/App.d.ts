@@ -27,8 +27,25 @@ export interface ILuminaRow {
     cells: Array<ILuminaCell>;
 }
 
+export interface ILuminaRowColStyle {
+    width?: number;
+    height?: number;
+    backgroundColor?: string;
+    textColor?: string;
+}
+
+export interface ILuminaRowStyle extends ILuminaRowColStyle {}
+
+export interface ILuminaColStyle extends ILuminaRowColStyle {}
+
+export interface ILuminaSheetStyle {
+    rows: HashMap<ILuminaRowStyle>;
+    cols: HashMap<ILuminaColStyle>;
+}
+
 export interface ILuminaSheet {
     id: string;
+    style?: ILuminaSheetStyle;
     rows: Array<ILuminaRow>;
 }
 
