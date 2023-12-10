@@ -11,18 +11,15 @@
         <div class="flex gap-4 p-1 text-xs">
             <div class="flex border">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }"
-                    @click="toggleBold">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" @click="toggleBold">
                     <IconBold :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }"
-                    @click="setItalic">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
                     <IconItalic :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }"
-                    @click="toggleUnderline">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
                     <IconUnderline :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r">
