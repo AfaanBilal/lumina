@@ -33,6 +33,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 ---
 
 ## Screenshots
+![Lumina](./screenshots/Lumina-2023-12-10-2.png)
 ![Lumina](./screenshots/Lumina-2023-12-10.png)
 
 ---
