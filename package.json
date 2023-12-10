@@ -12,6 +12,7 @@
   "dependencies": {
     "@tabler/icons-vue": "^2.42.0",
     "clsx": "^2.0.0",
+    "expr-eval": "^2.0.2",
     "pinia": "^2.1.7",
     "ulid": "^2.3.0",
     "vue": "^3.3.8"
