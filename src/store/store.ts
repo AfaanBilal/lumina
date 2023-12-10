@@ -11,10 +11,10 @@ const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cell
 
 export const useStore = defineStore("counter", () => {
     const settings = ref<Settings>({
-        autofocus: true,
-        stripes: true,
-        rowBand: true,
-        colBand: true,
+        autofocus: false,
+        stripes: false,
+        rowBand: false,
+        colBand: false,
     });
 
     function updateSettings(key: keyof Settings, value: boolean) {
