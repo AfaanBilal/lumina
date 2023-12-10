@@ -13,6 +13,8 @@ export interface ILuminaCellStyle {
     bold?: boolean;
     italic?: boolean;
     underline?: boolean;
+    backgroundColor?: string;
+    textColor?: string;
 }
 
 export interface ILuminaCell {
@@ -30,8 +32,6 @@ export interface ILuminaRow {
 export interface ILuminaRowColStyle {
     width?: number;
     height?: number;
-    backgroundColor?: string;
-    textColor?: string;
 }
 
 export interface ILuminaRowStyle extends ILuminaRowColStyle {}
