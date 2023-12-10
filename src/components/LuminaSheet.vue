@@ -9,7 +9,7 @@
 
         <template v-for="(row, i) of sheet.rows" :key="row.id">
             <LuminaIndexCell :index="i" />
-            <LuminaCell v-for="(cell, j) of row.cells" :key="cell.id" :cell="cell" :index="j" :row-index="i" />
+            <LuminaCell v-for="(cell, j) of row.cells" :key="cell.id" :cell="cell" :row-index="i" :cell-index="j" />
         </template>
 
         <button class="flex items-center justify-center h-6 px-2 w-fit bg-slate-300" @click="store.addRow()">
@@ -51,6 +51,11 @@ const navKeyListener = (e: KeyboardEvent) => {
         case "ArrowRight":
             e.preventDefault();
             store.selectCellRight();
+            break;
+        case "Delete":
+        case "Backspace":
+            e.preventDefault();
+            store.setActiveCellValue("");
             break;
     }
 };

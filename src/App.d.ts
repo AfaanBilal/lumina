@@ -27,3 +27,8 @@ export interface Settings {
     rowBand: boolean;
     colBand: boolean;
 }
+
+export interface CellCoordinates {
+    rowIndex: number;
+    cellIndex: number;
+}

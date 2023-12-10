@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { ILuminaCell, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
+import { CellCoordinates, ILuminaCell, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
 
 const INITIAL_ROW_COUNT = 100;
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
@@ -21,7 +21,7 @@ export const useStore = defineStore("counter", () => {
         settings.value[key] = value;
     }
 
-    const activeCell = ref({ rowIndex: 0, cellIndex: 0 });
+    const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
@@ -30,7 +30,7 @@ export const useStore = defineStore("counter", () => {
     const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
     const maxRows = computed(() => sheet.value.rows.length);
 
-    function selectCell(rowIndex: number, cellIndex: number) {
+    function selectCell({ rowIndex, cellIndex }: CellCoordinates) {
         activeCell.value.rowIndex = rowIndex;
         activeCell.value.cellIndex = cellIndex;
     }
@@ -63,8 +63,16 @@ export const useStore = defineStore("counter", () => {
         activeCell.value.cellIndex += 1;
     }
 
-    function updateCell(rowIndex: number, cellIndex: number, cell: ILuminaCell) {
+    function updateCell({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) {
         sheet.value.rows[rowIndex].cells[cellIndex] = cell;
+    }
+
+    function setCellValue({ rowIndex, cellIndex }: CellCoordinates, v: string) {
+        sheet.value.rows[rowIndex].cells[cellIndex].value = v;
+    }
+
+    function setActiveCellValue(v: string) {
+        sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex].value = v;
     }
 
     function addRow(index?: number) {
@@ -96,6 +104,8 @@ export const useStore = defineStore("counter", () => {
         selectCellUp,
         selectCellDown,
         updateCell,
+        setCellValue,
+        setActiveCellValue,
 
         sheet,
         maxRows,

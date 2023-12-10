@@ -4,8 +4,8 @@
         :class="{
             'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
             'border-2 border-blue-500': isSelected,
-            'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > index,
-            'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === index && store.activeCell.rowIndex > rowIndex,
+            'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
+            'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
         }"
         @click="cellClick">
         <div v-show="!isSelected" class="w-full overflow-clip">{{ computedValue }}</div>
@@ -22,24 +22,24 @@ import { useStore } from "../store/store";
 import type { ILuminaCell, TLuminaCellValue } from "../App.d";
 import { isFormula, columnToIndex } from "../utils/helpers";
 
-const props = defineProps<{ index: number; rowIndex: number; cell: ILuminaCell; }>();
+const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
 const store = useStore();
 
-const isSelected = computed(() => store.activeCell.rowIndex === props.rowIndex && store.activeCell.cellIndex === props.index);
+const isSelected = computed(() => store.activeCell.rowIndex === props.rowIndex && store.activeCell.cellIndex === props.cellIndex);
 
 const value = computed<TLuminaCellValue>({
     get() {
         return props.cell.value;
     },
     set(v: TLuminaCellValue) {
-        store.updateCell(props.rowIndex, props.index, { ...props.cell, value: v });
+        store.setCellValue({ rowIndex: props.rowIndex, cellIndex: props.cellIndex }, v);
     },
 });
 
 const input = ref<HTMLInputElement | null>(null);
 const cellClick = () => {
-    store.selectCell(props.rowIndex, props.index);
+    store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex });
 
     if (store.settings.autofocus) {
         nextTick(() => input.value?.focus());
