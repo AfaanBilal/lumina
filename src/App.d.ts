@@ -9,10 +9,17 @@ export enum LuminaCellType {
 
 export type TLuminaCellValue = string;
 
+export interface ILuminaCellStyle {
+    bold?: boolean;
+    italic?: boolean;
+    underline?: boolean;
+}
+
 export interface ILuminaCell {
     id: string;
     type?: LuminaCellType;
     value: TLuminaCellValue;
+    style?: ILuminaCellStyle;
 }
 
 export interface ILuminaRow {

@@ -8,9 +8,27 @@
             'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
         }"
         @click="cellClick">
-        <div v-show="!isSelected" class="w-full overflow-clip">{{ computedValue }}</div>
+        <div
+            v-show="!isSelected" class="w-full overflow-clip"
+            :class="{
+                'font-bold': props.cell.style?.bold,
+                'italic': props.cell.style?.italic,
+                'underline': props.cell.style?.underline,
+            }">
+            {{ computedValue }}
+        </div>
         <div v-if="isSelected">
-            <input ref="input" v-model="value" type="text" class="w-full h-5 outline-none" @keyup.enter="store.selectCellDown()">
+            <input
+                ref="input"
+                v-model="value"
+                type="text"
+                class="w-full h-5 outline-none"
+                :class="{
+                    'font-bold': props.cell.style?.bold,
+                    'italic': props.cell.style?.italic,
+                    'underline': props.cell.style?.underline,
+                }"
+                @keyup.enter="store.selectCellDown()">
         </div>
     </div>
 </template>

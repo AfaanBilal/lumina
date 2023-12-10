@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { CellCoordinates, ILuminaCell, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
+import { CellCoordinates, ILuminaCell, ILuminaCellStyle, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
 
 const INITIAL_ROW_COUNT = 100;
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
@@ -26,6 +26,8 @@ export const useStore = defineStore("counter", () => {
         id: "sheet_" + ulid(),
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
     });
+
+    const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
 
     const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
     const maxRows = computed(() => sheet.value.rows.length);
@@ -71,8 +73,16 @@ export const useStore = defineStore("counter", () => {
         sheet.value.rows[rowIndex].cells[cellIndex].value = v;
     }
 
+    function updateActiveCell(cell: ILuminaCell) {
+        updateCell(activeCell.value, cell);
+    }
+
+    function updateActiveCellStyle(style: ILuminaCellStyle) {
+        updateActiveCell({ ...ActiveCell.value, style });
+    }
+
     function setActiveCellValue(v: string) {
-        sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex].value = v;
+        setCellValue(activeCell.value, v);
     }
 
     function addRow(index?: number) {
@@ -98,12 +108,15 @@ export const useStore = defineStore("counter", () => {
         updateSettings,
 
         activeCell,
+        ActiveCell,
         selectCell,
         selectCellLeft,
         selectCellRight,
         selectCellUp,
         selectCellDown,
         updateCell,
+        updateActiveCell,
+        updateActiveCellStyle,
         setCellValue,
         setActiveCellValue,
 
