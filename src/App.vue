@@ -5,18 +5,33 @@
                 <img src="/public/logo.png" alt="logo" class="w-8">
                 <h1 class="text-2xl font-semibold">Lumina</h1>
             </div>
-            <a href="https://afaan.dev" target="_blank" rel="noopener" class="text-lg text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
+            <a href="https://afaan.dev" target="_blank" rel="noopener"
+                class="text-lg text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
         </div>
         <div class="flex gap-4 p-1 text-xs">
             <div class="flex border">
-                <div class="p-0.5 rounded-l border-r cursor-pointer" :class="{'bg-slate-800 text-white': store.ActiveCell.style?.bold}" @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, bold: !store.ActiveCell.style?.bold })">
+                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }"
+                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, bold: !store.ActiveCell.style?.bold })">
                     <IconBold :size="16" />
                 </div>
-                <div class="p-0.5 cursor-pointer" :class="{'bg-slate-800 text-white': store.ActiveCell.style?.italic}" @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, italic: !store.ActiveCell.style?.italic })">
+                <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }"
+                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, italic: !store.ActiveCell.style?.italic })">
                     <IconItalic :size="16" />
                 </div>
-                <div class="p-0.5 rounded-r border-l cursor-pointer" :class="{'bg-slate-800 text-white': store.ActiveCell.style?.underline}" @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, underline: !store.ActiveCell.style?.underline })">
+                <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }"
+                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, underline: !store.ActiveCell.style?.underline })">
                     <IconUnderline :size="16" />
+                </div>
+                <div class="flex items-center justify-center w-6 border-r">
+                    <color-picker shape="circle" :round-history="true"
+                        @pure-color-change="(color: string) => store.updateActiveCellStyle({ ...store.ActiveCell.style, backgroundColor: color })" />
+                </div>
+                <div class="flex items-center justify-center w-6">
+                    <color-picker shape="circle" :round-history="true"
+                        @pure-color-change="(color: string) => store.updateActiveCellStyle({ ...store.ActiveCell.style, textColor: color })" />
                 </div>
             </div>
             <div class="flex gap-2 ml-auto"><input v-model="stripes" type="checkbox"> Stripes</div>

@@ -29,6 +29,7 @@ module.exports = {
         },
     ],
     rules: {
+        "vue/first-attribute-linebreak": "off",
         "vue/singleline-html-element-content-newline": "off",
         "vue/max-attributes-per-line": "off",
         "vue/html-indent": [

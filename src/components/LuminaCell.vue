@@ -7,6 +7,7 @@
             'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
             'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
         }"
+        :style="`background-color: ${cell.style?.backgroundColor}; color: ${cell.style?.textColor};`"
         @click="cellClick">
         <div
             v-show="!isSelected" class="w-full overflow-clip"
