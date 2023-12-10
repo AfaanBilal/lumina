@@ -7,12 +7,14 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 **Lumina** is a [🚧 work in progress] spreadsheet app written in Vue and Typescript with Pinia and Tailwind.
 
 ### Features
-- [X] Spreadsheet Grid
+- [X] Spreadsheet grid
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
-- [X] Basic Styling
+- [X] Basic styling
   - [X] Bold
   - [X] Italic
   - [X] Underline
+  - [X] Background color
+  - [X] Text color
 - [X] Basic settings
   - [X] Striped Grid
   - [X] Auto focus input
