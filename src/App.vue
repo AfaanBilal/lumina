@@ -9,7 +9,7 @@
                 class="text-lg text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
         </div>
         <div class="flex gap-4 p-1 text-xs">
-            <div class="flex border">
+            <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" @click="toggleBold">
                     <IconBold :size="16" />
@@ -18,10 +18,26 @@
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
                     <IconItalic :size="16" />
                 </div>
-                <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
                     <IconUnderline :size="16" />
                 </div>
+            </div>
+            <div class="flex border rounded">
+                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }" @click="setTextAlign('left')">
+                    <IconAlignLeft :size="16" />
+                </div>
+                <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }" @click="setTextAlign('center')">
+                    <IconAlignCenter :size="16" />
+                </div>
+                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }" @click="setTextAlign('right')">
+                    <IconAlignRight :size="16" />
+                </div>
+            </div>
+            <div class="flex border">
                 <div class="flex items-center justify-center w-6 border-r">
                     <color-picker shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
                 </div>
@@ -45,6 +61,9 @@ import LuminaSheet from "./components/LuminaSheet.vue";
 import { IconBold } from "@tabler/icons-vue";
 import { IconItalic } from "@tabler/icons-vue";
 import { IconUnderline } from "@tabler/icons-vue";
+import { IconAlignLeft } from "@tabler/icons-vue";
+import { IconAlignCenter } from "@tabler/icons-vue";
+import { IconAlignRight } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -53,6 +72,7 @@ const stripes = computed<boolean>({ get() { return store.settings.stripes; }, se
 const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
 const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
 
+const setTextAlign = (alignment: "left" | "center" | "right") => store.hasSelection ? store.updateSelectionStyle({ textAlignment: alignment }) : store.updateActiveCellStyle({ textAlignment: alignment });
 const toggleBold = () => store.hasSelection ? store.updateSelectionStyle({ bold: !store.ActiveCell.style?.bold }) : store.updateActiveCellStyle({ bold: !store.ActiveCell.style?.bold });
 const setItalic = () => store.hasSelection ? store.updateSelectionStyle({ italic: !store.ActiveCell.style?.italic }) : store.updateActiveCellStyle({ italic: !store.ActiveCell.style?.italic });
 const toggleUnderline = () => store.hasSelection ? store.updateSelectionStyle({ underline: !store.ActiveCell.style?.underline }) : store.updateActiveCellStyle({ underline: !store.ActiveCell.style?.underline });

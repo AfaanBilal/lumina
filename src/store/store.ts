@@ -38,6 +38,7 @@ export const useStore = defineStore("counter", () => {
     }
     function endSelection() {
         selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
+        selectCell(Object.assign({}, selectedCells.value.start));
     }
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
