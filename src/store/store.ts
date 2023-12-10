@@ -28,6 +28,7 @@ export const useStore = defineStore("counter", () => {
     }
 
     const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
+    const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
     function setSelectedCells(selection: CellSelection) {
         selectedCells.value = selection;
     }
@@ -88,6 +89,19 @@ export const useStore = defineStore("counter", () => {
         sheet.value.rows[rowIndex].cells[cellIndex] = cell;
     }
 
+    function updateCellStyle(coords: CellCoordinates, style: ILuminaCellStyle) {
+        sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
+    }
+
+    function updateSelectionStyle(style: ILuminaCellStyle) {
+        for (let row = selectedCells.value.start.rowIndex; row <= selectedCells.value.end.rowIndex; row++) {
+            for (let col = selectedCells.value.start.cellIndex; col <= selectedCells.value.end.cellIndex; col++) {
+                const cellStyle = sheet.value.rows[row].cells[col].style;
+                updateCellStyle({ rowIndex: row, cellIndex: col }, { ...cellStyle, ...style });
+            }
+        }
+    }
+
     function setCellValue({ rowIndex, cellIndex }: CellCoordinates, v: string) {
         sheet.value.rows[rowIndex].cells[cellIndex].value = v;
     }
@@ -97,7 +111,7 @@ export const useStore = defineStore("counter", () => {
     }
 
     function updateActiveCellStyle(style: ILuminaCellStyle) {
-        updateActiveCell({ ...ActiveCell.value, style });
+        updateActiveCell({ ...ActiveCell.value, style: { ...ActiveCell.value.style, ...style } });
     }
 
     function setActiveCellValue(v: string) {
@@ -128,11 +142,12 @@ export const useStore = defineStore("counter", () => {
 
         hoverCellCoordinates,
         setHoverCellCoordinates,
-        startSelection,
-        endSelection,
 
         selectedCells,
         setSelectedCells,
+        startSelection,
+        endSelection,
+        hasSelection,
 
         activeCell,
         ActiveCell,
@@ -142,6 +157,8 @@ export const useStore = defineStore("counter", () => {
         selectCellUp,
         selectCellDown,
         updateCell,
+        updateCellStyle,
+        updateSelectionStyle,
         updateActiveCell,
         updateActiveCellStyle,
         setCellValue,

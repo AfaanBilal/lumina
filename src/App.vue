@@ -26,12 +26,10 @@
                     <IconUnderline :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r">
-                    <color-picker shape="circle" :round-history="true"
-                        @pure-color-change="(color: string) => store.updateActiveCellStyle({ ...store.ActiveCell.style, backgroundColor: color })" />
+                    <color-picker shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
                 </div>
                 <div class="flex items-center justify-center w-6">
-                    <color-picker shape="circle" :round-history="true"
-                        @pure-color-change="(color: string) => store.updateActiveCellStyle({ ...store.ActiveCell.style, textColor: color })" />
+                    <color-picker shape="circle" :round-history="true" @pure-color-change="setTextColor" />
                 </div>
             </div>
             <div class="flex gap-2 ml-auto"><input v-model="stripes" type="checkbox"> Stripes</div>
@@ -57,4 +55,7 @@ const autofocus = computed<boolean>({ get() { return store.settings.autofocus; }
 const stripes = computed<boolean>({ get() { return store.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
 const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
 const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
+
+const setBackgroundColor = (color: string) => store.hasSelection ? store.updateSelectionStyle({ backgroundColor: color }) : store.updateActiveCellStyle({ backgroundColor: color });
+const setTextColor = (color: string) => store.hasSelection ? store.updateSelectionStyle({ textColor: color }) : store.updateActiveCellStyle({ textColor: color });
 </script>

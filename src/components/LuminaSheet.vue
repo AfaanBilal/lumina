@@ -1,7 +1,7 @@
 <template>
-    <div class="grid overflow-x-auto border" :style="`
+    <div class="grid overflow-x-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
             grid-template-rows: repeat(${sheet.rows.length}, 1.5rem);
-                        grid-template-columns: 2.5rem repeat(${sheet.rows[0].cells.length}, 5rem);
+            grid-template-columns: 2.5rem repeat(${sheet.rows[0].cells.length}, 5rem);
         `">
         <LuminaHeader />
 
@@ -61,15 +61,6 @@ const navKeyListener = (e: KeyboardEvent) => {
 const onMouseDown = () => store.startSelection();
 const onMouseUp = () => store.endSelection();
 
-onMounted(() => {
-    window.addEventListener("keydown", navKeyListener);
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-});
-
-onUnmounted(() => {
-    window.removeEventListener("keydown", navKeyListener);
-    window.removeEventListener("mousedown", onMouseDown);
-    window.removeEventListener("mouseup", onMouseUp);
-});
+onMounted(() => window.addEventListener("keydown", navKeyListener));
+onUnmounted(() => window.removeEventListener("keydown", navKeyListener));
 </script>
