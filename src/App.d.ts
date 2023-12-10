@@ -45,7 +45,7 @@ export interface ILuminaSheetStyle {
 
 export interface ILuminaSheet {
     id: string;
-    style?: ILuminaSheetStyle;
+    style: ILuminaSheetStyle;
     rows: Array<ILuminaRow>;
 }
 

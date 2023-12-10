@@ -24,6 +24,7 @@ export const useStore = defineStore("counter", () => {
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
         id: "sheet_" + ulid(),
+        style: { rows: {}, cols: {}, },
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
     });
 
