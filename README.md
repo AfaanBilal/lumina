@@ -15,6 +15,7 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Underline
   - [X] Background color
   - [X] Text color
+  - [ ] Text alignment
 - [X] Basic settings
   - [X] Striped Grid
   - [X] Auto focus input

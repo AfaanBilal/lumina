@@ -12,17 +12,17 @@
             <div class="flex border">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }"
-                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, bold: !store.ActiveCell.style?.bold })">
+                    @click="toggleBold">
                     <IconBold :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }"
-                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, italic: !store.ActiveCell.style?.italic })">
+                    @click="setItalic">
                     <IconItalic :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }"
-                    @click="store.updateActiveCellStyle({ ...store.ActiveCell.style, underline: !store.ActiveCell.style?.underline })">
+                    @click="toggleUnderline">
                     <IconUnderline :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r">
@@ -56,6 +56,9 @@ const stripes = computed<boolean>({ get() { return store.settings.stripes; }, se
 const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
 const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
 
+const toggleBold = () => store.hasSelection ? store.updateSelectionStyle({ bold: !store.ActiveCell.style?.bold }) : store.updateActiveCellStyle({ bold: !store.ActiveCell.style?.bold });
+const setItalic = () => store.hasSelection ? store.updateSelectionStyle({ italic: !store.ActiveCell.style?.italic }) : store.updateActiveCellStyle({ italic: !store.ActiveCell.style?.italic });
+const toggleUnderline = () => store.hasSelection ? store.updateSelectionStyle({ underline: !store.ActiveCell.style?.underline }) : store.updateActiveCellStyle({ underline: !store.ActiveCell.style?.underline });
 const setBackgroundColor = (color: string) => store.hasSelection ? store.updateSelectionStyle({ backgroundColor: color }) : store.updateActiveCellStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.hasSelection ? store.updateSelectionStyle({ textColor: color }) : store.updateActiveCellStyle({ textColor: color });
 </script>
