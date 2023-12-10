@@ -19,8 +19,8 @@
 import { computed, nextTick, ref } from "vue";
 import { Parser } from "expr-eval";
 import { useStore } from "../store/store";
-import type { ILuminaCell, TLuminaCellValue } from "../App.d";
-import { isFormula, columnToIndex } from "../utils/helpers";
+import type { HashMap, ILuminaCell, TLuminaCellValue } from "../App.d";
+import { isFormula, columnToIndex, isNumeric, toNumber } from "../utils/helpers";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
@@ -64,18 +64,21 @@ const computedValue = computed(() => {
     const v = props.cell.value;
 
     if (isFormula(v)) {
-        const base = v.toUpperCase();
-        const cells = base.match(/[A-Z]+[\d]+/g);
+        const cells = v.toUpperCase().match(/[A-Z]+[\d]+/g);
 
-        if (!cells) return ERROR;
+        let values: HashMap<number> = {};
+        if (cells) {
+            for (let i = 0; i < cells.length; i++) {
+                const v = cellValue(cells[i]);
 
-        let expr = base.substring(1);
-        for (let i = 0; i < cells.length; i++) {
-            expr = expr.replace(cells[i], cellValue(cells[i]));
+                if (!isNumeric(v)) return ERROR;
+
+                values[cells[i].toLowerCase()] = toNumber(v);
+            }
         }
 
         try {
-            return Parser.evaluate(expr);
+            return Parser.parse(v.substring(1).toLowerCase()).evaluate(values);
         } catch (e) {
             return ERROR;
         }

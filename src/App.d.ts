@@ -1,3 +1,7 @@
+export interface HashMap<V> {
+    [k: string]: V;
+}
+
 export enum LuminaCellType {
     Text = "text",
     Number = "number",
