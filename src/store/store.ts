@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { CellCoordinates, ILuminaCell, ILuminaCellStyle, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
+import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
 
 const INITIAL_ROW_COUNT = 100;
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
@@ -19,6 +19,24 @@ export const useStore = defineStore("counter", () => {
 
     function updateSettings(key: keyof Settings, value: boolean) {
         settings.value[key] = value;
+    }
+
+    const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
+    function setHoverCellCoordinates({ rowIndex, cellIndex }: CellCoordinates) {
+        hoverCellCoordinates.value.rowIndex = rowIndex;
+        hoverCellCoordinates.value.cellIndex = cellIndex;
+    }
+
+    const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
+    function setSelectedCells(selection: CellSelection) {
+        selectedCells.value = selection;
+    }
+    function startSelection() {
+        selectedCells.value.start = Object.assign({}, hoverCellCoordinates.value);
+        selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
+    }
+    function endSelection() {
+        selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
     }
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
@@ -107,6 +125,14 @@ export const useStore = defineStore("counter", () => {
     return {
         settings,
         updateSettings,
+
+        hoverCellCoordinates,
+        setHoverCellCoordinates,
+        startSelection,
+        endSelection,
+
+        selectedCells,
+        setSelectedCells,
 
         activeCell,
         ActiveCell,

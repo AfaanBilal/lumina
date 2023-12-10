@@ -60,3 +60,8 @@ export interface CellCoordinates {
     rowIndex: number;
     cellIndex: number;
 }
+
+export interface CellSelection {
+    start: CellCoordinates;
+    end: CellCoordinates;
+}
