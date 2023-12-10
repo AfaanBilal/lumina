@@ -16,6 +16,12 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Background color
   - [X] Text color
   - [X] Text alignment
+  - [ ] Font size
+  - [ ] Select whole row
+  - [ ] Select whole column
+  - [ ] Select whole sheet
+  - [ ] Row height
+  - [ ] Column width
 - [X] Basic settings
   - [X] Striped Grid
   - [X] Auto focus input
