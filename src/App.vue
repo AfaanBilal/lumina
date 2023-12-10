@@ -25,15 +25,18 @@
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }" @click="setTextAlign('left')">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
+                    @click="setTextAlign('left')">
                     <IconAlignLeft :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }" @click="setTextAlign('center')">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
+                    @click="setTextAlign('center')">
                     <IconAlignCenter :size="16" />
                 </div>
                 <div class="flex items-center justify-center w-6 rounded-r cursor-pointer"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }" @click="setTextAlign('right')">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
+                    @click="setTextAlign('right')">
                     <IconAlignRight :size="16" />
                 </div>
             </div>
@@ -45,10 +48,24 @@
                     <color-picker shape="circle" :round-history="true" @pure-color-change="setTextColor" />
                 </div>
             </div>
-            <div class="flex gap-2 ml-auto"><input v-model="stripes" type="checkbox"> Stripes</div>
-            <div class="flex gap-2"><input v-model="autofocus" type="checkbox"> Auto focus input</div>
-            <div class="flex gap-2"><input v-model="rowBand" type="checkbox"> Row Band</div>
-            <div class="flex gap-2"><input v-model="colBand" type="checkbox"> Column Band</div>
+            <div class="flex items-center gap-4 ml-auto">
+                <div class="flex items-center gap-1">
+                    <input id="stripes" v-model="stripes" type="checkbox">
+                    <label for="stripes" class="cursor-pointer select-none">Stripes</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="autofocus" v-model="autofocus" type="checkbox">
+                    <label for="autofocus" class="cursor-pointer select-none">Auto focus input</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="rowBand" v-model="rowBand" type="checkbox">
+                    <label for="rowBand" class="cursor-pointer select-none">Row band</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="colBand" v-model="colBand" type="checkbox">
+                    <label for="colBand" class="cursor-pointer select-none">Column band</label>
+                </div>
+            </div>
         </div>
         <LuminaSheet :sheet="store.sheet" />
     </div>
