@@ -1,5 +1,5 @@
 <template>
-    <div class="flex text-sm items-center border p-0.5 animate-[fadeIn_.3s_ease-in-out]" :class="{
+    <div class="flex text-sm items-center border p-0.5 animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
         'border-2 border-blue-500': isActive,
         'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
