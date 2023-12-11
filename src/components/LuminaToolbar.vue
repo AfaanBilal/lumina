@@ -1,37 +1,37 @@
 <template>
     <div class="flex gap-4 p-1 text-xs">
         <div class="flex border rounded">
-            <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
+            <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" @click="toggleBold">
                 <IconBold :size="16" />
             </div>
-            <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+            <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
                 <IconItalic :size="16" />
             </div>
-            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer"
+            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
                 <IconUnderline :size="16" />
             </div>
         </div>
         <div class="flex border rounded">
-            <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer"
+            <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
                 @click="setTextAlign('left')">
                 <IconAlignLeft :size="16" />
             </div>
-            <div class="flex items-center justify-center w-6 border-r cursor-pointer"
+            <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
                 @click="setTextAlign('center')">
                 <IconAlignCenter :size="16" />
             </div>
-            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer"
+            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
                 @click="setTextAlign('right')">
                 <IconAlignRight :size="16" />
             </div>
         </div>
-        <div class="flex items-center justify-center border rounded">
+        <div class="flex items-center justify-center border rounded focus-within:border-slate-400 hover:border-slate-400">
             <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
                 class="outline-none p-0.5 w-10" @change="setFontSize">
         </div>
@@ -46,19 +46,19 @@
         <div class="flex items-center gap-4 ml-auto">
             <div class="flex items-center gap-1">
                 <input id="stripes" v-model="stripes" type="checkbox">
-                <label for="stripes" class="cursor-pointer select-none">Stripes</label>
+                <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
             </div>
             <div class="flex items-center gap-1">
                 <input id="autofocus" v-model="autofocus" type="checkbox">
-                <label for="autofocus" class="cursor-pointer select-none">Auto focus input</label>
+                <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
             </div>
             <div class="flex items-center gap-1">
                 <input id="rowBand" v-model="rowBand" type="checkbox">
-                <label for="rowBand" class="cursor-pointer select-none">Row band</label>
+                <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
             </div>
             <div class="flex items-center gap-1">
                 <input id="colBand" v-model="colBand" type="checkbox">
-                <label for="colBand" class="cursor-pointer select-none">Column band</label>
+                <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
             </div>
         </div>
     </div>
