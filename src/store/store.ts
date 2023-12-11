@@ -11,7 +11,7 @@ const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cell
 
 export const useStore = defineStore("counter", () => {
     const settings = ref<Settings>({
-        autofocus: false,
+        autofocus: true,
         stripes: false,
         rowBand: false,
         colBand: false,
@@ -119,6 +119,12 @@ export const useStore = defineStore("counter", () => {
         setCellValue(activeCell.value, v);
     }
 
+    function updateStyle(style: ILuminaCellStyle) {
+        hasSelection.value ?
+            updateSelectionStyle(style) :
+            updateActiveCellStyle(style);
+    }
+
     function addRow(index?: number) {
         if (index) {
             sheet.value.rows.splice(index, 0, emptyRow(maxColumns.value));
@@ -164,6 +170,7 @@ export const useStore = defineStore("counter", () => {
         updateActiveCellStyle,
         setCellValue,
         setActiveCellValue,
+        updateStyle,
 
         sheet,
         maxRows,
