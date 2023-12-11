@@ -1,5 +1,9 @@
 <template>
-    <div class="border-b-4 border-r-4 border-slate-300 bg-slate-200">&nbsp;</div>
+    <div class="border-b-4 border-r-4 cursor-pointer border-slate-300 bg-slate-200"
+        :class="{ 'bg-blue-100 border-blue-600': store.isWholeSheetSelected }"
+        @click="store.selectSheet()">
+        &nbsp;
+    </div>
     <div v-for="i in store.maxColumns" :key="i"
         class="relative text-sm flex flex-shrink-0 items-center justify-center font-medium w-20 h-6 border p-0.5 bg-slate-100 group cursor-pointer"
         :class="{

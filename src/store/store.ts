@@ -29,6 +29,16 @@ export const useStore = defineStore("counter", () => {
 
     const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
     const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
+    const isWholeSheetSelected = computed(() => {
+        if (selectedCells.value.start.rowIndex != 0) return false;
+        if (selectedCells.value.start.cellIndex != 0) return false;
+
+        if (selectedCells.value.end.rowIndex != maxRows.value - 1) return false;
+        if (selectedCells.value.end.cellIndex != maxColumns.value - 1) return false;
+
+        return true;
+    });
+
     function setSelectedCells(selection: CellSelection) {
         selectedCells.value = selection;
     }
@@ -47,6 +57,10 @@ export const useStore = defineStore("counter", () => {
     function selectColumn(cellIndex: number) {
         selectedCells.value.start = { rowIndex: 0, cellIndex };
         selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex };
+    }
+    function selectSheet() {
+        selectedCells.value.start = { rowIndex: 0, cellIndex: 0 };
+        selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex: maxColumns.value - 1 };
     }
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
@@ -165,6 +179,8 @@ export const useStore = defineStore("counter", () => {
         hasSelection,
         selectRow,
         selectColumn,
+        isWholeSheetSelected,
+        selectSheet,
 
         activeCell,
         ActiveCell,

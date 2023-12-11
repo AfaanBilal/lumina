@@ -19,7 +19,7 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Font size
   - [X] Select whole row
   - [X] Select whole column
-  - [ ] Select whole sheet
+  - [X] Select whole sheet
   - [ ] Row height
   - [ ] Column width
 - [X] Basic settings
