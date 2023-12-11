@@ -6,10 +6,10 @@
         'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
         'border-dashed border-blue-400': isHovered && !isActive,
         'bg-blue-200': isSelected && !isActive,
-        'border-t-blue-700': isSelected && onSelectionTopEdge,
+        'border-t-blue-700': isSelected && onSelectionTopEdge && !onSheetTopEdge,
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
-        'border-l-blue-700': isSelected && onSelectionLeftEdge,
+        'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
     }"
         :style="`background-color: ${cell.style?.backgroundColor}; color: ${cell.style?.textColor}; text-align: ${cell.style?.textAlignment}; font-size: ${cell.style?.fontSize || 11}px;`"
         @click="cellClick" @mouseenter="mouseEnter">
@@ -57,10 +57,12 @@ const isSelected = computed(() => {
     return true;
 });
 
-const onSelectionTopEdge = computed(() => props.rowIndex == store.selectedCells.start.rowIndex);
-const onSelectionRightEdge = computed(() => props.cellIndex == store.selectedCells.end.cellIndex);
-const onSelectionBottomEdge = computed(() => props.rowIndex == store.selectedCells.end.rowIndex);
-const onSelectionLeftEdge = computed(() => props.cellIndex == store.selectedCells.start.cellIndex);
+const onSelectionTopEdge = computed(() => props.rowIndex === store.selectedCells.start.rowIndex);
+const onSelectionRightEdge = computed(() => props.cellIndex === store.selectedCells.end.cellIndex);
+const onSelectionBottomEdge = computed(() => props.rowIndex === store.selectedCells.end.rowIndex);
+const onSelectionLeftEdge = computed(() => props.cellIndex === store.selectedCells.start.cellIndex);
+const onSheetTopEdge = computed(() => props.rowIndex === 0);
+const onSheetLeftEdge = computed(() => props.cellIndex === 0);
 
 const value = computed<TLuminaCellValue>({
     get() {

@@ -17,8 +17,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Text color
   - [X] Text alignment
   - [X] Font size
-  - [ ] Select whole row
-  - [ ] Select whole column
+  - [X] Select whole row
+  - [X] Select whole column
   - [ ] Select whole sheet
   - [ ] Row height
   - [ ] Column width

@@ -40,6 +40,14 @@ export const useStore = defineStore("counter", () => {
         selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
         selectCell(Object.assign({}, selectedCells.value.start));
     }
+    function selectRow(rowIndex: number) {
+        selectedCells.value.start = { rowIndex, cellIndex: 0 };
+        selectedCells.value.end = { rowIndex, cellIndex: maxColumns.value - 1 };
+    }
+    function selectColumn(cellIndex: number) {
+        selectedCells.value.start = { rowIndex: 0, cellIndex };
+        selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex };
+    }
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const sheet = ref<ILuminaSheet>({
@@ -155,6 +163,8 @@ export const useStore = defineStore("counter", () => {
         startSelection,
         endSelection,
         hasSelection,
+        selectRow,
+        selectColumn,
 
         activeCell,
         ActiveCell,
