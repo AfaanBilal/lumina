@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-semibold">Lumina</h1>
             </div>
             <a href="https://afaan.dev" target="_blank" rel="noopener"
-                class="text-lg text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
+                class="self-start text-sm text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
         </div>
         <LuminaToolbar />
         <LuminaSheet :sheet="store.sheet" />
