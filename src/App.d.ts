@@ -16,6 +16,7 @@ export interface ILuminaCellStyle {
     backgroundColor?: string;
     textColor?: string;
     textAlignment?: "left" | "center" | "right";
+    fontSize?: number;
 }
 
 export interface ILuminaCell {

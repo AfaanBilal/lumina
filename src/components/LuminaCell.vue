@@ -11,9 +11,9 @@
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge,
     }"
-        :style="`background-color: ${cell.style?.backgroundColor}; color: ${cell.style?.textColor}; text-align: ${cell.style?.textAlignment};`"
+        :style="`background-color: ${cell.style?.backgroundColor}; color: ${cell.style?.textColor}; text-align: ${cell.style?.textAlignment}; font-size: ${cell.style?.fontSize || 11}px;`"
         @click="cellClick" @mouseenter="mouseEnter">
-        <div v-show="!isActive" class="w-full overflow-clip" :class="{
+        <div v-show="!isActive" class="w-full overflow-hidden" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
             'underline': props.cell.style?.underline,

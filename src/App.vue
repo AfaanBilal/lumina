@@ -40,6 +40,10 @@
                     <IconAlignRight :size="16" />
                 </div>
             </div>
+            <div class="flex items-center justify-center border rounded">
+                <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
+                    class="outline-none p-0.5 w-10" @change="setFontSize">
+            </div>
             <div class="flex border">
                 <div class="flex items-center justify-center w-6 border-r">
                     <color-picker shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
@@ -89,6 +93,7 @@ const stripes = computed<boolean>({ get() { return store.settings.stripes; }, se
 const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
 const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
 
+const setFontSize = (e: Event) => store.hasSelection ? store.updateSelectionStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) }) : store.updateActiveCellStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.hasSelection ? store.updateSelectionStyle({ textAlignment: alignment }) : store.updateActiveCellStyle({ textAlignment: alignment });
 const toggleBold = () => store.hasSelection ? store.updateSelectionStyle({ bold: !store.ActiveCell.style?.bold }) : store.updateActiveCellStyle({ bold: !store.ActiveCell.style?.bold });
 const setItalic = () => store.hasSelection ? store.updateSelectionStyle({ italic: !store.ActiveCell.style?.italic }) : store.updateActiveCellStyle({ italic: !store.ActiveCell.style?.italic });
