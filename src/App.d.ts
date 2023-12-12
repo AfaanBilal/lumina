@@ -13,6 +13,7 @@ export interface ILuminaCellStyle {
     bold?: boolean;
     italic?: boolean;
     underline?: boolean;
+    strikethrough?: boolean;
     backgroundColor?: string;
     textColor?: string;
     textAlignment?: "left" | "center" | "right";

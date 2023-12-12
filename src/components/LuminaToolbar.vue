@@ -13,6 +13,10 @@
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
                 <IconUnderline :size="16" />
             </div>
+            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }" @click="toggleStrikethrough">
+                <IconStrikethrough :size="16" />
+            </div>
         </div>
         <div class="flex border rounded">
             <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
@@ -67,7 +71,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "../store/store";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight } from "@tabler/icons-vue";
+import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -79,6 +83,7 @@ const colBand = computed<boolean>({ get() { return store.settings.colBand; }, se
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
 const toggleBold = () => store.updateStyle({ bold: !store.ActiveCell.style?.bold });
+const toggleStrikethrough = () => store.updateStyle({ strikethrough: !store.ActiveCell.style?.strikethrough });
 const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.italic });
 const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.style?.underline });
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
