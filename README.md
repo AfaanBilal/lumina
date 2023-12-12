@@ -9,17 +9,24 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 ### Features
 - [X] Spreadsheet grid
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
-- [X] Basic styling
+- [X] Styling
   - [X] Bold
   - [X] Italic
   - [X] Underline
+  - [X] Strikethrough
   - [X] Background color
   - [X] Text color
   - [X] Text alignment
   - [X] Font size
+- [X] Selection
+  - [X] Select a cell
+  - [X] Select a series of cells (column)
+  - [X] Select a series of cells (row)
+  - [X] Select a series of cells (grid)
   - [X] Select whole row
   - [X] Select whole column
   - [X] Select whole sheet
+- [ ] Sizing
   - [ ] Row height
   - [ ] Column width
 - [X] Basic settings
