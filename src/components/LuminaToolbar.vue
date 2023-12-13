@@ -1,18 +1,23 @@
 <template>
-    <div class="flex flex-col gap-1 p-1 text-xs">
+    <div class="flex flex-col gap-1 p-1 text-xs print:hidden">
         <div class="flex gap-1 border-y">
             <Dropdown>
                 <template #trigger>
-                    <div class="p-2 cursor-pointer hover:bg-slate-100">File</div>
+                    <div class="flex gap-1 p-2 cursor-pointer hover:bg-slate-100">
+                        <IconFile :size="18" /> File
+                    </div>
                 </template>
 
-                <div class="flex flex-col text-sm">
-                    <div class="p-2 text-sm font-semibold border-b">File Management</div>
-                    <div class="flex items-center gap-1 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
+                <div class="flex flex-col font-serif text-sm min-w-[7rem] print:hidden">
+                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
                         <IconFile :size="18" /> Open
                     </div>
-                    <div class="flex items-center gap-1 px-2 py-1 cursor-pointer hover:bg-slate-100">
+                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
                         <IconDeviceFloppy :size="18" /> Save
+                    </div>
+                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                        @click="w.print()">
+                        <IconPrinter :size="18" /> Print
                     </div>
                 </div>
             </Dropdown>
@@ -102,10 +107,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "../store/store";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical } from "@tabler/icons-vue";
+import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
-import { IconDeviceFloppy } from "@tabler/icons-vue";
-import { IconFile } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -122,4 +125,6 @@ const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.ita
 const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.style?.underline });
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
+
+const w = window;
 </script>
