@@ -20,6 +20,9 @@ dependencies:
   ulid:
     specifier: ^2.3.0
     version: 2.3.0
+  v-dropdown:
+    specifier: ^3.0.0
+    version: 3.0.0(vue@3.3.10)
   vue:
     specifier: ^3.3.8
     version: 3.3.10(typescript@5.3.3)
@@ -2057,6 +2060,14 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /v-dropdown@3.0.0(vue@3.3.10):
+    resolution: {integrity: sha512-sDBiHhTjm0/eLmC83vUbOIHXNTlQD30w+usrh779OG+aNc/5vqyFQbSBPGekvD7pQPbWSPc5esVT8jcqfLRnrg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.3.10(typescript@5.3.3)
+    dev: false
 
   /vite@5.0.6:
     resolution: {integrity: sha512-MD3joyAEBtV7QZPl2JVVUai6zHms3YOmLR+BpMzLlX2Yzjfcc4gTgNi09d/Rua3F4EtC8zdwPU8eQYyib4vVMQ==}

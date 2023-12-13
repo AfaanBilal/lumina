@@ -15,6 +15,7 @@
     "expr-eval": "^2.0.2",
     "pinia": "^2.1.7",
     "ulid": "^2.3.0",
+    "v-dropdown": "^3.0.0",
     "vue": "^3.3.8",
     "vue3-colorpicker": "^2.2.3"
   },
