@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-1 p-1 text-xs print:hidden">
         <div class="flex gap-1 border-y">
-            <Dropdown>
+            <Dropdown ref="fileDropdown">
                 <template #trigger>
                     <div class="flex gap-1 p-2 cursor-pointer select-none hover:bg-slate-100">
                         <IconFile :size="18" /> File
@@ -128,11 +128,12 @@ const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.s
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
 
+const fileDropdown = ref();
 const input = ref<HTMLInputElement>();
 
-const open = () => input.value!.click();
-const save = () => download(store.sheet.id + ".lumina", JSON.stringify(store.sheet));
-const print = () => window.print();
+const open = () => { input.value!.click(); fileDropdown.value!.close(); };
+const save = () => { download(store.sheet.id + ".lumina", JSON.stringify(store.sheet)); fileDropdown.value!.close(); };
+const print = () => { window.print(); fileDropdown.value!.close(); };
 
 const onFileSelected = (e: Event) => {
     const files = (e.target as HTMLInputElement).files;
