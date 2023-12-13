@@ -9,8 +9,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 ### Features
 - [X] Spreadsheet grid
 - [X] File management
-  - [X] Open file
-  - [X] Save file
+  - [X] Open
+  - [X] Save
   - [X] Print
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
 - [X] Additional functions
