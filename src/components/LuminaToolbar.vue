@@ -92,6 +92,15 @@
                         <div class="flex items-center px-1">e</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">e</div>
                     </div>
+                    <div class="flex items-center justify-between gap-2 p-1 border-b">
+                        <div class="flex items-center px-1">true</div>
+                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">true</div>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 p-1 border-b">
+                        <div class="flex items-center px-1">false</div>
+                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">false</div>
+                    </div>
+                    <div class="w-full p-2 cursor-pointer hover:bg-slate-100" @click="referenceVisible = true">Operator and function reference &rarr;</div>
                 </div>
             </Dropdown>
         </div>
@@ -204,6 +213,7 @@ const autofocus = computed<boolean>({ get() { return store.settings.autofocus; }
 const stripes = computed<boolean>({ get() { return store.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
 const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
 const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
+const referenceVisible = computed<boolean>({ get() { return store.settings.referenceVisible; }, set(v: boolean) { store.updateSettings("referenceVisible", v); } });
 
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });

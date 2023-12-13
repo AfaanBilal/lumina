@@ -15,6 +15,7 @@ export const useStore = defineStore("counter", () => {
         stripes: false,
         rowBand: false,
         colBand: false,
+        referenceVisible: false,
     });
 
     function updateSettings(key: keyof Settings, value: boolean) {

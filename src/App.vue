@@ -10,6 +10,7 @@
         </div>
         <LuminaToolbar />
         <LuminaSheet :sheet="store.sheet" />
+        <ReferenceModal />
     </div>
 </template>
 
@@ -17,6 +18,7 @@
 import { useStore } from "./store/store";
 import LuminaSheet from "./components/LuminaSheet.vue";
 import LuminaToolbar from "./components/LuminaToolbar.vue";
+import ReferenceModal from "./components/ReferenceModal.vue";
 
 const store = useStore();
 </script>

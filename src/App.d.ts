@@ -57,6 +57,7 @@ export interface Settings {
     stripes: boolean;
     rowBand: boolean;
     colBand: boolean;
+    referenceVisible: boolean;
 }
 
 export interface CellCoordinates {
