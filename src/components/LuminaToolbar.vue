@@ -73,17 +73,20 @@
                     <div class="w-full p-2 text-center">Functions</div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Sum</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SUM(A1:B2)
+                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                            =SUM(A1:B2)
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Average</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=AVG(A1:B2)
+                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                            =AVG(A1:B2)
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Square</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SQUARE(A1)
+                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                            =SQUARE(A1)
                         </div>
                     </div>
                     <div class="w-full p-2 text-center">Constants</div>
