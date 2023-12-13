@@ -53,19 +53,21 @@
         <div class="flex gap-4">
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" @click="toggleBold">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" title="Bold" @click="toggleBold">
                     <IconBold :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" title="Italic"
+                    @click="setItalic">
                     <IconItalic :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" title="Underline"
+                    @click="toggleUnderline">
                     <IconUnderline :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
-                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }" title="Strikethrough"
                     @click="toggleStrikethrough">
                     <IconStrikethrough :size="18" />
                 </div>
@@ -73,22 +75,22 @@
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
-                    @click="setTextAlign('left')">
+                    title="Text align left" @click="setTextAlign('left')">
                     <IconAlignLeft :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
-                    @click="setTextAlign('center')">
+                    title="Text align center" @click="setTextAlign('center')">
                     <IconAlignCenter :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
-                    @click="setTextAlign('right')">
+                    title="Text align right" @click="setTextAlign('right')">
                     <IconAlignRight :size="18" />
                 </div>
             </div>
-            <div
-                class="flex items-center justify-center border rounded focus-within:border-slate-400 hover:border-slate-400">
+            <div class="flex items-center justify-center border rounded focus-within:border-slate-400 hover:border-slate-400"
+                title="Font size">
                 <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
                     class="outline-none p-0.5 w-10" @change="setFontSize">
             </div>
