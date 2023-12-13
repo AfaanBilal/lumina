@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-1 p-1 text-xs print:hidden">
-        <div class="flex gap-1 rounded border-y">
+        <div class="flex rounded border-y">
             <Dropdown ref="fileDropdown">
                 <template #trigger>
                     <div class="flex items-center gap-1 px-2 py-1 cursor-pointer select-none border-x hover:bg-slate-100">
@@ -19,6 +19,33 @@
                     <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                         @click="print">
                         <IconPrinter :size="18" /> Print
+                    </div>
+                </div>
+            </Dropdown>
+
+            <Dropdown>
+                <template #trigger>
+                    <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                        <IconSettings :size="18" /> Settings
+                    </div>
+                </template>
+
+                <div class="flex flex-col font-serif text-sm min-w-[7rem] print:hidden">
+                    <div class="flex items-center gap-2 px-2 py-1 border-b">
+                        <input id="autofocus" v-model="autofocus" type="checkbox">
+                        <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
+                    </div>
+                    <div class="flex items-center gap-2 px-2 py-1 border-b">
+                        <input id="stripes" v-model="stripes" type="checkbox">
+                        <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
+                    </div>
+                    <div class="flex items-center gap-2 px-2 py-1 border-b">
+                        <input id="rowBand" v-model="rowBand" type="checkbox">
+                        <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
+                    </div>
+                    <div class="flex items-center gap-2 px-2 py-1 border-b">
+                        <input id="colBand" v-model="colBand" type="checkbox">
+                        <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
                     </div>
                 </div>
             </Dropdown>
@@ -77,44 +104,17 @@
                         @pure-color-change="setTextColor" />
                 </div>
             </div>
-
-            <Dropdown class="ml-auto">
-                <template #trigger>
-                    <button class="p-0.5 items-center justify-center rounded-sm flex hover:bg-slate-200">
-                        <IconDotsVertical :size="18" />
-                    </button>
-                </template>
-
-                <div class="flex flex-col gap-2 p-2 text-sm">
-                    <div class="font-semibold text-md">Settings</div>
-                    <div class="flex items-center gap-1">
-                        <input id="autofocus" v-model="autofocus" type="checkbox">
-                        <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
-                    </div>
-                    <div class="flex items-center gap-1">
-                        <input id="stripes" v-model="stripes" type="checkbox">
-                        <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
-                    </div>
-                    <div class="flex items-center gap-1">
-                        <input id="rowBand" v-model="rowBand" type="checkbox">
-                        <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
-                    </div>
-                    <div class="flex items-center gap-1">
-                        <input id="colBand" v-model="colBand" type="checkbox">
-                        <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
-                    </div>
-                </div>
-            </Dropdown>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter, IconTextColor, IconPaint } from "@tabler/icons-vue";
+import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDeviceFloppy, IconFile, IconPrinter, IconTextColor, IconPaint } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
 import Dropdown from "v-dropdown";
+import { IconSettings } from "@tabler/icons-vue";
 
 const store = useStore();
 
