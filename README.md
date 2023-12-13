@@ -9,6 +9,9 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 ### Features
 - [X] Spreadsheet grid
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
+- [X] Cell references
+  - [X] Direct: A1, A2, B1, C1, ...
+  - [ ] Range: A1:A10
 - [X] Styling
   - [X] Bold
   - [X] Italic
