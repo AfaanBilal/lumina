@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { ulid } from "ulid";
 import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 
-const INITIAL_ROW_COUNT = 100;
+const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 25);
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
 
 const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
