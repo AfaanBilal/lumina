@@ -3,7 +3,7 @@
         <div class="flex gap-1 border-y">
             <Dropdown ref="fileDropdown">
                 <template #trigger>
-                    <div class="flex gap-1 p-2 cursor-pointer select-none hover:bg-slate-100">
+                    <div class="flex items-center gap-1 px-2 py-1 cursor-pointer select-none border-x hover:bg-slate-100">
                         <IconFile :size="18" /> File
                     </div>
                 </template>
