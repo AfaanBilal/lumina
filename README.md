@@ -15,7 +15,7 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] SQUARE(x)
 - [X] Cell references
   - [X] Direct: A1, A2, B1, C1, ...
-  - [ ] Range: A1:A10
+  - [X] Range: A1:A10, C1:E5
 - [X] Styling
   - [X] Bold
   - [X] Italic

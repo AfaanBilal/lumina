@@ -39,8 +39,9 @@
 import { computed, nextTick, ref } from "vue";
 import { useStore } from "../store/store";
 import type { HashMap, ILuminaCell, TLuminaCellValue } from "../App.d";
-import { isFormula, columnToIndex, isNumeric, toNumber } from "../utils/helpers";
+import { isFormula, cellCoordinates, isNumeric, toNumber, REGEX_RANGE, REGEX_CELL } from "../utils/helpers";
 import { parser } from "../utils/parser";
+import { Values } from "expr-eval";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
@@ -98,15 +99,30 @@ const mouseEnter = (e: MouseEvent) => {
 };
 
 const cellValue = (c: string): string => {
-    const col = c.toUpperCase().match(/[A-Z]+/g);
-    const row = c.toUpperCase().match(/[\d]+/g);
+    const coords = cellCoordinates(c);
+    if (!coords) return "";
 
-    if (!col || !row) return "";
+    return store.sheet.rows[coords.rowIndex].cells[coords.cellIndex].value;
+};
 
-    const cellIndex = columnToIndex(col[0]);
-    const rowIndex = parseInt(row[0]) - 1;
+const rangeValues = (r: string): string[] => {
+    const startCell = r.split(":")[0];
+    const endCell = r.split(":")[1];
 
-    return store.sheet.rows[rowIndex].cells[cellIndex].value;
+    const start = cellCoordinates(startCell);
+    const end = cellCoordinates(endCell);
+
+    if (!start || !end) return [];
+
+    const values: string[] = [];
+
+    for (let row = start.rowIndex; row <= end.rowIndex; row++) {
+        for (let col = start.cellIndex; col <= end.cellIndex; col++) {
+            values.push(store.sheet.rows[row].cells[col].value);
+        }
+    }
+
+    return values;
 };
 
 const ERROR = "#ERROR";
@@ -115,9 +131,16 @@ const computedValue = computed(() => {
     const v = props.cell.value;
 
     if (isFormula(v)) {
-        const cells = v.toUpperCase().match(/[A-Z]+[\d]+/g);
+        let values: HashMap<number | number[]> = {};
 
-        let values: HashMap<number> = {};
+        const ranges = v.toUpperCase().match(REGEX_RANGE);
+        if (ranges) {
+            for (let i = 0; i < ranges.length; i++) {
+                values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
+            }
+        }
+
+        const cells = v.toUpperCase().match(REGEX_CELL);
         if (cells) {
             for (let i = 0; i < cells.length; i++) {
                 const v = cellValue(cells[i]);
@@ -129,7 +152,7 @@ const computedValue = computed(() => {
         }
 
         try {
-            return parser.parse(v.substring(1).toLowerCase()).evaluate(values);
+            return parser.parse(v.substring(1).toLowerCase().replace(":", "_")).evaluate(values as Values);
         } catch (e) {
             console.log(e);
             return ERROR;
