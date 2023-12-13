@@ -51,69 +51,75 @@
             </Dropdown>
         </div>
         <div class="flex gap-2">
-            <div class="flex border rounded">
-                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
+            <div class="flex">
+                <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" title="Bold" @click="toggleBold">
                     <IconBold :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" title="Italic"
                     @click="setItalic">
                     <IconItalic :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" title="Underline"
                     @click="toggleUnderline">
                     <IconUnderline :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }" title="Strikethrough"
                     @click="toggleStrikethrough">
                     <IconStrikethrough :size="18" />
                 </div>
             </div>
-            <div class="flex border rounded">
-                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
+            <div class="flex">
+                <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
                     title="Text align left" @click="setTextAlign('left')">
                     <IconAlignLeft :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
                     title="Text align center" @click="setTextAlign('center')">
                     <IconAlignCenter :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
                     title="Text align right" @click="setTextAlign('right')">
                     <IconAlignRight :size="18" />
                 </div>
             </div>
-            <div class="flex border rounded">
-                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
+            <div class="flex">
+                <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'top' }"
                     title="Vertical align top" @click="setVerticalAlign('top')">
                     <IconLayoutAlignTop :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'middle' }"
                     title="Vertical align middle" @click="setVerticalAlign('middle')">
                     <IconLayoutAlignCenter :size="18" />
                 </div>
-                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+                <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'bottom' }"
                     title="Vertical align bottom" @click="setVerticalAlign('bottom')">
                     <IconLayoutAlignBottom :size="18" />
                 </div>
             </div>
-            <div class="flex items-center justify-center border rounded">
-                <IconMinus :size="18" class="rounded cursor-pointer hover:bg-slate-100" title="Decrease font size"
-                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) - 1 })" />
+            <div class="flex items-center justify-center">
+                <div class="flex items-center self-stretch justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-100"
+                    title="Decrease font size"
+                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) - 1 })">
+                    <IconMinus :size="18" />
+                </div>
                 <input type="number" min="8" max="200" :value="store.ActiveCell.style?.fontSize || 11"
-                    class="outline-none text-center p-0.5 w-6 rounded [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    class="outline-none text-center p-0.5 w-6 border-y [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     title="Font size" @change="setFontSize">
-                <IconPlus :size="18" class="rounded cursor-pointer hover:bg-slate-100" title="Increase font size"
-                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) + 1 })" />
+                <div class="flex items-center self-stretch justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-100"
+                    title="Increase font size"
+                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) + 1 })">
+                    <IconPlus :size="18" />
+                </div>
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center gap-1 px-1 border-r" title="Background color">
