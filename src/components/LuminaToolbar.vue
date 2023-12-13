@@ -50,7 +50,7 @@
                 </div>
             </Dropdown>
         </div>
-        <div class="flex gap-4">
+        <div class="flex gap-2">
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" title="Bold" @click="toggleBold">
@@ -106,10 +106,14 @@
                     <IconLayoutAlignBottom :size="18" />
                 </div>
             </div>
-            <div class="flex items-center justify-center border rounded focus-within:border-slate-400 hover:border-slate-400"
-                title="Font size">
-                <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
-                    class="outline-none p-0.5 w-10" @change="setFontSize">
+            <div class="flex items-center justify-center border rounded">
+                <IconMinus :size="18" class="rounded cursor-pointer hover:bg-slate-100" title="Decrease font size"
+                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) - 1 })" />
+                <input type="number" min="8" max="200" :value="store.ActiveCell.style?.fontSize || 11"
+                    class="outline-none text-center p-0.5 w-6 rounded [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    title="Font size" @change="setFontSize">
+                <IconPlus :size="18" class="rounded cursor-pointer hover:bg-slate-100" title="Increase font size"
+                    @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) + 1 })" />
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center gap-1 px-1 border-r" title="Background color">
@@ -134,6 +138,7 @@ import {
     IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconDeviceFloppy, IconFile, IconSettings, IconPrinter,
+    IconMinus, IconPlus,
     IconBucketDroplet, IconTextColor,
 } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
