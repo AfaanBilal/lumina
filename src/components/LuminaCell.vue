@@ -1,5 +1,5 @@
 <template>
-    <div class="flex text-sm items-center border p-0.5 animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
+    <div class="flex items-center border p-0.5 animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
         'border-2 border-blue-500': isActive,
         'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
@@ -16,7 +16,7 @@
         text-align: ${cell.style?.textAlignment};
         font-size: ${cell.style?.fontSize || 11}px;
     `" @click="cellClick" @mouseenter="mouseEnter">
-        <div v-show="!isActive" class="w-full overflow-hidden" :class="{
+        <div v-show="!isActive" class="flex items-center justify-center w-full h-full overflow-hidden" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
             'underline': props.cell.style?.underline,
@@ -25,12 +25,12 @@
             {{ computedValue }}
         </div>
         <div v-if="isActive">
-            <input ref="input" v-model="value" type="text" class="w-full h-5 outline-none" :class="{
+            <input ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
                 'font-bold': props.cell.style?.bold,
                 'italic': props.cell.style?.italic,
                 'underline': props.cell.style?.underline,
                 'line-through': props.cell.style?.strikethrough,
-            }" @keyup.enter="store.selectCellDown()">
+            }" :style="`font-size: ${cell.style?.fontSize || 11}px;`" @keyup.enter="store.selectCellDown()">
         </div>
     </div>
 </template>
