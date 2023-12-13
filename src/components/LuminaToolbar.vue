@@ -60,56 +60,37 @@
                 <div class="flex flex-col font-serif print:hidden w-80">
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Start Formula</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Cell Reference</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Range Reference</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
                     </div>
-                    <div class="w-full p-2 text-center">Functions</div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Sum</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
-                            =SUM(A1:B2)
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                            =SUM(A1, B1:B5, 3)
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Average</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
                             =AVG(A1:B2)
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Square</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
+                        <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
                             =SQUARE(A1)
                         </div>
                     </div>
-                    <div class="w-full p-2 text-center">Constants</div>
-                    <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center px-1">
-                            <IconMathPi :size="12" />
-                        </div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">pi</div>
-                    </div>
-                    <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center px-1">e</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">e</div>
-                    </div>
-                    <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center px-1">true</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">true</div>
-                    </div>
-                    <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center px-1">false</div>
-                        <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">false</div>
-                    </div>
-                    <div class="w-full p-2 cursor-pointer hover:bg-slate-100" @click="showReference">
-                        Operator and function reference &rarr;
+                    <div class="flex justify-between p-2 cursor-pointer hover:bg-slate-100" @click="showReference">
+                        <div>Operator and function reference</div>
+                        <div>&rarr;</div>
                     </div>
                 </div>
             </Dropdown>
@@ -208,8 +189,7 @@ import {
     IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconDeviceFloppy, IconFile, IconSettings, IconPrinter,
-    IconMinus, IconPlus, IconBucketDroplet, IconTextColor,
-    IconHelp, IconMathPi,
+    IconMinus, IconPlus, IconBucketDroplet, IconTextColor, IconHelp,
 } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
