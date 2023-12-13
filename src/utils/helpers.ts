@@ -7,7 +7,7 @@ export const indexToColumn = (index: number): string => {
 
 export const columnToIndex = (column: string): number => column.split("").reduce((a, v) => a * 26 + parseInt(v, 36) - 9, 0) - 1;
 
-export const isNumeric = (v: string): boolean => v === parseFloat(v).toString();
+export const isNumeric = (v: string): boolean => "" + v === parseFloat(v).toString();
 
 export const toNumber = (v: string): number => parseFloat(v);
 
@@ -29,3 +29,6 @@ export const cellCoordinates = (c: string): CellCoordinates | false => {
         cellIndex: columnToIndex(col[0]),
     };
 };
+
+export const getRanges = (v: string) => v.toUpperCase().match(REGEX_RANGE);
+export const getCells = (v: string) => v.toUpperCase().match(REGEX_CELL);

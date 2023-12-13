@@ -39,9 +39,9 @@
 import { computed, nextTick, ref } from "vue";
 import { useStore } from "../store/store";
 import type { HashMap, ILuminaCell, TLuminaCellValue } from "../App.d";
-import { isFormula, cellCoordinates, isNumeric, toNumber, REGEX_RANGE, REGEX_CELL } from "../utils/helpers";
-import { parser } from "../utils/parser";
 import { Values } from "expr-eval";
+import { isFormula, cellCoordinates, isNumeric, toNumber, getRanges, getCells } from "../utils/helpers";
+import { parser } from "../utils/parser";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
@@ -98,11 +98,16 @@ const mouseEnter = (e: MouseEvent) => {
     }
 };
 
-const cellValue = (c: string): string => {
+const cellContent = (c: string): string => {
     const coords = cellCoordinates(c);
     if (!coords) return "";
 
     return store.sheet.rows[coords.rowIndex].cells[coords.cellIndex].value;
+};
+
+const cellValue = (c: string): string => {
+    const v = cellContent(c);
+    return isFormula(v) ? calculateValue(v) : v;
 };
 
 const rangeValues = (r: string): string[] => {
@@ -118,7 +123,8 @@ const rangeValues = (r: string): string[] => {
 
     for (let row = start.rowIndex; row <= end.rowIndex; row++) {
         for (let col = start.cellIndex; col <= end.cellIndex; col++) {
-            values.push(store.sheet.rows[row].cells[col].value);
+            const v = store.sheet.rows[row].cells[col].value;
+            values.push(isFormula(v) ? calculateValue(v) : v);
         }
     }
 
@@ -126,37 +132,43 @@ const rangeValues = (r: string): string[] => {
 };
 
 const ERROR = "#ERROR";
+const calculateValue = (v: string) => {
+    console.log(v);
+    const formula = v.substring(1);
+
+    const values: HashMap<number | number[]> = {};
+
+    const ranges = getRanges(formula);
+    if (ranges) {
+        for (let i = 0; i < ranges.length; i++) {
+            values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
+        }
+    }
+
+    const cells = getCells(formula);
+    if (cells) {
+        for (let i = 0; i < cells.length; i++) {
+            const v = cellValue(cells[i]);
+
+            if (!isNumeric(v)) return ERROR;
+
+            values[cells[i].toLowerCase()] = toNumber(v);
+        }
+    }
+
+    try {
+        return parser.parse(formula.toLowerCase().replace(":", "_")).evaluate(values as Values);
+    } catch (e) {
+        console.log(e);
+        return ERROR;
+    }
+};
 
 const computedValue = computed(() => {
     const v = props.cell.value;
 
     if (isFormula(v)) {
-        let values: HashMap<number | number[]> = {};
-
-        const ranges = v.toUpperCase().match(REGEX_RANGE);
-        if (ranges) {
-            for (let i = 0; i < ranges.length; i++) {
-                values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
-            }
-        }
-
-        const cells = v.toUpperCase().match(REGEX_CELL);
-        if (cells) {
-            for (let i = 0; i < cells.length; i++) {
-                const v = cellValue(cells[i]);
-
-                if (!isNumeric(v)) return ERROR;
-
-                values[cells[i].toLowerCase()] = toNumber(v);
-            }
-        }
-
-        try {
-            return parser.parse(v.substring(1).toLowerCase().replace(":", "_")).evaluate(values as Values);
-        } catch (e) {
-            console.log(e);
-            return ERROR;
-        }
+        return calculateValue(v);
     }
 
     return v;
