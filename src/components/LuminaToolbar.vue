@@ -9,8 +9,9 @@
                 </template>
 
                 <div class="flex flex-col font-serif text-sm min-w-[7rem] print:hidden">
-                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
+                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
                         <IconFile :size="18" /> Open
+                        <input ref="input" type="file" class="hidden" @change="onFileSelected">
                     </div>
                     <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
                         <IconDeviceFloppy :size="18" /> Save
@@ -105,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
@@ -127,6 +128,16 @@ const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.s
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
 
+const input = ref<HTMLInputElement>();
+
+const open = () => input.value!.click();
 const save = () => download(store.sheet.id + ".lumina", JSON.stringify(store.sheet));
 const print = () => window.print();
+
+const onFileSelected = (e: Event) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (!files?.length) return;
+
+    store.loadFromFile(files[0]);
+};
 </script>

@@ -70,6 +70,10 @@ export const useStore = defineStore("counter", () => {
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
     });
 
+    async function loadFromFile(file: File) {
+        sheet.value = JSON.parse(await file.text());
+    }
+
     function updateRowStyle(index: number, style: ILuminaRowStyle) {
         sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
     }
@@ -175,6 +179,8 @@ export const useStore = defineStore("counter", () => {
     return {
         settings,
         updateSettings,
+
+        loadFromFile,
 
         hoverCellCoordinates,
         setHoverCellCoordinates,
