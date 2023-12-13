@@ -12,11 +12,11 @@
                     <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
                         <IconFile :size="18" /> Open
                     </div>
-                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100">
+                    <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
                         <IconDeviceFloppy :size="18" /> Save
                     </div>
                     <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                        @click="w.print()">
+                        @click="print">
                         <IconPrinter :size="18" /> Print
                     </div>
                 </div>
@@ -106,8 +106,9 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "../store/store";
 import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter } from "@tabler/icons-vue";
+import { useStore } from "../store/store";
+import { download } from "../utils/helpers";
 import Dropdown from "v-dropdown";
 
 const store = useStore();
@@ -126,5 +127,6 @@ const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.s
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
 
-const w = window;
+const save = () => download(store.sheet.id + ".lumina", JSON.stringify(store.sheet));
+const print = () => window.print();
 </script>
