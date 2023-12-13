@@ -39,7 +39,7 @@
             <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
                 class="outline-none p-0.5 w-10" @change="setFontSize">
         </div>
-        <div class="flex border">
+        <div class="flex border rounded">
             <div class="flex items-center justify-center w-6 border-r">
                 <color-picker shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
             </div>
