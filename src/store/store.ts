@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaRow, ILuminaSheet, Settings } from "../App.d";
+import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 
 const INITIAL_ROW_COUNT = 100;
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
@@ -69,6 +69,13 @@ export const useStore = defineStore("counter", () => {
         style: { rows: {}, cols: {}, },
         rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
     });
+
+    function updateRowStyle(index: number, style: ILuminaRowStyle) {
+        sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
+    }
+    function updateColStyle(index: number, style: ILuminaColStyle) {
+        sheet.value.style.cols[index] = { ...sheet.value.style.cols[index], ...style };
+    }
 
     const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
 
@@ -181,6 +188,9 @@ export const useStore = defineStore("counter", () => {
         selectColumn,
         isWholeSheetSelected,
         selectSheet,
+
+        updateColStyle,
+        updateRowStyle,
 
         activeCell,
         ActiveCell,

@@ -29,7 +29,9 @@
                 <div class="flex items-center justify-between gap-2">
                     <div class="font-semibold">Width</div>
                     <div class="flex items-baseline gap-1">
-                        <input type="number" min="10" max="100" class="p-1 outline-none">px
+                        <input type="number" min="10" max="100" class="p-1 outline-none"
+                            :value="store.sheet.style.cols?.[i - 1]?.width || '80'"
+                            @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
                 </div>
             </div>

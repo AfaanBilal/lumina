@@ -32,14 +32,13 @@ export interface ILuminaRow {
     cells: Array<ILuminaCell>;
 }
 
-export interface ILuminaRowColStyle {
-    width?: number;
+export interface ILuminaRowStyle {
     height?: number;
 }
 
-export interface ILuminaRowStyle extends ILuminaRowColStyle {}
-
-export interface ILuminaColStyle extends ILuminaRowColStyle {}
+export interface ILuminaColStyle {
+    width?: number;
+}
 
 export interface ILuminaSheetStyle {
     rows: HashMap<ILuminaRowStyle>;
