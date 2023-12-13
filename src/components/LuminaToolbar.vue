@@ -67,10 +67,10 @@
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r">
-                    <color-picker shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
+                    <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
                 </div>
                 <div class="flex items-center justify-center w-6">
-                    <color-picker shape="circle" :round-history="true" @pure-color-change="setTextColor" />
+                    <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true" @pure-color-change="setTextColor" />
                 </div>
             </div>
 
@@ -125,6 +125,9 @@ const toggleBold = () => store.updateStyle({ bold: !store.ActiveCell.style?.bold
 const toggleStrikethrough = () => store.updateStyle({ strikethrough: !store.ActiveCell.style?.strikethrough });
 const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.italic });
 const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.style?.underline });
+
+const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set() {} });
+const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set() {} });
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
 
