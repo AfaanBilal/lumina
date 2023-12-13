@@ -1,7 +1,7 @@
 <template>
     <div class="grid overflow-x-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
             grid-template-rows: repeat(${sheet.rows.length}, 1.5rem);
-            grid-template-columns: 2.5rem repeat(${sheet.rows[0].cells.length}, 5rem);
+            grid-template-columns: ${colTemplate};
         `">
         <LuminaHeader />
 
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { IconPlus } from "@tabler/icons-vue";
-import { onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 
 import { useStore } from "../store/store";
 import type { ILuminaSheet } from "../App.d";
@@ -29,6 +29,16 @@ import LuminaIndexCell from "./LuminaIndexCell.vue";
 defineProps<{ sheet: ILuminaSheet }>();
 
 const store = useStore();
+
+const colTemplate = computed(() => {
+    let c = "2.5rem ";
+
+    for (let i = 0; i < store.sheet.rows[0].cells.length; i++) {
+        c += (store.sheet.style.cols?.[i]?.width || 80) + "px ";
+    }
+
+    return c;
+});
 
 const navKeyListener = (e: KeyboardEvent) => {
     if (document.activeElement && document.activeElement.tagName.toLowerCase() === "input") return;

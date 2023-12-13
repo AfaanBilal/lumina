@@ -28,7 +28,7 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Select whole sheet
 - [ ] Sizing
   - [ ] Row height
-  - [ ] Column width
+  - [X] Column width
 - [X] Basic settings
   - [X] Striped Grid
   - [X] Auto focus input
