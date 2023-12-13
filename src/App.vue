@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div class="flex items-center justify-between p-2">
             <div class="flex items-center gap-2">
-                <img src="/public/logo.png" alt="logo" class="w-8">
+                <img src="/logo.png" alt="logo" class="w-8">
                 <h1 class="text-2xl font-semibold">Lumina</h1>
             </div>
             <a href="https://afaan.dev" target="_blank" rel="noopener"
