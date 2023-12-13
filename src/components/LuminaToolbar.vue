@@ -9,7 +9,7 @@
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
                 <IconItalic :size="16" />
             </div>
-            <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+            <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
                 <IconUnderline :size="16" />
             </div>
