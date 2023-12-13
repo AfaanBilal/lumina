@@ -1,6 +1,10 @@
 import { Parser } from "expr-eval";
 
-export const parser = new Parser();
+export const parser = new Parser({
+    operators: {
+        assignment: false,
+    },
+});
 
 parser.consts = {
     pi: Math.PI,
