@@ -59,37 +59,37 @@
 
                 <div class="flex flex-col font-serif print:hidden w-80">
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Start Formula</div>
+                        <div class="px-1">Start Formula</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Cell Reference</div>
+                        <div class="px-1">Cell Reference</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Range Reference</div>
+                        <div class="px-1">Range Reference</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
                     </div>
                     <div class="w-full p-2 text-center">Functions</div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Sum</div>
+                        <div class="px-1">Sum</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SUM(A1:B2)</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Average</div>
+                        <div class="px-1">Average</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=AVG(A1:B2)</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div>Square</div>
+                        <div class="px-1">Square</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SQUARE(A1)</div>
                     </div>
                     <div class="w-full p-2 text-center">Constants</div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center"><IconMathPi :size="12" /></div>
+                        <div class="flex items-center px-1"><IconMathPi :size="12" /></div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">pi</div>
                     </div>
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
-                        <div class="flex items-center">e</div>
+                        <div class="flex items-center px-1">e</div>
                         <div class="w-32 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">e</div>
                     </div>
                 </div>
