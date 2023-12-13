@@ -38,4 +38,6 @@
 
 .vc-color-wrap {
     margin: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
 }

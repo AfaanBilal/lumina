@@ -27,37 +27,37 @@
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" @click="toggleBold">
-                    <IconBold :size="16" />
+                    <IconBold :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" @click="setItalic">
-                    <IconItalic :size="16" />
+                    <IconItalic :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" @click="toggleUnderline">
-                    <IconUnderline :size="16" />
+                    <IconUnderline :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }"
                     @click="toggleStrikethrough">
-                    <IconStrikethrough :size="16" />
+                    <IconStrikethrough :size="18" />
                 </div>
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
                     @click="setTextAlign('left')">
-                    <IconAlignLeft :size="16" />
+                    <IconAlignLeft :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
                     @click="setTextAlign('center')">
-                    <IconAlignCenter :size="16" />
+                    <IconAlignCenter :size="18" />
                 </div>
                 <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
                     :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
                     @click="setTextAlign('right')">
-                    <IconAlignRight :size="16" />
+                    <IconAlignRight :size="18" />
                 </div>
             </div>
             <div
@@ -66,18 +66,22 @@
                     class="outline-none p-0.5 w-10" @change="setFontSize">
             </div>
             <div class="flex border rounded">
-                <div class="flex items-center justify-center w-6 border-r">
-                    <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true" @pure-color-change="setBackgroundColor" />
+                <div class="flex items-center gap-1 px-1 border-r" title="Background color">
+                    <IconPaint :size="18" />
+                    <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true"
+                        @pure-color-change="setBackgroundColor" />
                 </div>
-                <div class="flex items-center justify-center w-6">
-                    <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true" @pure-color-change="setTextColor" />
+                <div class="flex items-center gap-1 px-1">
+                    <IconTextColor :size="18" />
+                    <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true"
+                        @pure-color-change="setTextColor" />
                 </div>
             </div>
 
             <Dropdown class="ml-auto">
                 <template #trigger>
                     <button class="p-0.5 items-center justify-center rounded-sm flex hover:bg-slate-200">
-                        <IconDotsVertical :size="16" />
+                        <IconDotsVertical :size="18" />
                     </button>
                 </template>
 
@@ -107,7 +111,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter } from "@tabler/icons-vue";
+import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical, IconDeviceFloppy, IconFile, IconPrinter, IconTextColor, IconPaint } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
 import Dropdown from "v-dropdown";
