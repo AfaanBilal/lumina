@@ -9,12 +9,33 @@
         </button>
 
         {{ index + 1 }}
+
+        <Dropdown class="absolute right-0 !flex items-center justify-center">
+            <template #trigger>
+                <button class="p-0.5 items-center justify-center hidden rounded group-hover:flex hover:bg-slate-300">
+                    <IconDotsVertical :size="10" />
+                </button>
+            </template>
+
+            <div class="flex flex-col w-40 gap-2 p-2 text-sm">
+                <div class="font-bold text-md">Row {{ index + 1 }}</div>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="font-semibold">Height</div>
+                    <div class="flex items-baseline gap-1">
+                        <input type="number" min="20" max="1000" class="p-1 outline-none"
+                            :value="store.sheet.style.rows?.[index + 1]?.height || '24'"
+                            @change="e => store.updateRowStyle(index + 1, { height: parseInt((e.target as HTMLInputElement).value) })">px
+                    </div>
+                </div>
+            </div>
+        </Dropdown>
     </div>
 </template>
 
 <script setup lang="ts">
+import Dropdown from "v-dropdown";
 import { computed } from "vue";
-import { IconPlus } from "@tabler/icons-vue";
+import { IconPlus, IconDotsVertical } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 
 const props = defineProps<{ index: number }>();

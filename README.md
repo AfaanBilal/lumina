@@ -26,8 +26,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Select whole row
   - [X] Select whole column
   - [X] Select whole sheet
-- [ ] Sizing
-  - [ ] Row height
+- [X] Sizing
+  - [X] Row height
   - [X] Column width
 - [X] Basic settings
   - [X] Striped Grid

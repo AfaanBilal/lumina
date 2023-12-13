@@ -1,6 +1,6 @@
 <template>
     <div class="grid overflow-x-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
-            grid-template-rows: repeat(${sheet.rows.length}, 1.5rem);
+            grid-template-rows: ${rowTemplate};
             grid-template-columns: ${colTemplate};
         `">
         <LuminaHeader />
@@ -29,6 +29,16 @@ import LuminaIndexCell from "./LuminaIndexCell.vue";
 defineProps<{ sheet: ILuminaSheet }>();
 
 const store = useStore();
+
+const rowTemplate = computed(() => {
+    let r = "";
+
+    for (let i = 0; i < store.sheet.rows.length; i++) {
+        r += (store.sheet.style.rows?.[i]?.height || 24) + "px ";
+    }
+
+    return r;
+});
 
 const colTemplate = computed(() => {
     let c = "2.5rem ";

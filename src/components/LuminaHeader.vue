@@ -40,8 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import { IconPlus, IconDotsVertical } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
+import { IconPlus, IconDotsVertical } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { indexToColumn } from "../utils/helpers";
 
