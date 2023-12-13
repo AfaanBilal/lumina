@@ -176,6 +176,16 @@ export const useStore = defineStore("counter", () => {
         }
     }
 
+    function deleteRow(index: number) {
+        sheet.value.rows.splice(index, 1);
+    }
+
+    function deleteColumn(index: number) {
+        for (let i = 0; i < sheet.value.rows.length; i++) {
+            sheet.value.rows[i].cells.splice(index, 1);
+        }
+    }
+
     return {
         settings,
         updateSettings,
@@ -219,5 +229,8 @@ export const useStore = defineStore("counter", () => {
         addRow,
         maxColumns,
         addColumn,
+
+        deleteRow,
+        deleteColumn,
     };
 });

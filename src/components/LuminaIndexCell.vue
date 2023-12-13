@@ -17,15 +17,20 @@
                 </button>
             </template>
 
-            <div class="flex flex-col w-40 gap-2 p-2 text-sm">
-                <div class="font-bold text-md">Row {{ index + 1 }}</div>
-                <div class="flex items-center justify-between gap-2">
-                    <div class="font-semibold">Height</div>
+            <div class="flex flex-col w-48 text-sm">
+                <div class="p-2 font-semibold border-b text-md">Row {{ index + 1 }}</div>
+                <div class="flex items-center gap-2 p-2">
+                    <IconLineHeight :size="18" />
+                    <div class="flex-1 font-semibold">Height</div>
                     <div class="flex items-baseline gap-1">
                         <input type="number" min="20" max="1000" class="p-1 outline-none"
                             :value="store.sheet.style.rows?.[index + 1]?.height || '24'"
                             @change="e => store.updateRowStyle(index + 1, { height: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.deleteRow(index)">
+                    <IconTrash :size="18" /> Delete row
                 </div>
             </div>
         </Dropdown>
@@ -35,7 +40,7 @@
 <script setup lang="ts">
 import Dropdown from "v-dropdown";
 import { computed } from "vue";
-import { IconPlus, IconDotsVertical } from "@tabler/icons-vue";
+import { IconPlus, IconDotsVertical, IconTrash, IconLineHeight } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 
 const props = defineProps<{ index: number }>();

@@ -24,15 +24,20 @@
                 </button>
             </template>
 
-            <div class="flex flex-col w-40 gap-2 p-2 text-sm">
-                <div class="font-bold text-md">Column {{ indexToColumn(i - 1) }}</div>
-                <div class="flex items-center justify-between gap-2">
-                    <div class="font-semibold">Width</div>
+            <div class="flex flex-col text-sm w-52">
+                <div class="p-2 font-semibold border-b text-md">Column {{ indexToColumn(i - 1) }}</div>
+                <div class="flex items-center gap-2 p-2">
+                    <IconArrowAutofitWidth :size="18" />
+                    <div class="flex-1 font-semibold">Width</div>
                     <div class="flex items-baseline gap-1">
                         <input type="number" min="40" max="2500" class="p-1 outline-none"
                             :value="store.sheet.style.cols?.[i - 1]?.width || '80'"
                             @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.deleteColumn(i - 1)">
+                    <IconTrash :size="18" /> Delete column
                 </div>
             </div>
         </Dropdown>
@@ -41,7 +46,7 @@
 
 <script setup lang="ts">
 import Dropdown from "v-dropdown";
-import { IconPlus, IconDotsVertical } from "@tabler/icons-vue";
+import { IconPlus, IconDotsVertical, IconTrash, IconArrowAutofitWidth } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { indexToColumn } from "../utils/helpers";
 

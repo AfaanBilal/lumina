@@ -37,6 +37,13 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Select whole row
   - [X] Select whole column
   - [X] Select whole sheet
+- [X] Sheet management
+  - [X] Add row (end)
+  - [X] Add row (middle)
+  - [X] Delete row
+  - [X] Add column (end)
+  - [X] Add column (middle)
+  - [X] Delete column
 - [X] Sizing
   - [X] Row height
   - [X] Column width
