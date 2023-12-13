@@ -133,7 +133,6 @@ const rangeValues = (r: string): string[] => {
 
 const ERROR = "#ERROR";
 const calculateValue = (v: string) => {
-    console.log(v);
     const formula = v.substring(1);
 
     const values: HashMap<number | number[]> = {};
@@ -159,7 +158,6 @@ const calculateValue = (v: string) => {
     try {
         return parser.parse(formula.toLowerCase().replace(":", "_")).evaluate(values as Values);
     } catch (e) {
-        console.log(e);
         return ERROR;
     }
 };
