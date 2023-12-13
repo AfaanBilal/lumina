@@ -96,7 +96,7 @@
             </div>
             <div class="flex border rounded">
                 <div class="flex items-center gap-1 px-1 border-r" title="Background color">
-                    <IconPaint :size="18" />
+                    <IconBucketDroplet :size="18" />
                     <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true"
                         @pure-color-change="setBackgroundColor" />
                 </div>
@@ -112,11 +112,15 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDeviceFloppy, IconFile, IconPrinter, IconTextColor, IconPaint } from "@tabler/icons-vue";
+import {
+    IconBold, IconItalic, IconUnderline,
+    IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
+    IconDeviceFloppy, IconFile, IconSettings, IconPrinter,
+    IconBucketDroplet, IconTextColor
+} from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
 import Dropdown from "v-dropdown";
-import { IconSettings } from "@tabler/icons-vue";
 
 const store = useStore();
 
