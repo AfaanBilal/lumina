@@ -84,12 +84,12 @@
                 <div class="flex flex-col gap-2 p-2 text-sm">
                     <div class="font-semibold text-md">Settings</div>
                     <div class="flex items-center gap-1">
-                        <input id="stripes" v-model="stripes" type="checkbox">
-                        <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
-                    </div>
-                    <div class="flex items-center gap-1">
                         <input id="autofocus" v-model="autofocus" type="checkbox">
                         <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input id="stripes" v-model="stripes" type="checkbox">
+                        <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
                     </div>
                     <div class="flex items-center gap-1">
                         <input id="rowBand" v-model="rowBand" type="checkbox">
