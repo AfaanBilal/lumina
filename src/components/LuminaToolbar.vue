@@ -47,31 +47,42 @@
                 <color-picker shape="circle" :round-history="true" @pure-color-change="setTextColor" />
             </div>
         </div>
-        <div class="flex items-center gap-4 ml-auto">
-            <div class="flex items-center gap-1">
-                <input id="stripes" v-model="stripes" type="checkbox">
-                <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
+
+        <Dropdown class="ml-auto">
+            <template #trigger>
+                <button class="p-0.5 items-center justify-center rounded-sm flex hover:bg-slate-100">
+                    <IconDotsVertical :size="10" />
+                </button>
+            </template>
+
+            <div class="flex flex-col gap-2 p-2 text-sm">
+                <div class="font-semibold text-md">Settings</div>
+                <div class="flex items-center gap-1">
+                    <input id="stripes" v-model="stripes" type="checkbox">
+                    <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="autofocus" v-model="autofocus" type="checkbox">
+                    <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="rowBand" v-model="rowBand" type="checkbox">
+                    <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
+                </div>
+                <div class="flex items-center gap-1">
+                    <input id="colBand" v-model="colBand" type="checkbox">
+                    <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
+                </div>
             </div>
-            <div class="flex items-center gap-1">
-                <input id="autofocus" v-model="autofocus" type="checkbox">
-                <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input id="rowBand" v-model="rowBand" type="checkbox">
-                <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input id="colBand" v-model="colBand" type="checkbox">
-                <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
-            </div>
-        </div>
+        </Dropdown>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "../store/store";
-import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough } from "@tabler/icons-vue";
+import { IconBold, IconItalic, IconUnderline, IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough, IconDotsVertical } from "@tabler/icons-vue";
+import Dropdown from "v-dropdown";
 
 const store = useStore();
 
