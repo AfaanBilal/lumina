@@ -178,12 +178,16 @@ export const useStore = defineStore("counter", () => {
 
     function deleteRow(index: number) {
         sheet.value.rows.splice(index, 1);
+
+        if (!sheet.value.rows.length) addRow();
     }
 
     function deleteColumn(index: number) {
         for (let i = 0; i < sheet.value.rows.length; i++) {
             sheet.value.rows[i].cells.splice(index, 1);
         }
+
+        if (!sheet.value.rows[0].cells.length) addColumn();
     }
 
     return {
