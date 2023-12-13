@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-1 p-1 text-xs print:hidden">
-        <div class="flex gap-1 border-y">
+        <div class="flex gap-1 rounded border-y">
             <Dropdown ref="fileDropdown">
                 <template #trigger>
                     <div class="flex items-center gap-1 px-2 py-1 cursor-pointer select-none border-x hover:bg-slate-100">
