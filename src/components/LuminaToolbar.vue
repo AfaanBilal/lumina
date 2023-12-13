@@ -89,6 +89,23 @@
                     <IconAlignRight :size="18" />
                 </div>
             </div>
+            <div class="flex border rounded">
+                <div class="flex items-center justify-center w-6 border-r rounded-l cursor-pointer hover:bg-slate-200"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'top' }"
+                    title="Vertical align top" @click="setVerticalAlign('top')">
+                    <IconLayoutAlignTop :size="18" />
+                </div>
+                <div class="flex items-center justify-center w-6 border-r cursor-pointer hover:bg-slate-200"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'middle' }"
+                    title="Vertical align middle" @click="setVerticalAlign('middle')">
+                    <IconLayoutAlignCenter :size="18" />
+                </div>
+                <div class="flex items-center justify-center w-6 rounded-r cursor-pointer hover:bg-slate-200"
+                    :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'bottom' }"
+                    title="Vertical align bottom" @click="setVerticalAlign('bottom')">
+                    <IconLayoutAlignBottom :size="18" />
+                </div>
+            </div>
             <div class="flex items-center justify-center border rounded focus-within:border-slate-400 hover:border-slate-400"
                 title="Font size">
                 <input type="number" min="8" max="100" :value="store.ActiveCell.style?.fontSize || 11"
@@ -115,8 +132,9 @@ import { computed, ref } from "vue";
 import {
     IconBold, IconItalic, IconUnderline,
     IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
+    IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconDeviceFloppy, IconFile, IconSettings, IconPrinter,
-    IconBucketDroplet, IconTextColor
+    IconBucketDroplet, IconTextColor,
 } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
@@ -131,6 +149,7 @@ const colBand = computed<boolean>({ get() { return store.settings.colBand; }, se
 
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
+const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
 const toggleBold = () => store.updateStyle({ bold: !store.ActiveCell.style?.bold });
 const toggleStrikethrough = () => store.updateStyle({ strikethrough: !store.ActiveCell.style?.strikethrough });
 const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.italic });

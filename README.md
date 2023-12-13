@@ -28,6 +28,7 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Background color
   - [X] Text color
   - [X] Text alignment
+  - [X] Vertical alignment
   - [X] Font size
 - [X] Selection
   - [X] Select a cell

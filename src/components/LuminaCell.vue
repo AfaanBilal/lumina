@@ -21,6 +21,12 @@
             'italic': props.cell.style?.italic,
             'underline': props.cell.style?.underline,
             'line-through': props.cell.style?.strikethrough,
+            '!justify-start': props.cell.style?.textAlignment === 'left',
+            '!justify-center': props.cell.style?.textAlignment === 'center',
+            '!justify-end': props.cell.style?.textAlignment === 'right',
+            '!items-start': props.cell.style?.verticalAlignment === 'top',
+            '!items-center': props.cell.style?.verticalAlignment === 'middle',
+            '!items-end': props.cell.style?.verticalAlignment === 'bottom',
         }">
             {{ computedValue }}
         </div>
