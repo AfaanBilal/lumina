@@ -76,8 +76,8 @@
 
             <Dropdown class="ml-auto">
                 <template #trigger>
-                    <button class="p-0.5 items-center justify-center rounded-sm flex hover:bg-slate-100">
-                        <IconDotsVertical :size="10" />
+                    <button class="p-0.5 items-center justify-center rounded-sm flex hover:bg-slate-200">
+                        <IconDotsVertical :size="16" />
                     </button>
                 </template>
 
