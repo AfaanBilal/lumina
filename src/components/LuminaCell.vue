@@ -37,10 +37,10 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref } from "vue";
-import { Parser } from "expr-eval";
 import { useStore } from "../store/store";
 import type { HashMap, ILuminaCell, TLuminaCellValue } from "../App.d";
 import { isFormula, columnToIndex, isNumeric, toNumber } from "../utils/helpers";
+import { parser } from "../utils/parser";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
@@ -129,8 +129,9 @@ const computedValue = computed(() => {
         }
 
         try {
-            return Parser.parse(v.substring(1).toLowerCase()).evaluate(values);
+            return parser.parse(v.substring(1).toLowerCase()).evaluate(values);
         } catch (e) {
+            console.log(e);
             return ERROR;
         }
     }
