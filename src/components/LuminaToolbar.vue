@@ -71,7 +71,7 @@
                     <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true"
                         @pure-color-change="setBackgroundColor" />
                 </div>
-                <div class="flex items-center gap-1 px-1">
+                <div class="flex items-center gap-1 px-1" title="Text color">
                     <IconTextColor :size="18" />
                     <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true"
                         @pure-color-change="setTextColor" />
