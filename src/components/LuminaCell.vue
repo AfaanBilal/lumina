@@ -162,8 +162,13 @@ const calculateValue = (v: string) => {
         }
     }
 
+    const finalFormula = formula.toLowerCase()
+        .replace("roundto", "roundTo")
+        .replace("indexof", "indexOf")
+        .replace(":", "_");
+
     try {
-        return parser.parse(formula.toLowerCase().replace(":", "_")).evaluate(values as Values);
+        return parser.parse(finalFormula).evaluate(values as Values);
     } catch (e) {
         return ERROR;
     }
