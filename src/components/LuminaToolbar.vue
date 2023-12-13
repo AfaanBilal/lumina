@@ -121,13 +121,13 @@
                     <IconPlus :size="18" />
                 </div>
             </div>
-            <div class="flex border rounded">
-                <div class="flex items-center gap-1 px-1 border-r" title="Background color">
+            <div class="flex">
+                <div class="flex items-center gap-1 px-1 border rounded-l hover:bg-slate-100" title="Background color">
                     <IconBucketDroplet :size="18" />
                     <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true"
                         @pure-color-change="setBackgroundColor" />
                 </div>
-                <div class="flex items-center gap-1 px-1" title="Text color">
+                <div class="flex items-center gap-1 px-1 border border-l-0 rounded-r hover:bg-slate-100" title="Text color">
                     <IconTextColor :size="18" />
                     <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true"
                         @pure-color-change="setTextColor" />
