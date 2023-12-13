@@ -12,6 +12,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Open
   - [X] Save
   - [X] Print
+- [X] Help menu
+- [X] Reference: operators, functions and constants
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
 - [X] Additional functions
   - [X] SUM(...)
