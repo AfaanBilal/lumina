@@ -30,11 +30,10 @@
  */
 
 import { computed } from "vue";
-import { IconMathFunction } from "@tabler/icons-vue";
+import { IconMathFunction, IconEqual } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { calculateValue } from "../../utils/computer";
 import { isFormula } from "../../utils/helpers";
-import { IconEqual } from "@tabler/icons-vue";
 
 const store = useStore();
 
