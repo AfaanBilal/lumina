@@ -14,8 +14,8 @@ import { ulid } from "ulid";
 import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 import { indexToColumn } from "../utils/helpers";
 
-const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 25);
-const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 80);
+const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
+const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
 
 const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });

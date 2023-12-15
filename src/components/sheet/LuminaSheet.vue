@@ -1,7 +1,6 @@
 <template>
     <div ref="grid" class="relative grid overflow-auto" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
-            grid-template-rows: ${rowTemplate};
-            grid-template-columns: ${colTemplate};
+            grid-template-rows: ${rowTemplate}; grid-template-columns: ${colTemplate};
         `">
         <LuminaSheetHeader />
 
@@ -38,8 +37,8 @@ import LuminaIndexCell from "./LuminaIndexCell.vue";
 
 defineProps<{ sheet: ILuminaSheet }>();
 
-const grid = ref();
 const store = useStore();
+const grid = ref();
 
 const rowTemplate = computed(() => {
     let r = "";
