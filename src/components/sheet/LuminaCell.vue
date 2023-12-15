@@ -71,12 +71,20 @@ const onSelectionLeftEdge = computed(() => props.cellIndex === store.selectedCel
 const onSheetTopEdge = computed(() => props.rowIndex === 0);
 const onSheetLeftEdge = computed(() => props.cellIndex === 0);
 
-const commonStyle = computed(() => `
-    background-color: ${props.cell.style?.backgroundColor || "white"};
-    color: ${props.cell.style?.textColor || "black"};
-    text-align: ${props.cell.style?.textAlignment || "left"};
-    font-size: ${props.cell.style?.fontSize || 11}px;
-`);
+const commonStyle = computed(() => {
+    if (!props.cell.style) return "";
+
+    const style = props.cell.style;
+
+    let s = "";
+
+    style.backgroundColor && (s += `background-color: ${style.backgroundColor};`);
+    style.textColor && (s += `color: ${style.textColor};`);
+    style.textAlignment && (s += `text-align: ${style.textAlignment}`);
+    style.fontSize && (s += `font-size: ${style.fontSize}px`);
+
+    return s;
+});
 
 const value = computed<TLuminaCellValue>({
     get() {
