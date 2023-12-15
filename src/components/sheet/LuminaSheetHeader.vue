@@ -1,10 +1,10 @@
 <template>
-    <div class="border-b-4 border-r-4 cursor-pointer border-slate-300 bg-slate-200"
+    <div class="sticky top-0 left-0 z-20 border-b-4 border-r-4 cursor-pointer border-slate-300 bg-slate-200"
         :class="{ 'bg-blue-100 border-blue-600': store.isWholeSheetSelected }" @click="store.selectSheet()">
         &nbsp;
     </div>
     <div v-for="i in store.maxColumns" :key="i"
-        class="relative text-sm flex flex-shrink-0 items-center justify-center font-medium h-6 border p-0.5 bg-slate-100 group cursor-pointer select-none"
+        class="text-sm flex flex-shrink-0 items-center justify-center font-medium h-6 border p-0.5 bg-slate-100 group cursor-pointer select-none sticky top-0"
         :class="{
             'bg-slate-200': i - 1 === store.activeCell.cellIndex,
             'bg-blue-100 border-x-blue-700 border-t-blue-700': store.selectedCells.start.cellIndex === i - 1 && store.selectedCells.end.cellIndex === i - 1

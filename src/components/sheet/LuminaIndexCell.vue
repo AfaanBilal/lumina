@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex items-center justify-center font-medium text-sm border p-0.5 bg-slate-100 group select-none cursor-pointer"
+    <div class="flex items-center justify-center font-medium text-sm border p-0.5 bg-slate-100 group select-none cursor-pointer sticky left-0"
         :class="{ 'bg-slate-200': index === store.activeCell.rowIndex, 'bg-blue-100 border-l-blue-700 border-y-blue-700': isRowSelected }"
         @click="store.selectRow(index)">
         <button
