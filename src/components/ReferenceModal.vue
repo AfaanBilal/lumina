@@ -1,6 +1,6 @@
 <template>
     <div v-if="store.settings.referenceVisible"
-        class="fixed flex flex-col bg-white border-2 rounded-lg shadow-2xl border-slate-300 bottom-4 right-4 w-80">
+        class="fixed flex flex-col bg-white border-2 rounded-lg shadow-2xl border-slate-300 bottom-4 right-4 w-72">
         <div class="flex justify-between p-2">
             <div class="">Reference</div>
             <div class="p-1 rounded cursor-pointer hover:bg-slate-200"
@@ -11,15 +11,15 @@
         <div class="flex flex-col gap-2 p-2 border-t">
             <div>Operators</div>
             <div class="flex flex-wrap gap-1 text-xs">
-                <span v-for="o in operators" :key="o" class="px-1 py-0.5 w-16 text-gray-200 rounded bg-zinc-900">{{ o }}</span>
+                <span v-for="o in operators" :key="o" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ o }}</span>
             </div>
             <div>Functions</div>
             <div class="flex flex-wrap gap-1 text-xs">
-                <span v-for="f in functions" :key="f" class="px-1 py-0.5 w-16 text-gray-200 rounded bg-zinc-900">{{ f }}</span>
+                <span v-for="f in functions" :key="f" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ f }}</span>
             </div>
             <div>Constants</div>
             <div class="flex flex-wrap gap-1 text-xs">
-                <span v-for="c in constants" :key="c" class="px-1 py-0.5 w-16 text-gray-200 rounded bg-zinc-900">{{ c }}</span>
+                <span v-for="c in constants" :key="c" class="font-mono px-1 py-0.5 w-12 text-gray-200 rounded bg-zinc-900">{{ c }}</span>
             </div>
         </div>
     </div>

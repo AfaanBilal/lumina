@@ -8,7 +8,7 @@
                     </div>
                 </template>
 
-                <div class="flex flex-col font-serif text-sm min-w-[7rem] print:hidden">
+                <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                     <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
                         <IconFile :size="18" /> Open
                         <input ref="input" type="file" class="hidden" @change="onFileSelected">
@@ -30,7 +30,7 @@
                     </div>
                 </template>
 
-                <div class="flex flex-col font-serif text-sm min-w-[7rem] print:hidden">
+                <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                     <div class="flex items-center gap-2 px-2 py-1 border-b">
                         <input id="autofocus" v-model="autofocus" type="checkbox">
                         <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
@@ -57,7 +57,7 @@
                     </div>
                 </template>
 
-                <div class="flex flex-col font-serif print:hidden w-80">
+                <div class="flex flex-col print:hidden w-80">
                     <div class="flex items-center justify-between gap-2 p-1 border-b">
                         <div class="px-1">Start Formula</div>
                         <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div class="flex border rounded">
-            <div class="flex items-center justify-center w-10 p-1 font-semibold border-r">
+            <div class="flex items-center justify-center w-10 p-1 font-mono font-semibold border-r">
                 {{ store.ActiveCellName }}
             </div>
             <div class="p-1 border-r">
