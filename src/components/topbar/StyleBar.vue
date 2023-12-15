@@ -54,7 +54,7 @@
                 <IconLayoutAlignBottom :size="18" />
             </div>
         </div>
-        <div class="flex items-center justify-center w-24 border rounded">
+        <div class="flex items-center justify-center border rounded">
             <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Arial'" @change="setFontFamily">
                 <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
             </select>
