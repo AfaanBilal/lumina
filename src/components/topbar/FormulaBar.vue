@@ -8,7 +8,9 @@
         </div>
         <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none bg-slate-100"
             @keyup.enter="store.selectCellDown()">
-        <div v-if="isFormula(activeCellValue)" class="flex-1 p-1 border-l bg-slate-100">{{ calculateValue(activeCellValue) }}</div>
+        <div v-if="isFormula(activeCellValue)" class="flex-1 p-1 font-semibold border-l bg-slate-100">
+            {{ calculateValue(activeCellValue) }}
+        </div>
     </div>
 </template>
 
