@@ -47,8 +47,8 @@
 <script setup lang="ts">
 import Dropdown from "v-dropdown";
 import { IconPlus, IconDotsVertical, IconTrash, IconArrowAutofitWidth } from "@tabler/icons-vue";
-import { useStore } from "../store/store";
-import { indexToColumn } from "../utils/helpers";
+import { useStore } from "../../store/store";
+import { indexToColumn } from "../../utils/helpers";
 
 const store = useStore();
 </script>

@@ -3,7 +3,7 @@
             grid-template-rows: ${rowTemplate};
             grid-template-columns: ${colTemplate};
         `">
-        <LuminaHeader />
+        <LuminaSheetHeader />
 
         <template v-for="(row, i) of sheet.rows" :key="row.id">
             <LuminaIndexCell :index="i" />
@@ -19,10 +19,9 @@
 <script setup lang="ts">
 import { IconPlus } from "@tabler/icons-vue";
 import { computed, onMounted, onUnmounted } from "vue";
-
-import { useStore } from "../store/store";
-import type { ILuminaSheet } from "../App.d";
-import LuminaHeader from "./LuminaHeader.vue";
+import { useStore } from "../../store/store";
+import type { ILuminaSheet } from "../../App.d";
+import LuminaSheetHeader from "./LuminaSheetHeader.vue";
 import LuminaCell from "./LuminaCell.vue";
 import LuminaIndexCell from "./LuminaIndexCell.vue";
 

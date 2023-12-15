@@ -44,11 +44,11 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref } from "vue";
-import { useStore } from "../store/store";
-import type { HashMap, ILuminaCell, TLuminaCellValue } from "../App.d";
+import { useStore } from "../../store/store";
+import type { HashMap, ILuminaCell, TLuminaCellValue } from "../../App.d";
 import { Values } from "expr-eval";
-import { isFormula, cellCoordinates, isNumeric, toNumber, getRanges, getCells } from "../utils/helpers";
-import { parser } from "../utils/parser";
+import { isFormula, cellCoordinates, isNumeric, toNumber, getRanges, getCells } from "../../utils/helpers";
+import { parser } from "../../utils/parser";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 

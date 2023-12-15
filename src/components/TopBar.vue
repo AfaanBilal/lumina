@@ -8,10 +8,10 @@
             <a href="https://afaan.dev" target="_blank" rel="noopener"
                 class="self-start text-sm text-slate-500 hover:text-blue-500">&copy; Afaan Bilal</a>
         </div>
-        <LuminaToolbar />
+        <Toolbar />
     </div>
 </template>
 
 <script setup lang="ts">
-import LuminaToolbar from "./LuminaToolbar.vue";
+import Toolbar from "./Toolbar.vue";
 </script>

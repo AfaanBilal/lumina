@@ -41,7 +41,7 @@
 import Dropdown from "v-dropdown";
 import { computed } from "vue";
 import { IconPlus, IconDotsVertical, IconTrash, IconLineHeight } from "@tabler/icons-vue";
-import { useStore } from "../store/store";
+import { useStore } from "../../store/store";
 
 const props = defineProps<{ index: number }>();
 
