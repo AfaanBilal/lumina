@@ -57,7 +57,21 @@ const addRow = () => {
 };
 
 const navKeyListener = (e: KeyboardEvent) => {
-    if (document.activeElement && document.activeElement.tagName.toLowerCase() === "input") return;
+    const inputFocused = document.activeElement && document.activeElement.tagName.toLowerCase() === "input";
+    if (inputFocused) {
+        switch (e.key) {
+            case "Escape":
+                e.preventDefault();
+                (e.target as HTMLInputElement).blur();
+                break;
+            case "Enter":
+                e.preventDefault();
+                store.selectCellDown();
+                break;
+        }
+
+        return;
+    }
 
     switch (e.key) {
         case "ArrowUp":

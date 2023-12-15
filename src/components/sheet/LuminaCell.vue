@@ -31,7 +31,7 @@
                 'italic': props.cell.style?.italic,
                 'underline': props.cell.style?.underline,
                 'line-through': props.cell.style?.strikethrough,
-            }" :style="commonStyle" @keyup.enter="store.selectCellDown()">
+            }" :style="commonStyle">
         </div>
     </div>
 </template>
