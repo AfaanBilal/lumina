@@ -1,5 +1,5 @@
 <template>
-    <div class="grid overflow-x-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
+    <div class="relative grid overflow-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
             grid-template-rows: ${rowTemplate};
             grid-template-columns: ${colTemplate};
         `">
