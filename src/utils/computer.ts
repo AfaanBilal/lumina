@@ -4,13 +4,11 @@ import { useStore } from "../store/store";
 import { cellCoordinates, getCells, getRanges, isFormula, isNumeric, toNumber } from "./helpers";
 import { parser } from "./parser";
 
-const store = useStore();
-
 const cellContent = (c: string): string => {
     const coords = cellCoordinates(c);
     if (!coords) return "";
 
-    return store.sheet.rows[coords.rowIndex].cells[coords.cellIndex].value;
+    return useStore().sheet.rows[coords.rowIndex].cells[coords.cellIndex].value;
 };
 
 const cellValue = (c: string): string => {
@@ -31,7 +29,7 @@ const rangeValues = (r: string): string[] => {
 
     for (let row = start.rowIndex; row <= end.rowIndex; row++) {
         for (let col = start.cellIndex; col <= end.cellIndex; col++) {
-            const v = store.sheet.rows[row].cells[col].value;
+            const v = useStore().sheet.rows[row].cells[col].value;
             values.push(isFormula(v) ? calculateValue(v) : v);
         }
     }
