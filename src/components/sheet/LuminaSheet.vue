@@ -1,5 +1,5 @@
 <template>
-    <div class="relative grid overflow-auto border" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
+    <div ref="grid" class="relative grid overflow-auto" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
             grid-template-rows: ${rowTemplate};
             grid-template-columns: ${colTemplate};
         `">
@@ -10,7 +10,8 @@
             <LuminaCell v-for="(cell, j) of row.cells" :key="cell.id" :cell="cell" :row-index="i" :cell-index="j" />
         </template>
 
-        <button class="flex items-center justify-center h-6 px-2 w-fit bg-slate-300" @click="store.addRow()">
+        <button class="flex items-center justify-center w-10 px-2 bg-slate-300 hover:bg-slate-200" title="Add row"
+            @click="addRow">
             <IconPlus :size="16" />
         </button>
     </div>
@@ -18,7 +19,7 @@
 
 <script setup lang="ts">
 import { IconPlus } from "@tabler/icons-vue";
-import { computed, onMounted, onUnmounted } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useStore } from "../../store/store";
 import type { ILuminaSheet } from "../../App.d";
 import LuminaSheetHeader from "./LuminaSheetHeader.vue";
@@ -27,6 +28,7 @@ import LuminaIndexCell from "./LuminaIndexCell.vue";
 
 defineProps<{ sheet: ILuminaSheet }>();
 
+const grid = ref();
 const store = useStore();
 
 const rowTemplate = computed(() => {
@@ -48,6 +50,11 @@ const colTemplate = computed(() => {
 
     return c;
 });
+
+const addRow = () => {
+    store.addRow();
+    nextTick(() => grid.value.scrollTo(0, grid.value.scrollHeight));
+};
 
 const navKeyListener = (e: KeyboardEvent) => {
     if (document.activeElement && document.activeElement.tagName.toLowerCase() === "input") return;
