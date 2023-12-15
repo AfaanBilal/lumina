@@ -27,14 +27,12 @@
         }" :style.="commonStyle">
             {{ computedValue }}
         </div>
-        <div v-if="isActive">
-            <input ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
-                'font-bold': props.cell.style?.bold,
-                'italic': props.cell.style?.italic,
-                'underline': props.cell.style?.underline,
-                'line-through': props.cell.style?.strikethrough,
-            }" :style="commonStyle">
-        </div>
+        <input v-if="isActive" ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
+            'font-bold': props.cell.style?.bold,
+            'italic': props.cell.style?.italic,
+            'underline': props.cell.style?.underline,
+            'line-through': props.cell.style?.strikethrough,
+        }" :style="commonStyle">
     </div>
 </template>
 
