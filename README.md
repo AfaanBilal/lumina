@@ -43,6 +43,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Text color
   - [X] Text alignment
   - [X] Vertical alignment
+  - [X] Font family
   - [X] Font size
 - [X] Selection
   - [X] Select a cell
