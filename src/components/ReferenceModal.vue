@@ -19,7 +19,7 @@
             </div>
             <div>Constants</div>
             <div class="flex flex-wrap gap-1 text-xs">
-                <span v-for="c in constants" :key="c" class="font-mono px-1 py-0.5 w-12 text-gray-200 rounded bg-zinc-900">{{ c }}</span>
+                <span v-for="c in constants" :key="c" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ c }}</span>
             </div>
         </div>
     </div>
