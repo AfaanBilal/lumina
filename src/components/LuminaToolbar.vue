@@ -183,7 +183,7 @@
             <div class="p-1 border-r">
                 <IconMathFunction :size="18" />
             </div>
-            <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none">
+            <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none bg-slate-100">
         </div>
     </div>
 </template>
