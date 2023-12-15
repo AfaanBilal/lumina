@@ -179,6 +179,12 @@
                 </div>
             </div>
         </div>
+        <div class="flex border rounded">
+            <div class="p-1 border-r">
+                <IconMathFunction :size="18" />
+            </div>
+            <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none">
+        </div>
     </div>
 </template>
 
@@ -194,8 +200,11 @@ import {
 import { useStore } from "../store/store";
 import { download } from "../utils/helpers";
 import Dropdown from "v-dropdown";
+import { IconMathFunction } from "@tabler/icons-vue";
 
 const store = useStore();
+
+const activeCellValue = computed({ get() { return store.ActiveCell.value; }, set(v: string) { store.setActiveCellValue(v); } });
 
 const autofocus = computed<boolean>({ get() { return store.settings.autofocus; }, set(v: boolean) { store.updateSettings("autofocus", v); } });
 const stripes = computed<boolean>({ get() { return store.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
