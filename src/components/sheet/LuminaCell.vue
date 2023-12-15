@@ -10,12 +10,7 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" :style="`
-        background-color: ${cell.style?.backgroundColor};
-        color: ${cell.style?.textColor};
-        text-align: ${cell.style?.textAlignment};
-        font-size: ${cell.style?.fontSize || 11}px;
-    `" @click="cellClick" @mouseenter="mouseEnter">
+    }" :style="commonStyle" @click="cellClick" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-center w-full h-full overflow-hidden" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
@@ -36,8 +31,7 @@
                 'italic': props.cell.style?.italic,
                 'underline': props.cell.style?.underline,
                 'line-through': props.cell.style?.strikethrough,
-            }" :style="`background-color: ${cell.style?.backgroundColor}; font-size: ${cell.style?.fontSize || 11}px;`"
-                @keyup.enter="store.selectCellDown()">
+            }" :style="commonStyle" @keyup.enter="store.selectCellDown()">
         </div>
     </div>
 </template>
@@ -76,6 +70,13 @@ const onSelectionBottomEdge = computed(() => props.rowIndex === store.selectedCe
 const onSelectionLeftEdge = computed(() => props.cellIndex === store.selectedCells.start.cellIndex);
 const onSheetTopEdge = computed(() => props.rowIndex === 0);
 const onSheetLeftEdge = computed(() => props.cellIndex === 0);
+
+const commonStyle = computed(() => `
+    background-color: ${props.cell.style?.backgroundColor || "white"};
+    color: ${props.cell.style?.textColor || "black"};
+    text-align: ${props.cell.style?.textAlignment || "left"};
+    font-size: ${props.cell.style?.fontSize || 11}px;
+`);
 
 const value = computed<TLuminaCellValue>({
     get() {
