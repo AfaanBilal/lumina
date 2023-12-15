@@ -57,16 +57,24 @@
 
             <div class="flex flex-col text-sm print:hidden w-80">
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Start Formula</div>
+                    <div class="px-1">Start formula</div>
                     <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
                 </div>
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Cell Reference</div>
+                    <div class="px-1">Cell reference</div>
                     <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
                 </div>
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Range Reference</div>
+                    <div class="px-1">Range reference</div>
                     <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
+                </div>
+                <div class="flex items-center justify-between gap-2 p-1 border-b">
+                    <div class="px-1">Operator call</div>
+                    <div class="px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=cos pi</div>
+                </div>
+                <div class="flex items-center justify-between gap-2 p-1 border-b">
+                    <div class="px-1">Function call</div>
+                    <div class="px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SUM(A1:D4)</div>
                 </div>
                 <div class="flex justify-between p-2 cursor-pointer bg-slate-900 text-slate-200 hover:bg-slate-600" @click="showReference">
                     <div>Operators, functions and constants</div>
