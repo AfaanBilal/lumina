@@ -10,7 +10,8 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" :style="commonStyle" @click="store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
+    }" :style="commonStyle" @click="store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
+        @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-center w-full h-full overflow-hidden" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
@@ -39,10 +40,9 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from "vue";
 import { useStore } from "../../store/store";
-import type { HashMap, ILuminaCell, TLuminaCellValue } from "../../App.d";
-import { Values } from "expr-eval";
-import { isFormula, cellCoordinates, isNumeric, toNumber, getRanges, getCells } from "../../utils/helpers";
-import { parser } from "../../utils/parser";
+import type { ILuminaCell, TLuminaCellValue } from "../../App.d";
+import { isFormula } from "../../utils/helpers";
+import { calculateValue } from "../../utils/computer";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
@@ -107,75 +107,6 @@ const mouseEnter = (e: MouseEvent) => {
 
     if (e.buttons === 1) {
         store.endSelection();
-    }
-};
-
-const cellContent = (c: string): string => {
-    const coords = cellCoordinates(c);
-    if (!coords) return "";
-
-    return store.sheet.rows[coords.rowIndex].cells[coords.cellIndex].value;
-};
-
-const cellValue = (c: string): string => {
-    const v = cellContent(c);
-    return isFormula(v) ? calculateValue(v) : v;
-};
-
-const rangeValues = (r: string): string[] => {
-    const startCell = r.split(":")[0];
-    const endCell = r.split(":")[1];
-
-    const start = cellCoordinates(startCell);
-    const end = cellCoordinates(endCell);
-
-    if (!start || !end) return [];
-
-    const values: string[] = [];
-
-    for (let row = start.rowIndex; row <= end.rowIndex; row++) {
-        for (let col = start.cellIndex; col <= end.cellIndex; col++) {
-            const v = store.sheet.rows[row].cells[col].value;
-            values.push(isFormula(v) ? calculateValue(v) : v);
-        }
-    }
-
-    return values;
-};
-
-const ERROR = "#ERROR";
-const calculateValue = (v: string) => {
-    const formula = v.substring(1);
-
-    const values: HashMap<number | number[]> = {};
-
-    const ranges = getRanges(formula);
-    if (ranges) {
-        for (let i = 0; i < ranges.length; i++) {
-            values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
-        }
-    }
-
-    const cells = getCells(formula);
-    if (cells) {
-        for (let i = 0; i < cells.length; i++) {
-            const v = cellValue(cells[i]);
-
-            if (!isNumeric(v)) return ERROR;
-
-            values[cells[i].toLowerCase()] = toNumber(v);
-        }
-    }
-
-    const finalFormula = formula.toLowerCase()
-        .replace("roundto", "roundTo")
-        .replace("indexof", "indexOf")
-        .replace(":", "_");
-
-    try {
-        return parser.parse(finalFormula).evaluate(values as Values);
-    } catch (e) {
-        return ERROR;
     }
 };
 

@@ -8,6 +8,7 @@
         </div>
         <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none bg-slate-100"
             @keyup.enter="store.selectCellDown()">
+        <div v-if="isFormula(activeCellValue)" class="flex-1 p-1 border-l bg-slate-100">{{ calculateValue(activeCellValue) }}</div>
     </div>
 </template>
 
@@ -15,6 +16,8 @@
 import { computed } from "vue";
 import { IconMathFunction } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
+import { calculateValue } from "../../utils/computer";
+import { isFormula } from "../../utils/helpers";
 
 const store = useStore();
 
