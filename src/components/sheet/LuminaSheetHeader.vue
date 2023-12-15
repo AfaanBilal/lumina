@@ -36,8 +36,16 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.addColumn(i - 1)">
+                    <IconColumnInsertLeft :size="18" /> Insert column left
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.addColumn(i)">
+                    <IconColumnInsertRight :size="18" /> Insert column right
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.deleteColumn(i - 1)">
-                    <IconTrash :size="18" /> Delete column
+                    <IconColumnRemove :size="18" /> Delete column
                 </div>
             </div>
         </Dropdown>
@@ -46,7 +54,7 @@
 
 <script setup lang="ts">
 import Dropdown from "v-dropdown";
-import { IconPlus, IconDotsVertical, IconTrash, IconArrowAutofitWidth } from "@tabler/icons-vue";
+import { IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove, IconColumnInsertLeft, IconColumnInsertRight } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { indexToColumn } from "../../utils/helpers";
 

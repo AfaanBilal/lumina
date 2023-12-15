@@ -24,11 +24,11 @@
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index)">
-                    <IconRowInsertTop :size="18" /> Add row above
+                    <IconRowInsertTop :size="18" /> Insert row above
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index + 1)">
-                    <IconRowInsertBottom :size="18" /> Add row below
+                    <IconRowInsertBottom :size="18" /> Insert row below
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.deleteRow(index)">
