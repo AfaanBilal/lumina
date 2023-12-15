@@ -10,7 +10,7 @@
 import { useStore } from "./store/store";
 import LuminaSheet from "./components/sheet/LuminaSheet.vue";
 import ReferenceModal from "./components/ReferenceModal.vue";
-import TopBar from "./components/TopBar.vue";
+import TopBar from "./components/topbar/TopBar.vue";
 
 const store = useStore();
 </script>

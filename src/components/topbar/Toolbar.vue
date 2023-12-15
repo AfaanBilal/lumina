@@ -186,7 +186,8 @@
             <div class="p-1 border-r">
                 <IconMathFunction :size="18" />
             </div>
-            <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none bg-slate-100">
+            <input v-model="activeCellValue" type="text" class="flex-1 p-1 outline-none bg-slate-100"
+                @keyup.enter="store.selectCellDown()">
         </div>
     </div>
 </template>
@@ -200,8 +201,8 @@ import {
     IconDeviceFloppy, IconFile, IconSettings, IconPrinter,
     IconMinus, IconPlus, IconBucketDroplet, IconTextColor, IconHelp,
 } from "@tabler/icons-vue";
-import { useStore } from "../store/store";
-import { download } from "../utils/helpers";
+import { useStore } from "../../store/store";
+import { download } from "../../utils/helpers";
 import Dropdown from "v-dropdown";
 import { IconMathFunction } from "@tabler/icons-vue";
 
