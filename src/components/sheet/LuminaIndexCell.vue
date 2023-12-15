@@ -2,12 +2,6 @@
     <div class="flex items-center justify-center font-medium text-sm border p-0.5 bg-slate-100 group select-none cursor-pointer sticky left-0"
         :class="{ 'bg-slate-200': index === store.activeCell.rowIndex, 'bg-blue-100 border-l-blue-700 border-y-blue-700': isRowSelected }"
         @click="store.selectRow(index)">
-        <button
-            class="absolute top-0 left-0 items-center justify-center hidden rounded-sm bg-slate-300 group-hover:flex p-0.5"
-            title="Add a row above" @click="store.addRow(index - 1)">
-            <IconPlus :size="8" />
-        </button>
-
         {{ index + 1 }}
 
         <Dropdown class="absolute right-0 !flex items-center justify-center">
@@ -29,8 +23,16 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.addRow(index)">
+                    <IconRowInsertTop :size="18" /> Add row above
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                    @click="store.addRow(index + 1)">
+                    <IconRowInsertBottom :size="18" /> Add row below
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.deleteRow(index)">
-                    <IconTrash :size="18" /> Delete row
+                    <IconRowRemove :size="18" /> Delete row
                 </div>
             </div>
         </Dropdown>
@@ -40,7 +42,7 @@
 <script setup lang="ts">
 import Dropdown from "v-dropdown";
 import { computed } from "vue";
-import { IconPlus, IconDotsVertical, IconTrash, IconLineHeight } from "@tabler/icons-vue";
+import { IconDotsVertical, IconLineHeight, IconRowInsertTop, IconRowInsertBottom, IconRowRemove } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 
 const props = defineProps<{ index: number }>();
