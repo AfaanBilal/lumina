@@ -60,7 +60,7 @@ export const useStore = defineStore("counter", () => {
     }
     function endSelection() {
         selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
-        selectCell(Object.assign({}, selectedCells.value.start));
+        setActiveCell(Object.assign({}, selectedCells.value.start));
     }
     function selectRow(rowIndex: number) {
         selectedCells.value.start = { rowIndex, cellIndex: 0 };
@@ -73,6 +73,10 @@ export const useStore = defineStore("counter", () => {
     function selectSheet() {
         selectedCells.value.start = { rowIndex: 0, cellIndex: 0 };
         selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex: maxColumns.value - 1 };
+    }
+    function selectActiveCell() {
+        selectedCells.value.start = Object.assign({}, activeCell.value);
+        selectedCells.value.end = Object.assign({}, activeCell.value);
     }
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
@@ -99,18 +103,26 @@ export const useStore = defineStore("counter", () => {
     const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
     const maxRows = computed(() => sheet.value.rows.length);
 
-    function selectCell({ rowIndex, cellIndex }: CellCoordinates) {
+    function setActiveCell({ rowIndex, cellIndex }: CellCoordinates) {
         activeCell.value.rowIndex = rowIndex;
         activeCell.value.cellIndex = cellIndex;
     }
 
-    function selectCellUp() {
+    function setActiveCellUp() {
         if (activeCell.value.rowIndex <= 0) return;
 
         activeCell.value.rowIndex -= 1;
     }
 
-    function selectCellDown() {
+    function setActiveCellRight() {
+        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
+            addColumn();
+        }
+
+        activeCell.value.cellIndex += 1;
+    }
+
+    function setActiveCellDown() {
         if (activeCell.value.rowIndex >= maxRows.value - 1) {
             addRow();
         }
@@ -118,18 +130,10 @@ export const useStore = defineStore("counter", () => {
         activeCell.value.rowIndex += 1;
     }
 
-    function selectCellLeft() {
+    function setActiveCellLeft() {
         if (activeCell.value.cellIndex <= 0) return;
 
         activeCell.value.cellIndex -= 1;
-    }
-
-    function selectCellRight() {
-        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
-            addColumn();
-        }
-
-        activeCell.value.cellIndex += 1;
     }
 
     function updateCell({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) {
@@ -221,6 +225,7 @@ export const useStore = defineStore("counter", () => {
         selectColumn,
         isWholeSheetSelected,
         selectSheet,
+        selectActiveCell,
 
         updateColStyle,
         updateRowStyle,
@@ -228,11 +233,11 @@ export const useStore = defineStore("counter", () => {
         activeCell,
         ActiveCell,
         ActiveCellName,
-        selectCell,
-        selectCellLeft,
-        selectCellRight,
-        selectCellUp,
-        selectCellDown,
+        setActiveCell,
+        setActiveCellUp,
+        setActiveCellRight,
+        setActiveCellDown,
+        setActiveCellLeft,
         updateCell,
         updateCellStyle,
         updateSelectionStyle,

@@ -76,7 +76,7 @@ const navKeyListener = (e: KeyboardEvent) => {
                 break;
             case "Enter":
                 e.preventDefault();
-                store.selectCellDown();
+                store.setActiveCellDown();
                 break;
         }
 
@@ -86,19 +86,19 @@ const navKeyListener = (e: KeyboardEvent) => {
     switch (e.key) {
         case "ArrowUp":
             e.preventDefault();
-            store.selectCellUp();
+            store.setActiveCellUp();
             break;
         case "ArrowDown":
             e.preventDefault();
-            store.selectCellDown();
+            store.setActiveCellDown();
             break;
         case "ArrowLeft":
             e.preventDefault();
-            store.selectCellLeft();
+            store.setActiveCellLeft();
             break;
         case "ArrowRight":
             e.preventDefault();
-            store.selectCellRight();
+            store.setActiveCellRight();
             break;
         case "Delete":
         case "Backspace":

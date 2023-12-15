@@ -12,7 +12,7 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" :style="commonStyle" @click="store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
+    }" :style="commonStyle" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
         @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full overflow-hidden p-0.5" :class="{
             'font-bold': props.cell.style?.bold,
@@ -79,7 +79,12 @@ const isSelected = computed(() => {
     return true;
 });
 
-watch(isActive, v => store.settings.autofocus && v && focusInput());
+watch(isActive, v => {
+    if (!v) return;
+
+    store.settings.autofocus && focusInput();
+    store.selectActiveCell();
+});
 
 const onSelectionTopEdge = computed(() => props.rowIndex === store.selectedCells.start.rowIndex);
 const onSelectionRightEdge = computed(() => props.cellIndex === store.selectedCells.end.cellIndex);
