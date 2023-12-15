@@ -54,6 +54,11 @@
                 <IconLayoutAlignBottom :size="18" />
             </div>
         </div>
+        <div class="flex items-center justify-center w-24 border rounded">
+            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Arial'" @change="setFontFamily">
+                <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
+            </select>
+        </div>
         <div class="flex items-center justify-center">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-100"
                 title="Decrease font size"
@@ -106,6 +111,7 @@ import { useStore } from "../../store/store";
 
 const store = useStore();
 
+const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
 const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
@@ -118,4 +124,16 @@ const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgr
 const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set() {} });
 const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
+
+const fontList = [
+    "Arial",
+    "Calibri",
+    "Helvetica",
+    "Segoe UI",
+    "Times New Roman",
+    "Georgia",
+    "Verdana",
+    "Courier New",
+    "Brush Script MT",
+];
 </script>

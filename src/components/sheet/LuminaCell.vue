@@ -12,8 +12,7 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" :style="commonStyle" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
-        @mouseenter="mouseEnter">
+    }" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full overflow-hidden p-0.5" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
@@ -25,7 +24,7 @@
             '!items-start': props.cell.style?.verticalAlignment === 'top',
             '!items-center': props.cell.style?.verticalAlignment === 'middle',
             '!items-end': props.cell.style?.verticalAlignment === 'bottom',
-        }">
+        }" :style.="commonStyle">
             {{ computedValue }}
         </div>
         <div v-if="isActive">
@@ -102,8 +101,9 @@ const commonStyle = computed(() => {
 
     style.backgroundColor && (s += `background-color: ${style.backgroundColor};`);
     style.textColor && (s += `color: ${style.textColor};`);
-    style.textAlignment && (s += `text-align: ${style.textAlignment}`);
-    style.fontSize && (s += `font-size: ${style.fontSize}px`);
+    style.textAlignment && (s += `text-align: ${style.textAlignment};`);
+    style.fontFamily && (s += `font-family: "${style.fontFamily}";`);
+    style.fontSize && (s += `font-size: ${style.fontSize}px;`);
 
     return s;
 });

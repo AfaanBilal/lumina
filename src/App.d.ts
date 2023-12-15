@@ -28,6 +28,7 @@ export interface ILuminaCellStyle {
     textColor?: string;
     textAlignment?: "left" | "center" | "right";
     verticalAlignment?: "top" | "middle" | "bottom";
+    fontFamily?: string;
     fontSize?: number;
 }
 
