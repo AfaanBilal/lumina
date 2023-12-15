@@ -10,11 +10,11 @@
         </div>
         <div class="flex flex-col gap-2 p-2 border-t">
             <div>Operators</div>
-            <div class="flex flex-wrap gap-1 text-xs">
+            <div class="flex flex-wrap gap-1 pb-2 text-xs border-b">
                 <span v-for="o in operators" :key="o" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ o }}</span>
             </div>
             <div>Functions</div>
-            <div class="flex flex-wrap gap-1 text-xs">
+            <div class="flex flex-wrap gap-1 pb-2 text-xs border-b">
                 <span v-for="f in functions" :key="f" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ f }}</span>
             </div>
             <div>Constants</div>

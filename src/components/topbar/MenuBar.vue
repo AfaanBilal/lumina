@@ -55,39 +55,21 @@
                 </div>
             </template>
 
-            <div class="flex flex-col print:hidden w-80">
+            <div class="flex flex-col text-sm print:hidden w-80">
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
                     <div class="px-1">Start Formula</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
+                    <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
                 </div>
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
                     <div class="px-1">Cell Reference</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
+                    <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1</div>
                 </div>
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
                     <div class="px-1">Range Reference</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
+                    <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">A1:D4</div>
                 </div>
-                <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Sum</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
-                        =SUM(A1, B1:B5, 3)
-                    </div>
-                </div>
-                <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Average</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
-                        =AVG(A1:B2)
-                    </div>
-                </div>
-                <div class="flex items-center justify-between gap-2 p-1 border-b">
-                    <div class="px-1">Square</div>
-                    <div class="w-40 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">
-                        =SQUARE(A1)
-                    </div>
-                </div>
-                <div class="flex justify-between p-2 cursor-pointer hover:bg-slate-100" @click="showReference">
-                    <div>Operator and function reference</div>
+                <div class="flex justify-between p-2 cursor-pointer bg-slate-900 text-slate-200 hover:bg-slate-600" @click="showReference">
+                    <div>Operators, functions and constants</div>
                     <div>&rarr;</div>
                 </div>
             </div>
