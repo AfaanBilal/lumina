@@ -18,6 +18,16 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import { IconPlus } from "@tabler/icons-vue";
 import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useStore } from "../../store/store";

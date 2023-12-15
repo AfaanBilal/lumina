@@ -1,3 +1,13 @@
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import { CellCoordinates } from "../App.d";
 
 export const indexToColumn = (index: number): string => {

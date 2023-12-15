@@ -6,6 +6,17 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 ## Introduction
 **Lumina** is a [🚧 work in progress] spreadsheet app written in Vue and Typescript with Pinia and Tailwind.
 
+Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
+
+---
+
+## Screenshots
+![Lumina](./screenshots/Lumina-2023-12-15.png)
+![Lumina](./screenshots/Lumina-2023-12-10-2.png)
+![Lumina](./screenshots/Lumina-2023-12-10.png)
+
+---
+
 ### Features
 - [X] Spreadsheet grid
 - [X] File management
@@ -56,14 +67,6 @@ Author: **[Afaan Bilal](https://afaan.dev)**
   - [X] Auto focus input
   - [X] Row Bands
   - [X] Column Bands
-
-Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
-
----
-
-## Screenshots
-![Lumina](./screenshots/Lumina-2023-12-10-2.png)
-![Lumina](./screenshots/Lumina-2023-12-10.png)
 
 ---
 

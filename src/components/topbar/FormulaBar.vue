@@ -19,6 +19,16 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import { computed } from "vue";
 import { IconMathFunction } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";

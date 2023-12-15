@@ -38,6 +38,16 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import { computed, nextTick, ref, watch } from "vue";
 import { useStore } from "../../store/store";
 import type { ILuminaCell, TLuminaCellValue } from "../../App.d";

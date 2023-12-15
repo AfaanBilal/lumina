@@ -53,6 +53,16 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import Dropdown from "v-dropdown";
 import { IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove, IconColumnInsertLeft, IconColumnInsertRight } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";

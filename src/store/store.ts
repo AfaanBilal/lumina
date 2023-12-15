@@ -1,3 +1,13 @@
+/**
+ * Lumina
+ *
+ * @author      Afaan Bilal
+ * @link        https://afaan.dev
+ * @link        https://github.com/AfaanBilal/lumina
+ * @license     MIT
+ * @copyright   2023 Afaan Bilal
+ */
+
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
