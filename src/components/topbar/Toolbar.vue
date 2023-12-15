@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-1 p-1 text-xs print:hidden">
+    <div class="flex flex-col gap-1 text-xs print:hidden">
         <MenuBar />
         <StyleBar />
         <FormulaBar />

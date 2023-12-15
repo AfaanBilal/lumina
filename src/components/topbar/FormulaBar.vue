@@ -1,18 +1,18 @@
 <template>
     <div class="flex">
-        <div class="flex items-center justify-center w-10 p-1 font-mono font-semibold border rounded-l">
+        <div class="flex items-center justify-center w-10 p-1 font-mono font-semibold border-r border-y">
             {{ store.ActiveCellName }}
         </div>
-        <div class="p-1 border-y">
+        <div class="px-2 py-1 border-y">
             <IconMathFunction :size="18" />
         </div>
         <input v-model="activeCellValue" type="text"
             class="self-stretch flex-1 p-1 border outline-none bg-slate-100 focus:border-slate-400"
-            :class="{ 'rounded-r': !isFormula(activeCellValue) }" @keyup.enter="store.selectCellDown()">
+            @keyup.enter="store.setActiveCellDown()">
         <div v-if="isFormula(activeCellValue)" class="p-1 border-y bg-slate-50">
             <IconEqual :size="18" />
         </div>
-        <div v-if="isFormula(activeCellValue)" class="flex-1 p-1 font-semibold border border-l-0 rounded-r bg-slate-50">
+        <div v-if="isFormula(activeCellValue)" class="flex-1 p-1 font-semibold border border-l-0 bg-slate-50">
             {{ calculateValue(activeCellValue) }}
         </div>
     </div>

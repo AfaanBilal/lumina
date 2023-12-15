@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-2">
+    <div class="flex gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" title="Bold" @click="toggleBold">
