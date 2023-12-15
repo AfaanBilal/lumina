@@ -10,7 +10,7 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" :style="commonStyle" @click="cellClick" @mouseenter="mouseEnter">
+    }" :style="commonStyle" @click="store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-center w-full h-full overflow-hidden" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import { useStore } from "../../store/store";
 import type { HashMap, ILuminaCell, TLuminaCellValue } from "../../App.d";
 import { Values } from "expr-eval";
@@ -47,6 +47,9 @@ import { parser } from "../../utils/parser";
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
 const store = useStore();
+
+const input = ref<HTMLInputElement | null>(null);
+const focusInput = () => nextTick(() => input.value?.focus());
 
 const isActive = computed(() => store.activeCell.rowIndex === props.rowIndex && store.activeCell.cellIndex === props.cellIndex);
 const isHovered = computed(() => store.hoverCellCoordinates.rowIndex === props.rowIndex && store.hoverCellCoordinates.cellIndex === props.cellIndex);
@@ -63,6 +66,8 @@ const isSelected = computed(() => {
 
     return true;
 });
+
+watch(isActive, v => store.settings.autofocus && v && focusInput());
 
 const onSelectionTopEdge = computed(() => props.rowIndex === store.selectedCells.start.rowIndex);
 const onSelectionRightEdge = computed(() => props.cellIndex === store.selectedCells.end.cellIndex);
@@ -94,15 +99,6 @@ const value = computed<TLuminaCellValue>({
         store.setCellValue({ rowIndex: props.rowIndex, cellIndex: props.cellIndex }, v);
     },
 });
-
-const input = ref<HTMLInputElement | null>(null);
-const cellClick = () => {
-    store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex });
-
-    if (store.settings.autofocus) {
-        nextTick(() => input.value?.focus());
-    }
-};
 
 const mouseEnter = (e: MouseEvent) => {
     const c = { rowIndex: props.rowIndex, cellIndex: props.cellIndex };
