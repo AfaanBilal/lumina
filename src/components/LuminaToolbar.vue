@@ -180,6 +180,9 @@
             </div>
         </div>
         <div class="flex border rounded">
+            <div class="flex items-center justify-center w-10 p-1 font-semibold border-r">
+                {{ store.ActiveCellName }}
+            </div>
             <div class="p-1 border-r">
                 <IconMathFunction :size="18" />
             </div>
