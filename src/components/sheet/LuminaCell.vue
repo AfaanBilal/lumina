@@ -1,18 +1,20 @@
 <template>
-    <div class="flex items-center border p-0.5 animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
+    <div class="flex items-center border animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'bg-slate-100': store.settings.stripes && rowIndex % 2 == 1,
-        'border-2 border-blue-500': isActive,
         'border-y-slate-400': store.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
         'border-x-slate-400': store.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
+
+        '!border-2 !border-blue-500': isActive,
         'border-dashed border-blue-400': isHovered && !isActive,
-        'bg-blue-200': isSelected && !isActive,
+
+        'bg-blue-200': isSelected,
         'border-t-blue-700': isSelected && onSelectionTopEdge && !onSheetTopEdge,
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
     }" :style="commonStyle" @click="store.selectCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
         @mouseenter="mouseEnter">
-        <div v-show="!isActive" class="flex items-center justify-center w-full h-full overflow-hidden" :class="{
+        <div v-show="!isActive" class="flex items-center justify-start w-full h-full overflow-hidden p-0.5" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
             'underline': props.cell.style?.underline,
