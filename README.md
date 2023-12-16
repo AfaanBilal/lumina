@@ -38,6 +38,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Stripes
   - [X] Row band
   - [X] Column band
+  - [X] Fullscreen
 - [X] Settings
   - [X] Autofocus
 - [X] Help menu

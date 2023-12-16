@@ -46,6 +46,10 @@
     }
 }
 
+:fullscreen, ::backdrop {
+    background-color: rgba(255,255,255,0);
+}
+
 .vc-color-wrap {
     margin: 0 !important;
     width: 18px !important;

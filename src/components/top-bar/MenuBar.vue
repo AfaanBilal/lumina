@@ -79,6 +79,9 @@
                     <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="fullscreen">
+                    <IconMaximize :size="18" /> Fullscreen
+                </div>
             </div>
         </Dropdown>
 
@@ -149,7 +152,7 @@
 import { computed, ref } from "vue";
 import {
     IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconHelp,
-    IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight,
+    IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
 } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
@@ -175,6 +178,8 @@ const onFileSelected = (e: Event) => {
 };
 
 const insertDropdown = ref();
+
+const fullscreen = () => document.body.requestFullscreen();
 
 const helpDropdown = ref();
 const showReference = () => { settings.value.referenceVisible = true; helpDropdown.value.close(); };
