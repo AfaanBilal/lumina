@@ -11,9 +11,10 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 ---
 
 ## Screenshots
-![Lumina](./screenshots/Lumina-2023-12-15.png)
-![Lumina](./screenshots/Lumina-2023-12-10-2.png)
-![Lumina](./screenshots/Lumina-2023-12-10.png)
+<img src="./screenshots/Lumina-2023-12-16.png" width="100%" />
+<img src="./screenshots/Lumina-2023-12-15.png" width="100%" />
+<img src="./screenshots/Lumina-2023-12-10-2.png" width="100%" />
+<img src="./screenshots/Lumina-2023-12-10.png" width="100%" />
 
 ---
 
@@ -26,7 +27,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Print
 - [X] Help menu
 - [X] Reference: operators, functions and constants
-- [X] Entry bar
+- [X] Formula bar
 - [X] Formulae and expression evaluation by [expr-eval](https://github.com/silentmatt/expr-eval).
 - [X] Additional functions
   - [X] SUM(...)
