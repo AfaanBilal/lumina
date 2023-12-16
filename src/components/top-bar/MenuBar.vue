@@ -21,6 +21,29 @@
             </div>
         </Dropdown>
 
+        <Dropdown ref="insertDropdown">
+            <template #trigger>
+                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                    <IconTablePlus :size="18" /> Insert
+                </div>
+            </template>
+
+            <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex)">
+                    <IconRowInsertTop :size="18" /> Insert row above
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex + 1)">
+                    <IconRowInsertBottom :size="18" /> Insert row below
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex)">
+                    <IconColumnInsertLeft :size="18" /> Insert column left
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1)">
+                    <IconColumnInsertRight :size="18" /> Insert column right
+                </div>
+            </div>
+        </Dropdown>
+
         <Dropdown>
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
@@ -121,7 +144,10 @@
  */
 
 import { computed, ref } from "vue";
-import { IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconHelp } from "@tabler/icons-vue";
+import {
+    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconHelp,
+    IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight,
+} from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
 import { download } from "../../utils/helpers";
@@ -144,6 +170,8 @@ const onFileSelected = (e: Event) => {
 
     store.loadFromFile(files[0]);
 };
+
+const insertDropdown = ref();
 
 const helpDropdown = ref();
 const showReference = () => { settings.value.referenceVisible = true; helpDropdown.value.close(); };
