@@ -114,12 +114,7 @@ const value = computed<TLuminaCellValue>({
 const calculatedValue = computed(() => isFormula(props.cell.value) ? calculateValue(props.cell.value) : props.cell.value);
 
 const mouseEnter = (e: MouseEvent) => {
-    const c = { rowIndex: props.rowIndex, cellIndex: props.cellIndex };
-
-    store.setHoverCellCoordinates(c);
-
-    if (e.buttons === 1) {
-        store.endSelection();
-    }
+    store.setHoverCellCoordinates({ rowIndex: props.rowIndex, cellIndex: props.cellIndex });
+    e.buttons === 1 && store.endSelection();
 };
 </script>
