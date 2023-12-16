@@ -30,6 +30,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Insert row below
   - [X] Insert column left
   - [X] Insert column right
+  - [X] Insert sheet
 - [X] View
   - [X] Style bar
   - [X] Formula bar

@@ -41,6 +41,9 @@
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
                     <IconColumnInsertRight :size="18" /> Insert column right
                 </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addSheet(); insertDropdown.close();">
+                    <IconTablePlus :size="18" /> Insert sheet
+                </div>
             </div>
         </Dropdown>
 
