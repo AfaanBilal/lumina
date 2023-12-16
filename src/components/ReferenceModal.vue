@@ -4,22 +4,28 @@
         <div class="flex justify-between p-2">
             <div class="">Reference</div>
             <div class="p-1 rounded cursor-pointer hover:bg-slate-200"
-                @click="store.updateSettings('referenceVisible', false);">
+                @click="store.updateSettings({ ...store.file.settings, referenceVisible: false });">
                 <IconX :size="16" />
             </div>
         </div>
         <div class="flex flex-col gap-2 p-2 border-t">
             <div>Operators</div>
             <div class="flex flex-wrap gap-1 pb-2 text-xs border-b">
-                <span v-for="o in operators" :key="o" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ o }}</span>
+                <span v-for="o in operators" :key="o" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">
+                    {{ o }}
+                </span>
             </div>
             <div>Functions</div>
             <div class="flex flex-wrap gap-1 pb-2 text-xs border-b">
-                <span v-for="f in functions" :key="f" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ f }}</span>
+                <span v-for="f in functions" :key="f" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">
+                    {{ f }}
+                </span>
             </div>
             <div>Constants</div>
             <div class="flex flex-wrap gap-1 text-xs">
-                <span v-for="c in constants" :key="c" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">{{ c }}</span>
+                <span v-for="c in constants" :key="c" class="font-mono px-1 py-0.5 w-20 text-gray-200 rounded bg-zinc-900">
+                    {{ c }}
+                </span>
             </div>
         </div>
     </div>
