@@ -55,7 +55,8 @@
             </div>
         </div>
         <div class="flex items-center justify-center border rounded">
-            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Manrope'" @change="setFontFamily">
+            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Manrope'"
+                @change="setFontFamily">
                 <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
             </select>
         </div>
@@ -77,13 +78,11 @@
         <div class="flex">
             <div class="flex items-center gap-1 px-1 border rounded-l hover:bg-slate-100" title="Background color">
                 <IconBucketDroplet :size="18" />
-                <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true"
-                    @pure-color-change="setBackgroundColor" />
+                <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true" />
             </div>
             <div class="flex items-center gap-1 px-1 border border-l-0 rounded-r hover:bg-slate-100" title="Text color">
                 <IconTextColor :size="18" />
-                <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true"
-                    @pure-color-change="setTextColor" />
+                <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true" />
             </div>
         </div>
     </div>
@@ -120,10 +119,8 @@ const toggleStrikethrough = () => store.updateStyle({ strikethrough: !store.Acti
 const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.italic });
 const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.style?.underline });
 
-const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set() {} });
-const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set() {} });
-const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColor: color });
-const setTextColor = (color: string) => store.updateStyle({ textColor: color });
+const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
+const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
 
 const fontList = [
     "Manrope",
