@@ -76,7 +76,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Delete column
 - [X] Freezing
   - [X] Frozen rows
-  - [ ] Frozen columns
+  - [X] Frozen columns
 - [X] Sizing
   - [X] Row height
   - [X] Column width

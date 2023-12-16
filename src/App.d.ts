@@ -60,6 +60,7 @@ export interface ILuminaRowStyle {
 
 export interface ILuminaColStyle {
     width?: number;
+    frozen?: boolean;
 }
 
 export interface ILuminaSheetStyle {

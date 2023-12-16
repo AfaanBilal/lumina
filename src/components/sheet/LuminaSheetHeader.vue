@@ -7,8 +7,10 @@
         class="text-sm flex flex-shrink-0 items-center justify-center font-medium h-6 border p-0.5 bg-slate-100 group cursor-pointer select-none sticky top-0"
         :class="{
             'bg-slate-200': i - 1 === store.activeCellCoordinates.cellIndex,
-            'bg-blue-100 border-x-blue-700 border-t-blue-700': store.selectedCells.start.cellIndex === i - 1 && store.selectedCells.end.cellIndex === i - 1
-        }" @click="store.selectColumn(i - 1)">
+            'bg-blue-100 border-x-blue-700 border-t-blue-700': store.selectedCells.start.cellIndex === i - 1 && store.selectedCells.end.cellIndex === i - 1,
+            'bg-slate-300 z-50': store.sheet.style.cols?.[i - 1]?.frozen,
+        }" :style="(store.sheet.style.cols?.[i - 1]?.frozen ? `left: ${store.getFrozenLeft(i - 1)}px;` : '')"
+        @click="store.selectColumn(i - 1)">
         <button
             class="absolute items-center justify-center p-0.5 left-1 bg-slate-300 hidden rounded group-hover:flex hover:bg-slate-400"
             title="Add a colum to the left" @click="store.addColumn(i - 1)">
@@ -34,6 +36,12 @@
                             :value="store.sheet.style.cols?.[i - 1]?.width || '80'"
                             @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input :id="'frozen-col-' + i" :checked="store.sheet.style.rows?.[i - 1]?.frozen" type="checkbox"
+                        class="accent-slate-600"
+                        @change="e => store.updateColStyle(i - 1, { frozen: !!(e.target as HTMLInputElement).value })">
+                    <label :for="'frozen-col-' + i" class="cursor-pointer select-none hover:font-medium">Freeze</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(i - 1)">

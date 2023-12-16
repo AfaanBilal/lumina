@@ -73,6 +73,17 @@ export const useStore = defineStore("lumina", () => {
 
         return t;
     };
+    const getFrozenLeft = (cellIndex: number) => {
+        let l = 40;
+
+        for (let i = 0; i < cellIndex; i++) {
+            if (sheet.value.style.cols?.[i]?.frozen) {
+                l += sheet.value.style.cols?.[i]?.width || 80;
+            }
+        }
+
+        return l;
+    };
 
     /** Row / Columns */
     const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
@@ -186,6 +197,7 @@ export const useStore = defineStore("lumina", () => {
         updateColStyle,
         updateRowStyle,
         getFrozenTop,
+        getFrozenLeft,
 
         addRow,
         addColumn,
