@@ -1,6 +1,6 @@
 <template>
     <div class="sticky top-0 left-0 z-20 border-b-4 border-r-4 cursor-pointer border-slate-300 bg-slate-200"
-        :class="{ 'bg-blue-100 border-blue-600': store.isWholeSheetSelected }" @click="store.selectSheet()">
+        :class="{ 'bg-blue-100 border-blue-600': store.isSheetSelected }" @click="store.selectSheet()">
         &nbsp;
     </div>
     <div v-for="i in store.columnCount" :key="i"

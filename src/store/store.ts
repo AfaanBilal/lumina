@@ -47,6 +47,7 @@ export const useStore = defineStore("lumina", () => {
     const sheet = computed({ get() { return file.value.sheets[activeSheetIndex.value]; }, set(v: ILuminaSheet) { file.value.sheets[activeSheetIndex.value] = v; } });
     const rowCount = computed(() => sheet.value.rows.length);
     const columnCount = computed(() => sheet.value.rows[0].cells.length);
+
     const setActiveSheet = (index: number) => activeSheetIndex.value = index;
     const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
     const addSheet = () => file.value.sheets.push(emptySheet(file.value.sheets.length));
@@ -59,6 +60,28 @@ export const useStore = defineStore("lumina", () => {
     const updateRowStyle = (index: number, style: ILuminaRowStyle) => sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
     const updateColStyle = (index: number, style: ILuminaColStyle) => sheet.value.style.cols[index] = { ...sheet.value.style.cols[index], ...style };
 
+    /** Row / Columns */
+    const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
+    const addColumn = (index?: number) => {
+        for (let i = 0; i < rowCount.value; i++) {
+            index ?
+                sheet.value.rows[i].cells.splice(index, 0, emptyCell()) :
+                sheet.value.rows[i].cells.push(emptyCell());
+        }
+    };
+    const deleteRow = (index: number) => {
+        sheet.value.rows.splice(index, 1);
+
+        !rowCount.value && addRow();
+    };
+    const deleteColumn = (index: number) => {
+        for (let i = 0; i < rowCount.value; i++) {
+            sheet.value.rows[i].cells.splice(index, 1);
+        }
+
+        !columnCount.value && addColumn();
+    };
+
     /** Hover */
     const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
     const setHoverCellCoordinates = ({ rowIndex, cellIndex }: CellCoordinates) => {
@@ -69,7 +92,7 @@ export const useStore = defineStore("lumina", () => {
     /** Selection */
     const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
     const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
-    const isWholeSheetSelected = computed(() => {
+    const isSheetSelected = computed(() => {
         if (selectedCells.value.start.rowIndex != 0) return false;
         if (selectedCells.value.start.cellIndex != 0) return false;
 
@@ -104,18 +127,15 @@ export const useStore = defineStore("lumina", () => {
         activeCellCoordinates.value.cellIndex += 1;
         selectActiveCell();
     };
-
     const setActiveCellDown = () => {
         activeCellCoordinates.value.rowIndex >= rowCount.value - 1 && addRow();
         activeCellCoordinates.value.rowIndex += 1;
         selectActiveCell();
     };
-
     const setActiveCellLeft = () => activeCellCoordinates.value.cellIndex > 0 && (activeCellCoordinates.value.cellIndex -= 1);
 
     const updateCell = ({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) => sheet.value.rows[rowIndex].cells[cellIndex] = cell;
     const updateActiveCell = (cell: ILuminaCell) => updateCell(activeCellCoordinates.value, cell);
-
     const setCellValue = ({ rowIndex, cellIndex }: CellCoordinates, v: string) => sheet.value.rows[rowIndex].cells[cellIndex].value = v;
     const setActiveCellValue = (v: string) => setCellValue(activeCellCoordinates.value, v);
 
@@ -132,81 +152,64 @@ export const useStore = defineStore("lumina", () => {
     const updateActiveCellStyle = (style: ILuminaCellStyle) => updateActiveCell({ ...ActiveCell.value, style: { ...ActiveCell.value.style, ...style } });
     const updateStyle = (style: ILuminaCellStyle) => hasSelection.value ? updateSelectionStyle(style) : updateActiveCellStyle(style);
 
-    /** Row / Columns */
-    const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
-    const addColumn = (index?: number) => {
-        for (let i = 0; i < rowCount.value; i++) {
-            index ?
-                sheet.value.rows[i].cells.splice(index, 0, emptyCell()) :
-                sheet.value.rows[i].cells.push(emptyCell());
-        }
-    };
-    const deleteRow = (index: number) => {
-        sheet.value.rows.splice(index, 1);
-
-        !rowCount.value && addRow();
-    };
-    const deleteColumn = (index: number) => {
-        for (let i = 0; i < rowCount.value; i++) {
-            sheet.value.rows[i].cells.splice(index, 1);
-        }
-
-        !columnCount.value && addColumn();
-    };
-
     return {
         file,
+
+        loadFromFile,
         setFileName,
         updateSettings,
 
-        loadFromFile,
+        activeSheetIndex,
+        sheet,
+        rowCount,
+        columnCount,
+
+        setActiveSheet,
+        setSheetName,
+        addSheet,
+        deleteSheet,
+
+        updateColStyle,
+        updateRowStyle,
+
+        addRow,
+        addColumn,
+        deleteRow,
+        deleteColumn,
 
         hoverCellCoordinates,
         setHoverCellCoordinates,
 
         selectedCells,
+        hasSelection,
+        isSheetSelected,
+
         setSelectedCells,
         startSelection,
         endSelection,
-        hasSelection,
         selectRow,
         selectColumn,
-        isWholeSheetSelected,
         selectSheet,
         selectActiveCell,
-
-        updateColStyle,
-        updateRowStyle,
 
         activeCellCoordinates,
         ActiveCell,
         ActiveCellName,
+
         setActiveCell,
         setActiveCellUp,
         setActiveCellRight,
         setActiveCellDown,
         setActiveCellLeft,
+
         updateCell,
-        updateCellStyle,
-        updateSelectionStyle,
         updateActiveCell,
-        updateActiveCellStyle,
         setCellValue,
         setActiveCellValue,
+
+        updateCellStyle,
+        updateSelectionStyle,
+        updateActiveCellStyle,
         updateStyle,
-
-        addSheet,
-        deleteSheet,
-        activeSheetIndex,
-        setActiveSheet,
-        setSheetName,
-
-        sheet,
-        rowCount,
-        columnCount,
-        addRow,
-        addColumn,
-        deleteRow,
-        deleteColumn,
     };
 });
