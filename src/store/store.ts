@@ -28,6 +28,7 @@ export const useStore = defineStore("lumina", () => {
         sheets: [emptySheet(0)],
         settings: {
             autofocus: true,
+            zoom: "100%",
             referenceVisible: false,
             showStyleBar: true,
             showFormulaBar: true,

@@ -77,6 +77,7 @@ export interface ILuminaSheet {
 
 export interface Settings {
     autofocus: boolean;
+    zoom: string;
     referenceVisible: boolean;
 
     showStyleBar: boolean;

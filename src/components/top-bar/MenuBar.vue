@@ -29,19 +29,24 @@
             </template>
 
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
                     <IconRowInsertTop :size="18" /> Insert row above
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="store.addRow(store.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
                     <IconRowInsertBottom :size="18" /> Insert row below
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex); insertDropdown.close();">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="store.addColumn(store.activeCellCoordinates.cellIndex); insertDropdown.close();">
                     <IconColumnInsertLeft :size="18" /> Insert column left
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
                     <IconColumnInsertRight :size="18" /> Insert column right
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addSheet(); insertDropdown.close();">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="store.addSheet(); insertDropdown.close();">
                     <IconTablePlus :size="18" /> Insert sheet
                 </div>
             </div>
@@ -79,7 +84,8 @@
                     <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="fullscreen">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="fullscreen">
                     <IconMaximize :size="18" /> Fullscreen
                 </div>
             </div>
@@ -100,7 +106,13 @@
             </div>
         </Dropdown>
 
-        <Dropdown ref="helpDropdown" class="ml-auto">
+        <div class="flex items-center justify-center px-2 py-1 ml-auto border-l" title="Zoom">
+            <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
+                <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
+            </select>
+        </div>
+
+        <Dropdown ref="helpDropdown">
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-l cursor-pointer select-none hover:bg-slate-100">
                     <IconHelp :size="18" /> Help
@@ -183,4 +195,6 @@ const fullscreen = () => document.body.requestFullscreen();
 
 const helpDropdown = ref();
 const showReference = () => { settings.value.referenceVisible = true; helpDropdown.value.close(); };
+
+const zoomList = ["50%", "75%", "90%", "100%", "125%", "150%", "200%", "300%", "400%", "500%"];
 </script>
