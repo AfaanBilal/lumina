@@ -98,11 +98,7 @@ export const useStore = defineStore("counter", () => {
 
     const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCell.value = { rowIndex, cellIndex };
 
-    function setActiveCellUp() {
-        if (activeCell.value.rowIndex <= 0) return;
-
-        activeCell.value.rowIndex -= 1;
-    }
+    const setActiveCellUp = () => activeCell.value.rowIndex > 0 && (activeCell.value.rowIndex -= 1);
 
     function setActiveCellRight() {
         if (activeCell.value.cellIndex >= columnCount.value - 1) {
@@ -181,6 +177,8 @@ export const useStore = defineStore("counter", () => {
                 sheet.value.rows[i].cells.push(emptyCell());
             }
         }
+
+        return true;
     }
 
     function deleteRow(index: number) {
