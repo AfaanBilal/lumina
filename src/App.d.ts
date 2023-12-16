@@ -30,6 +30,14 @@ export interface ILuminaCellStyle {
     verticalAlignment?: "top" | "middle" | "bottom";
     fontFamily?: string;
     fontSize?: number;
+    border?: {
+        all?: boolean;
+        top?: boolean;
+        right?: boolean;
+        bottom?: boolean;
+        left?: boolean;
+    };
+    borderColor?: string;
 }
 
 export interface ILuminaCell {

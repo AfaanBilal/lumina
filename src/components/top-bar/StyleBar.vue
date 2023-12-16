@@ -80,9 +80,39 @@
                 <IconBucketDroplet :size="18" />
                 <color-picker v-model:pure-color="backgroundColor" shape="circle" :round-history="true" />
             </div>
-            <div class="flex items-center gap-1 px-1 border border-l-0 rounded-r hover:bg-slate-100" title="Text color">
+            <div class="flex items-center gap-1 px-1 border-y hover:bg-slate-100" title="Text color">
                 <IconTextColor :size="18" />
                 <color-picker v-model:pure-color="textColor" shape="circle" :round-history="true" />
+            </div>
+            <div class="flex items-center gap-1 px-1 border rounded-r hover:bg-slate-100" title="Border color">
+                <IconBorderOuter :size="18" />
+                <color-picker v-model:pure-color="borderColor" shape="circle" :round-history="true" />
+            </div>
+        </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': border?.all }" title="Border"
+                @click="border = { all: !border?.all };">
+                <IconBorderAll :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': border?.top }" title="Border top"
+                @click="border = { ...border, all: false, top: !border?.top };">
+                <IconBorderTop :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': border?.right }" title="Border right" @click="border = { ...border, all: false, right: !border?.right };">
+                <IconBorderRight :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': border?.bottom }" title="Border bottom"
+                @click="border = { ...border, all: false, bottom: !border?.bottom };">
+                <IconBorderBottom :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': border?.left }" title="Border left"
+                @click="border = { ...border, all: false, left: !border?.left };">
+                <IconBorderLeft :size="18" />
             </div>
         </div>
     </div>
@@ -105,8 +135,10 @@ import {
     IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconMinus, IconPlus, IconBucketDroplet, IconTextColor,
+    IconBorderLeft, IconBorderBottom, IconBorderRight, IconBorderTop, IconBorderAll,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
+import { IconBorderOuter } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -121,6 +153,9 @@ const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.s
 
 const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
 const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
+const borderColor = computed({ get() { return store.ActiveCell.style?.borderColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ borderColor: color }); } });
+
+const border = computed({ get() { return store.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
 
 const fontList = [
     "Manrope",
