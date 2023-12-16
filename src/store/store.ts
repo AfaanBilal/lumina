@@ -11,7 +11,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ulid } from "ulid";
-import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
+import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 import { indexToColumn } from "../utils/helpers";
 
 const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
@@ -22,16 +22,21 @@ const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cell
 const emptySheet = (count: number) => ({ id: "sheet_" + ulid(), name: "Sheet " + (count + 1), style: { rows: {}, cols: {}, }, rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)) });
 
 export const useStore = defineStore("counter", () => {
-    const settings = ref<Settings>({
-        autofocus: true,
-        stripes: false,
-        rowBand: false,
-        colBand: false,
-        referenceVisible: false,
+    const file = ref<ILuminaFile>({
+        id: "lumina_" + ulid(),
+        name: "Lumina",
+        sheets: [emptySheet(0)],
+        settings: {
+            autofocus: true,
+            stripes: false,
+            rowBand: false,
+            colBand: false,
+            referenceVisible: false,
+        },
     });
 
     function updateSettings(key: keyof Settings, value: boolean) {
-        settings.value[key] = value;
+        file.value.settings[key] = value;
     }
 
     const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
@@ -89,26 +94,28 @@ export const useStore = defineStore("counter", () => {
         activeSheetIndex.value = index;
     }
 
-    function setSheetName(index: number, name: string) {
-        sheets.value[index].name = name;
+    function setFileName(name: string) {
+        file.value.name = name;
     }
 
-    const sheets = ref<ILuminaSheet[]>([emptySheet(0)]);
+    function setSheetName(index: number, name: string) {
+        file.value.sheets[index].name = name;
+    }
 
     function addSheet() {
-        sheets.value.push(emptySheet(sheets.value.length));
+        file.value.sheets.push(emptySheet(file.value.sheets.length));
     }
 
     function deleteSheet(index: number) {
-        sheets.value.splice(index, 1);
+        file.value.sheets.splice(index, 1);
 
-        if (!sheets.value.length) addSheet();
+        if (!file.value.sheets.length) addSheet();
     }
 
-    const sheet = computed({ get() { return sheets.value[activeSheetIndex.value]; }, set(v: ILuminaSheet) { sheets.value[activeSheetIndex.value] = v; } });
+    const sheet = computed({ get() { return file.value.sheets[activeSheetIndex.value]; }, set(v: ILuminaSheet) { file.value.sheets[activeSheetIndex.value] = v; } });
 
-    async function loadFromFile(file: File) {
-        sheet.value = JSON.parse(await file.text());
+    async function loadFromFile(f: File) {
+        file.value = JSON.parse(await f.text());
     }
 
     function updateRowStyle(index: number, style: ILuminaRowStyle) {
@@ -226,7 +233,8 @@ export const useStore = defineStore("counter", () => {
     }
 
     return {
-        settings,
+        file,
+        setFileName,
         updateSettings,
 
         loadFromFile,
@@ -265,7 +273,6 @@ export const useStore = defineStore("counter", () => {
         setActiveCellValue,
         updateStyle,
 
-        sheets,
         addSheet,
         deleteSheet,
         activeSheetIndex,

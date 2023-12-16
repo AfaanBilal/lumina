@@ -1,5 +1,5 @@
 <template>
-    <div v-if="store.settings.referenceVisible"
+    <div v-if="store.file.settings.referenceVisible"
         class="fixed flex flex-col max-w-sm bg-white border-2 rounded-lg shadow-2xl border-slate-300 bottom-4 right-4">
         <div class="flex justify-between p-2">
             <div class="">Reference</div>

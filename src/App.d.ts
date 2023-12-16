@@ -72,6 +72,13 @@ export interface Settings {
     referenceVisible: boolean;
 }
 
+export interface ILuminaFile {
+    id: string;
+    name: string;
+    sheets: Array<ILuminaSheet>;
+    settings: Settings;
+}
+
 export interface CellCoordinates {
     rowIndex: number;
     cellIndex: number;

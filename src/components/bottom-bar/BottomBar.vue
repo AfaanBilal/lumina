@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center gap-2">
         <div class="flex items-center ml-10">
-            <div v-for="(s, i) in store.sheets" :key="s.id"
+            <div v-for="(s, i) in store.file.sheets" :key="s.id"
                 class="flex justify-center gap-2 p-2 pl-4 border-l cursor-pointer first-of-type:border-none hover:bg-slate-300 border-slate-300 group"
                 :class="{ 'bg-slate-900 text-white hover:bg-slate-800': store.activeSheetIndex === i }"
                 @click="store.setActiveSheet(i)">
@@ -19,7 +19,7 @@
                         <div class="flex items-center gap-2 p-2">
                             <div class="flex-1 font-semibold">Name</div>
                             <div class="flex items-baseline gap-1">
-                                <input type="text" class="p-1 border rounded outline-none" :value="store.sheets[i].name"
+                                <input type="text" class="p-1 border rounded outline-none" :value="store.file.sheets[i].name"
                                     @change="e => store.setSheetName(i, (e.target as HTMLInputElement).value)">
                             </div>
                         </div>

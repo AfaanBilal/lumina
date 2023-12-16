@@ -104,17 +104,17 @@ import Dropdown from "v-dropdown";
 
 const store = useStore();
 
-const autofocus = computed<boolean>({ get() { return store.settings.autofocus; }, set(v: boolean) { store.updateSettings("autofocus", v); } });
-const stripes = computed<boolean>({ get() { return store.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
-const rowBand = computed<boolean>({ get() { return store.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
-const colBand = computed<boolean>({ get() { return store.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
-const referenceVisible = computed<boolean>({ get() { return store.settings.referenceVisible; }, set(v: boolean) { store.updateSettings("referenceVisible", v); } });
+const autofocus = computed<boolean>({ get() { return store.file.settings.autofocus; }, set(v: boolean) { store.updateSettings("autofocus", v); } });
+const stripes = computed<boolean>({ get() { return store.file.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
+const rowBand = computed<boolean>({ get() { return store.file.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
+const colBand = computed<boolean>({ get() { return store.file.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
+const referenceVisible = computed<boolean>({ get() { return store.file.settings.referenceVisible; }, set(v: boolean) { store.updateSettings("referenceVisible", v); } });
 
 const fileDropdown = ref();
 const input = ref<HTMLInputElement>();
 
 const open = () => { input.value!.click(); fileDropdown.value!.close(); };
-const save = () => { download(store.sheet.id + ".lumina", JSON.stringify(store.sheet)); fileDropdown.value!.close(); };
+const save = () => { download(store.file.name + ".lumina", JSON.stringify(store.file)); fileDropdown.value!.close(); };
 const print = () => { window.print(); fileDropdown.value!.close(); };
 
 const onFileSelected = (e: Event) => {
