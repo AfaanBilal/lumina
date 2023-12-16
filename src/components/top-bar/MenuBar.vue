@@ -30,7 +30,7 @@
 
             <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="autofocus" v-model="settings.autofocus" type="checkbox">
+                    <input id="autofocus" v-model="settings.autofocus" type="checkbox" class="accent-slate-600">
                     <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
                 </div>
             </div>
@@ -45,27 +45,27 @@
 
             <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="style-bar" v-model="settings.showStyleBar" type="checkbox">
+                    <input id="style-bar" v-model="settings.showStyleBar" type="checkbox" class="accent-slate-600">
                     <label for="style-bar" class="cursor-pointer select-none hover:font-medium">Style bar</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="formula-bar" v-model="settings.showFormulaBar" type="checkbox">
+                    <input id="formula-bar" v-model="settings.showFormulaBar" type="checkbox" class="accent-slate-600">
                     <label for="formula-bar" class="cursor-pointer select-none hover:font-medium">Formula bar</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="gridlines" v-model="settings.showGridlines" type="checkbox">
+                    <input id="gridlines" v-model="settings.showGridlines" type="checkbox" class="accent-slate-600">
                     <label for="gridlines" class="cursor-pointer select-none hover:font-medium">Gridlines</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="stripes" v-model="settings.showStripes" type="checkbox">
+                    <input id="stripes" v-model="settings.showStripes" type="checkbox" class="accent-slate-600">
                     <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="row-band" v-model="settings.showRowBand" type="checkbox">
+                    <input id="row-band" v-model="settings.showRowBand" type="checkbox" class="accent-slate-600">
                     <label for="row-band" class="cursor-pointer select-none hover:font-medium">Row band</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="column-band" v-model="settings.showColumnBand" type="checkbox">
+                    <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
             </div>
