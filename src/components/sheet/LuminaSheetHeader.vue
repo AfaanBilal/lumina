@@ -39,9 +39,9 @@
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
                     <input :id="'frozen-col-' + i" :checked="store.sheet.style.rows?.[i - 1]?.frozen" type="checkbox"
-                        class="accent-slate-600"
+                        class="w-5 accent-slate-600"
                         @change="e => store.updateColStyle(i - 1, { frozen: !!(e.target as HTMLInputElement).value })">
-                    <label :for="'frozen-col-' + i" class="cursor-pointer select-none hover:font-medium">Freeze</label>
+                    <label :for="'frozen-col-' + i" class="font-semibold cursor-pointer select-none">Freeze</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(i - 1)">
