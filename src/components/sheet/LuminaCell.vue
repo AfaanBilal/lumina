@@ -14,7 +14,7 @@
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
-        'sticky bg-slate-300 z-50': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
+        'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
     }"
         :style="commonStyle + (store.sheet.style.rows?.[rowIndex]?.frozen ? `top: ${store.getFrozenTop(rowIndex)}px;` : '') + (store.sheet.style.cols?.[cellIndex]?.frozen ? `left: ${store.getFrozenLeft(cellIndex)}px;` : '')"
         @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
