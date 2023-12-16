@@ -35,16 +35,21 @@ export const useStore = defineStore("counter", () => {
         },
     });
 
-    function updateSettings(key: keyof Settings, value: boolean) {
-        file.value.settings[key] = value;
-    }
+    /** File */
+    const loadFromFile = async (f: File) => file.value = JSON.parse(await f.text());
+    const setFileName = (name: string) => file.value.name = name;
 
+    /** Settings */
+    const updateSettings = (key: keyof Settings, value: boolean) => file.value.settings[key] = value;
+
+    /** Hover */
     const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
-    function setHoverCellCoordinates({ rowIndex, cellIndex }: CellCoordinates) {
+    const setHoverCellCoordinates = ({ rowIndex, cellIndex }: CellCoordinates) => {
         hoverCellCoordinates.value.rowIndex = rowIndex;
         hoverCellCoordinates.value.cellIndex = cellIndex;
-    }
+    };
 
+    /** Selection */
     const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
     const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
     const isWholeSheetSelected = computed(() => {
@@ -57,66 +62,32 @@ export const useStore = defineStore("counter", () => {
         return true;
     });
 
-    function setSelectedCells(selection: CellSelection) {
-        selectedCells.value = selection;
-    }
-    function startSelection() {
-        selectedCells.value.start = Object.assign({}, hoverCellCoordinates.value);
-        selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
-    }
-    function endSelection() {
+    const setSelectedCells = (selection: CellSelection) => selectedCells.value = selection;
+    const startSelection = () => setSelectedCells({ start: Object.assign({}, hoverCellCoordinates.value), end: Object.assign({}, hoverCellCoordinates.value) });
+    const endSelection = () => {
         selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
         setActiveCell(Object.assign({}, selectedCells.value.start));
-    }
-    function selectRow(rowIndex: number) {
-        selectedCells.value.start = { rowIndex, cellIndex: 0 };
-        selectedCells.value.end = { rowIndex, cellIndex: maxColumns.value - 1 };
-    }
-    function selectColumn(cellIndex: number) {
-        selectedCells.value.start = { rowIndex: 0, cellIndex };
-        selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex };
-    }
-    function selectSheet() {
-        selectedCells.value.start = { rowIndex: 0, cellIndex: 0 };
-        selectedCells.value.end = { rowIndex: maxRows.value - 1, cellIndex: maxColumns.value - 1 };
-    }
-    function selectActiveCell() {
-        selectedCells.value.start = Object.assign({}, activeCell.value);
-        selectedCells.value.end = Object.assign({}, activeCell.value);
-    }
+    };
+
+    const selectRow = (rowIndex: number) => setSelectedCells({ start: { rowIndex, cellIndex: 0 }, end: { rowIndex, cellIndex: maxColumns.value - 1 } });
+    const selectColumn = (cellIndex: number) => setSelectedCells({ start: { rowIndex: 0, cellIndex }, end: { rowIndex: maxRows.value - 1, cellIndex } });
+    const selectSheet = () => setSelectedCells({ start: { rowIndex: 0, cellIndex: 0 }, end: { rowIndex: maxRows.value - 1, cellIndex: maxColumns.value - 1 } });
+    const selectActiveCell = () => setSelectedCells({ start: Object.assign({}, activeCell.value), end: Object.assign({}, activeCell.value) });
 
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
     const ActiveCellName = computed(() => indexToColumn(activeCell.value.cellIndex) + (activeCell.value.rowIndex + 1));
 
+    /** Sheets */
     const activeSheetIndex = ref<number>(0);
-    function setActiveSheet(index: number) {
-        activeSheetIndex.value = index;
-    }
-
-    function setFileName(name: string) {
-        file.value.name = name;
-    }
-
-    function setSheetName(index: number, name: string) {
-        file.value.sheets[index].name = name;
-    }
-
-    function addSheet() {
-        file.value.sheets.push(emptySheet(file.value.sheets.length));
-    }
-
-    function deleteSheet(index: number) {
-        file.value.sheets.splice(index, 1);
-
-        if (!file.value.sheets.length) addSheet();
-    }
-
     const sheet = computed({ get() { return file.value.sheets[activeSheetIndex.value]; }, set(v: ILuminaSheet) { file.value.sheets[activeSheetIndex.value] = v; } });
-
-    async function loadFromFile(f: File) {
-        file.value = JSON.parse(await f.text());
-    }
+    const setActiveSheet = (index: number) => activeSheetIndex.value = index;
+    const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
+    const addSheet = () => file.value.sheets.push(emptySheet(file.value.sheets.length));
+    const deleteSheet = (index: number) => {
+        file.value.sheets.splice(index, 1);
+        if (!file.value.sheets.length) addSheet();
+    };
 
     function updateRowStyle(index: number, style: ILuminaRowStyle) {
         sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
