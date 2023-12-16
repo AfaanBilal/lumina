@@ -19,6 +19,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 
 ### Features
 - [X] Spreadsheet grid
+- [X] Multiple sheets
 - [X] File management
   - [X] Open
   - [X] Save

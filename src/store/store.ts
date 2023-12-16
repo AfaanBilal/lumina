@@ -19,6 +19,7 @@ const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
 
 const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
+const emptySheet = (count: number) => ({ id: "sheet_" + ulid(), name: "Sheet " + (count + 1), style: { rows: {}, cols: {}, }, rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)) });
 
 export const useStore = defineStore("counter", () => {
     const settings = ref<Settings>({
@@ -83,11 +84,28 @@ export const useStore = defineStore("counter", () => {
     const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
     const ActiveCellName = computed(() => indexToColumn(activeCell.value.cellIndex) + (activeCell.value.rowIndex + 1));
 
-    const sheet = ref<ILuminaSheet>({
-        id: "sheet_" + ulid(),
-        style: { rows: {}, cols: {}, },
-        rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)),
-    });
+    const activeSheetIndex = ref<number>(0);
+    function setActiveSheet(index: number) {
+        activeSheetIndex.value = index;
+    }
+
+    function setSheetName(index: number, name: string) {
+        sheets.value[index].name = name;
+    }
+
+    const sheets = ref<ILuminaSheet[]>([emptySheet(0)]);
+
+    function addSheet() {
+        sheets.value.push(emptySheet(sheets.value.length));
+    }
+
+    function deleteSheet(index: number) {
+        sheets.value.splice(index, 1);
+
+        if (!sheets.value.length) addSheet();
+    }
+
+    const sheet = computed({ get() { return sheets.value[activeSheetIndex.value]; }, set(v: ILuminaSheet) { sheets.value[activeSheetIndex.value] = v; } });
 
     async function loadFromFile(file: File) {
         sheet.value = JSON.parse(await file.text());
@@ -246,6 +264,13 @@ export const useStore = defineStore("counter", () => {
         setCellValue,
         setActiveCellValue,
         updateStyle,
+
+        sheets,
+        addSheet,
+        deleteSheet,
+        activeSheetIndex,
+        setActiveSheet,
+        setSheetName,
 
         sheet,
         maxRows,
