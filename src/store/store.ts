@@ -116,11 +116,7 @@ export const useStore = defineStore("counter", () => {
         activeCell.value.rowIndex += 1;
     }
 
-    function setActiveCellLeft() {
-        if (activeCell.value.cellIndex <= 0) return;
-
-        activeCell.value.cellIndex -= 1;
-    }
+    const setActiveCellLeft = () => activeCell.value.cellIndex > 0 && (activeCell.value.cellIndex -= 1);
 
     function updateCell({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) {
         sheet.value.rows[rowIndex].cells[cellIndex] = cell;
