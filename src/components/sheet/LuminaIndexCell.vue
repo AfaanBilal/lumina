@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="frozen" v-model="frozen" type="checkbox" class="accent-slate-600">
-                    <label for="frozen" class="cursor-pointer select-none hover:font-medium">Freeze</label>
+                    <input :id="'frozen-' + index" v-model="frozen" type="checkbox" class="accent-slate-600">
+                    <label :for="'frozen-' + index" class="cursor-pointer select-none hover:font-medium">Freeze</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index)">
