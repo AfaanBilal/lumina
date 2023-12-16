@@ -28,22 +28,45 @@
                 </div>
             </template>
 
-            <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
+            <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="autofocus" v-model="autofocus" type="checkbox">
+                    <input id="autofocus" v-model="settings.autofocus" type="checkbox">
                     <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
                 </div>
+            </div>
+        </Dropdown>
+
+        <Dropdown>
+            <template #trigger>
+                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                    <IconEye :size="18" /> View
+                </div>
+            </template>
+
+            <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="stripes" v-model="stripes" type="checkbox">
+                    <input id="style-bar" v-model="settings.showStyleBar" type="checkbox">
+                    <label for="style-bar" class="cursor-pointer select-none hover:font-medium">Style bar</label>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="formula-bar" v-model="settings.showFormulaBar" type="checkbox">
+                    <label for="formula-bar" class="cursor-pointer select-none hover:font-medium">Formula bar</label>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="gridlines" v-model="settings.showGridlines" type="checkbox">
+                    <label for="gridlines" class="cursor-pointer select-none hover:font-medium">Gridlines</label>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="stripes" v-model="settings.showStripes" type="checkbox">
                     <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="rowBand" v-model="rowBand" type="checkbox">
-                    <label for="rowBand" class="cursor-pointer select-none hover:font-medium">Row band</label>
+                    <input id="row-band" v-model="settings.showRowBand" type="checkbox">
+                    <label for="row-band" class="cursor-pointer select-none hover:font-medium">Row band</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="colBand" v-model="colBand" type="checkbox">
-                    <label for="colBand" class="cursor-pointer select-none hover:font-medium">Column band</label>
+                    <input id="column-band" v-model="settings.showColumnBand" type="checkbox">
+                    <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
             </div>
         </Dropdown>
@@ -98,18 +121,15 @@
  */
 
 import { computed, ref } from "vue";
-import { IconDeviceFloppy, IconFile, IconSettings, IconPrinter, IconHelp } from "@tabler/icons-vue";
+import { IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconHelp } from "@tabler/icons-vue";
+import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
 import { download } from "../../utils/helpers";
-import Dropdown from "v-dropdown";
+import { Settings } from "../../App.d";
 
 const store = useStore();
 
-const autofocus = computed<boolean>({ get() { return store.file.settings.autofocus; }, set(v: boolean) { store.updateSettings("autofocus", v); } });
-const stripes = computed<boolean>({ get() { return store.file.settings.stripes; }, set(v: boolean) { store.updateSettings("stripes", v); } });
-const rowBand = computed<boolean>({ get() { return store.file.settings.rowBand; }, set(v: boolean) { store.updateSettings("rowBand", v); } });
-const colBand = computed<boolean>({ get() { return store.file.settings.colBand; }, set(v: boolean) { store.updateSettings("colBand", v); } });
-const referenceVisible = computed<boolean>({ get() { return store.file.settings.referenceVisible; }, set(v: boolean) { store.updateSettings("referenceVisible", v); } });
+const settings = computed<Settings>({ get() { return store.file.settings; }, set(s: Settings) { console.log(s); store.updateSettings(s); } });
 
 const fileDropdown = ref();
 const input = ref<HTMLInputElement>();
@@ -126,5 +146,5 @@ const onFileSelected = (e: Event) => {
 };
 
 const helpDropdown = ref();
-const showReference = () => { referenceVisible.value = true; helpDropdown.value.close(); };
+const showReference = () => { settings.value.referenceVisible = true; helpDropdown.value.close(); };
 </script>

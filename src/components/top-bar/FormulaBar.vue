@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div v-show="store.file.settings.showFormulaBar" class="flex">
         <div class="flex items-center justify-center w-10 p-1 font-mono font-semibold border-r border-y">
             {{ store.ActiveCellName }}
         </div>

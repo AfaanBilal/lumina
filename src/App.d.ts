@@ -75,10 +75,14 @@ export interface ILuminaSheet {
 
 export interface Settings {
     autofocus: boolean;
-    stripes: boolean;
-    rowBand: boolean;
-    colBand: boolean;
     referenceVisible: boolean;
+
+    showStyleBar: boolean;
+    showFormulaBar: boolean;
+    showGridlines: boolean;
+    showStripes: boolean;
+    showRowBand: boolean;
+    showColumnBand: boolean;
 }
 
 export interface ILuminaFile {

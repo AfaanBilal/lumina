@@ -28,10 +28,13 @@ export const useStore = defineStore("lumina", () => {
         sheets: [emptySheet(0)],
         settings: {
             autofocus: true,
-            stripes: false,
-            rowBand: false,
-            colBand: false,
             referenceVisible: false,
+            showStyleBar: true,
+            showFormulaBar: true,
+            showGridlines: true,
+            showStripes: false,
+            showRowBand: false,
+            showColumnBand: false,
         },
     });
 
@@ -40,7 +43,7 @@ export const useStore = defineStore("lumina", () => {
     const setFileName = (name: string) => file.value.name = name;
 
     /** Settings */
-    const updateSettings = (key: keyof Settings, value: boolean) => file.value.settings[key] = value;
+    const updateSettings = (settings: Settings) => file.value.settings = settings;
 
     /** Sheets */
     const activeSheetIndex = ref<number>(0);

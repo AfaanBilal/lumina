@@ -1,8 +1,9 @@
 <template>
-    <div class="flex items-center border animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
-        'bg-slate-100': store.file.settings.stripes && rowIndex % 2 == 1,
-        'border-y-slate-400': store.file.settings.rowBand && store.activeCellCoordinates.rowIndex === rowIndex && store.activeCellCoordinates.cellIndex > cellIndex,
-        'border-x-slate-400': store.file.settings.colBand && store.activeCellCoordinates.cellIndex === cellIndex && store.activeCellCoordinates.rowIndex > rowIndex,
+    <div class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
+        'border': store.file.settings.showGridlines,
+        'bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
+        'border-y-slate-400': store.file.settings.showRowBand && store.activeCellCoordinates.rowIndex === rowIndex && store.activeCellCoordinates.cellIndex > cellIndex,
+        'border-x-slate-400': store.file.settings.showColumnBand && store.activeCellCoordinates.cellIndex === cellIndex && store.activeCellCoordinates.rowIndex > rowIndex,
 
         '!border-2 !border-blue-500': isActive,
         'border-dashed border-blue-400': isHovered && !isActive,

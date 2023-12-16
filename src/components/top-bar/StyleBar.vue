@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-2 px-1">
+    <div v-show="store.file.settings.showStyleBar" class="flex gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.bold }" title="Bold"
@@ -7,17 +7,18 @@
                 <IconBold :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.italic }" title="Italic" @click="setItalic">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.italic }" title="Italic"
+                @click="setItalic">
                 <IconItalic :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.underline }" title="Underline"
-                @click="toggleUnderline">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.underline }"
+                title="Underline" @click="toggleUnderline">
                 <IconUnderline :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.strikethrough }" title="Strikethrough"
-                @click="toggleStrikethrough">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.strikethrough }"
+                title="Strikethrough" @click="toggleStrikethrough">
                 <IconStrikethrough :size="18" />
             </div>
         </div>
@@ -92,7 +93,8 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.all }" title="Border" @click="border = { all: !border?.all };">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.all }" title="Border"
+                @click="border = { all: !border?.all };">
                 <IconBorderAll :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
