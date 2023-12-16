@@ -21,7 +21,7 @@ const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 const emptySheet = (count: number) => ({ id: "sheet_" + ulid(), name: "Sheet " + (count + 1), style: { rows: {}, cols: {}, }, rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)) });
 
-export const useStore = defineStore("counter", () => {
+export const useStore = defineStore("lumina", () => {
     const file = ref<ILuminaFile>({
         id: "lumina_" + ulid(),
         name: "Lumina",
