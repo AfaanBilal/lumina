@@ -25,7 +25,7 @@
             '!items-center': props.cell.style?.verticalAlignment === 'middle',
             '!items-end': props.cell.style?.verticalAlignment === 'bottom',
         }" :style.="commonStyle">
-            {{ computedValue }}
+            {{ calculatedValue }}
         </div>
         <input v-if="isActive" ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
             'font-bold': props.cell.style?.bold,
@@ -107,13 +107,11 @@ const commonStyle = computed(() => {
 });
 
 const value = computed<TLuminaCellValue>({
-    get() {
-        return props.cell.value;
-    },
-    set(v: TLuminaCellValue) {
-        store.setCellValue({ rowIndex: props.rowIndex, cellIndex: props.cellIndex }, v);
-    },
+    get() { return props.cell.value; },
+    set(v: TLuminaCellValue) { store.setCellValue({ rowIndex: props.rowIndex, cellIndex: props.cellIndex }, v); },
 });
+
+const calculatedValue = computed(() => isFormula(props.cell.value) ? calculateValue(props.cell.value) : props.cell.value);
 
 const mouseEnter = (e: MouseEvent) => {
     const c = { rowIndex: props.rowIndex, cellIndex: props.cellIndex };
@@ -124,14 +122,4 @@ const mouseEnter = (e: MouseEvent) => {
         store.endSelection();
     }
 };
-
-const computedValue = computed(() => {
-    const v = props.cell.value;
-
-    if (isFormula(v)) {
-        return calculateValue(v);
-    }
-
-    return v;
-});
 </script>
