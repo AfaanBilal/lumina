@@ -29,16 +29,16 @@
             </template>
 
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex)">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
                     <IconRowInsertTop :size="18" /> Insert row above
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex + 1)">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addRow(store.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
                     <IconRowInsertBottom :size="18" /> Insert row below
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex)">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex); insertDropdown.close();">
                     <IconColumnInsertLeft :size="18" /> Insert column left
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1)">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
                     <IconColumnInsertRight :size="18" /> Insert column right
                 </div>
             </div>
