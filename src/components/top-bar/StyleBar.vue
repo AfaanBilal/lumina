@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="flex items-center justify-center border rounded">
-            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Arial'" @change="setFontFamily">
+            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Manrope'" @change="setFontFamily">
                 <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
             </select>
         </div>
@@ -126,6 +126,7 @@ const setBackgroundColor = (color: string) => store.updateStyle({ backgroundColo
 const setTextColor = (color: string) => store.updateStyle({ textColor: color });
 
 const fontList = [
+    "Manrope",
     "Arial",
     "Calibri",
     "Helvetica",
