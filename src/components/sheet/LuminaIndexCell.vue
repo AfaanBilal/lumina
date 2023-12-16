@@ -3,8 +3,9 @@
         :class="{
             'bg-slate-200': index === store.activeCellCoordinates.rowIndex,
             'bg-blue-100 border-l-blue-700 border-y-blue-700': isRowSelected,
-            'sticky top-6 bg-slate-300 z-50': store.sheet.style.rows?.[index]?.frozen,
-        }" @click="store.selectRow(index)">
+            'sticky bg-slate-300 z-50': store.sheet.style.rows?.[index]?.frozen,
+        }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')"
+        @click="store.selectRow(index)">
         {{ index + 1 }}
 
         <Dropdown class="absolute right-0 !flex items-center justify-center">

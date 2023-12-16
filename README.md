@@ -74,6 +74,9 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Add column (end)
   - [X] Add column (middle)
   - [X] Delete column
+- [X] Freezing
+  - [X] Frozen rows
+  - [ ] Frozen columns
 - [X] Sizing
   - [X] Row height
   - [X] Column width

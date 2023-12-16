@@ -14,9 +14,10 @@
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
-        'sticky top-6 bg-slate-300 z-50': store.sheet.style.rows?.[rowIndex]?.frozen,
-    }" :style="commonStyle" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
-        @mouseenter="mouseEnter">
+        'sticky bg-slate-300 z-50': store.sheet.style.rows?.[rowIndex]?.frozen,
+    }"
+        :style="commonStyle + (store.sheet.style.rows?.[rowIndex]?.frozen ? `top: ${store.getFrozenTop(rowIndex)}px;` : '')"
+        @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
