@@ -25,8 +25,11 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Open
   - [X] Save
   - [X] Print
-- [X] Settings
-  - [X] Autofocus
+- [X] Insert
+  - [X] Insert row above
+  - [X] Insert row below
+  - [X] Insert column left
+  - [X] Insert column right
 - [X] View
   - [X] Style bar
   - [X] Formula bar
@@ -34,6 +37,8 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Stripes
   - [X] Row band
   - [X] Column band
+- [X] Settings
+  - [X] Autofocus
 - [X] Help menu
 - [X] Reference: operators, functions and constants
 - [X] Formula bar

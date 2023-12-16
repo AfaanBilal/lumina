@@ -47,21 +47,6 @@
         <Dropdown>
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
-                    <IconSettings :size="18" /> Settings
-                </div>
-            </template>
-
-            <div class="flex flex-col text-sm print:hidden">
-                <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="autofocus" v-model="settings.autofocus" type="checkbox" class="accent-slate-600">
-                    <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
-                </div>
-            </div>
-        </Dropdown>
-
-        <Dropdown>
-            <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
                     <IconEye :size="18" /> View
                 </div>
             </template>
@@ -90,6 +75,21 @@
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
                     <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
+                </div>
+            </div>
+        </Dropdown>
+
+        <Dropdown>
+            <template #trigger>
+                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                    <IconSettings :size="18" /> Settings
+                </div>
+            </template>
+
+            <div class="flex flex-col text-sm print:hidden">
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="autofocus" v-model="settings.autofocus" type="checkbox" class="accent-slate-600">
+                    <label for="autofocus" class="cursor-pointer select-none hover:font-medium">Auto focus input</label>
                 </div>
             </div>
         </Dropdown>
