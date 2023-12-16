@@ -32,7 +32,7 @@
                     <IconArrowAutofitWidth :size="18" />
                     <div class="flex-1 font-semibold">Width</div>
                     <div class="flex items-baseline gap-1">
-                        <input type="number" min="40" max="2500" class="p-1 outline-none"
+                        <input type="number" min="40" max="2500" class="p-1 border rounded outline-none"
                             :value="store.sheet.style.cols?.[i - 1]?.width || '80'"
                             @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>

@@ -21,7 +21,7 @@
                     <IconLineHeight :size="18" />
                     <div class="flex-1 font-semibold">Height</div>
                     <div class="flex items-baseline gap-1">
-                        <input type="number" min="20" max="1000" class="p-1 outline-none"
+                        <input type="number" min="20" max="1000" class="p-1 border rounded outline-none"
                             :value="store.sheet.style.rows?.[index + 1]?.height || '24'"
                             @change="e => store.updateRowStyle(index + 1, { height: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
