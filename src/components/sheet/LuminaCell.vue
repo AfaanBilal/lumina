@@ -102,6 +102,11 @@ const commonStyle = computed(() => {
     style.textAlignment && (s += `text-align: ${style.textAlignment};`);
     style.fontFamily && (s += `font-family: "${style.fontFamily}";`);
     style.fontSize && (s += `font-size: ${style.fontSize}px;`);
+    style.borderColor && (s += `border-color: ${style.borderColor};`);
+    style.border?.all || style.border?.top && (s += "border-top: 1px;");
+    style.border?.all || style.border?.right && (s += "border-right: 1px;");
+    style.border?.all || style.border?.bottom && (s += "border-bottom: 1px;");
+    style.border?.all || style.border?.left && (s += "border-left: 1px;");
 
     return s;
 });

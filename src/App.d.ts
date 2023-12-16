@@ -38,6 +38,7 @@ export interface ILuminaCellStyle {
         left?: boolean;
     };
     borderColor?: string;
+    borderType?: "solid" | "dashed" | "dotted";
 }
 
 export interface ILuminaCell {

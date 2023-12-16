@@ -91,8 +91,7 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.all }" title="Border"
-                @click="border = { all: !border?.all };">
+                :class="{ 'bg-slate-800 text-white': border?.all }" title="Border" @click="border = { all: !border?.all };">
                 <IconBorderAll :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
@@ -101,7 +100,8 @@
                 <IconBorderTop :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.right }" title="Border right" @click="border = { ...border, all: false, right: !border?.right };">
+                :class="{ 'bg-slate-800 text-white': border?.right }" title="Border right"
+                @click="border = { ...border, all: false, right: !border?.right };">
                 <IconBorderRight :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
@@ -113,6 +113,23 @@
                 :class="{ 'bg-slate-800 text-white': border?.left }" title="Border left"
                 @click="border = { ...border, all: false, left: !border?.left };">
                 <IconBorderLeft :size="18" />
+            </div>
+        </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': borderType === 'solid' }"
+                title="Border solid" @click="borderType = 'solid'">
+                <IconSlash class="rotate-12" :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': borderType === 'dashed' }"
+                title="Border dashed" @click="borderType = 'dashed'">
+                <IconLineDashed class="-rotate-45" :size="18" />
+            </div>
+            <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white': borderType === 'dotted' }"
+                title="Border dotted" @click="borderType = 'dotted'">
+                <IconLineDotted class="-rotate-45" :size="18" />
             </div>
         </div>
     </div>
@@ -139,6 +156,9 @@ import {
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { IconBorderOuter } from "@tabler/icons-vue";
+import { IconLineDashed } from "@tabler/icons-vue";
+import { IconLineDotted } from "@tabler/icons-vue";
+import { IconSlash } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -156,6 +176,7 @@ const textColor = computed({ get() { return store.ActiveCell.style?.textColor ||
 const borderColor = computed({ get() { return store.ActiveCell.style?.borderColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ borderColor: color }); } });
 
 const border = computed({ get() { return store.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
+const borderType = computed({ get() { return store.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
 
 const fontList = [
     "Manrope",
