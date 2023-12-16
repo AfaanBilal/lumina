@@ -99,97 +99,60 @@ export const useStore = defineStore("counter", () => {
     const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCell.value = { rowIndex, cellIndex };
 
     const setActiveCellUp = () => activeCell.value.rowIndex > 0 && (activeCell.value.rowIndex -= 1);
-
-    function setActiveCellRight() {
-        if (activeCell.value.cellIndex >= columnCount.value - 1) {
-            addColumn();
-        }
-
+    const setActiveCellRight = () => {
+        activeCell.value.cellIndex >= columnCount.value - 1 && addColumn();
         activeCell.value.cellIndex += 1;
-    }
+        selectActiveCell();
+    };
 
-    function setActiveCellDown() {
-        if (activeCell.value.rowIndex >= rowCount.value - 1) {
-            addRow();
-        }
-
+    const setActiveCellDown = () => {
+        activeCell.value.rowIndex >= rowCount.value - 1 && addRow();
         activeCell.value.rowIndex += 1;
-    }
+        selectActiveCell();
+    };
 
     const setActiveCellLeft = () => activeCell.value.cellIndex > 0 && (activeCell.value.cellIndex -= 1);
 
-    function updateCell({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) {
-        sheet.value.rows[rowIndex].cells[cellIndex] = cell;
-    }
+    const updateCell = ({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) => sheet.value.rows[rowIndex].cells[cellIndex] = cell;
+    const updateActiveCell = (cell: ILuminaCell) => updateCell(activeCell.value, cell);
 
-    function updateCellStyle(coords: CellCoordinates, style: ILuminaCellStyle) {
-        sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
-    }
+    const setCellValue = ({ rowIndex, cellIndex }: CellCoordinates, v: string) => sheet.value.rows[rowIndex].cells[cellIndex].value = v;
+    const setActiveCellValue = (v: string) => setCellValue(activeCell.value, v);
 
-    function updateSelectionStyle(style: ILuminaCellStyle) {
+    /** Cell Style */
+    const updateCellStyle = (coords: CellCoordinates, style: ILuminaCellStyle) => sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
+    const updateSelectionStyle = (style: ILuminaCellStyle) => {
         for (let row = selectedCells.value.start.rowIndex; row <= selectedCells.value.end.rowIndex; row++) {
             for (let col = selectedCells.value.start.cellIndex; col <= selectedCells.value.end.cellIndex; col++) {
                 const cellStyle = sheet.value.rows[row].cells[col].style;
                 updateCellStyle({ rowIndex: row, cellIndex: col }, { ...cellStyle, ...style });
             }
         }
-    }
+    };
+    const updateActiveCellStyle = (style: ILuminaCellStyle) => updateActiveCell({ ...ActiveCell.value, style: { ...ActiveCell.value.style, ...style } });
+    const updateStyle = (style: ILuminaCellStyle) => hasSelection.value ? updateSelectionStyle(style) : updateActiveCellStyle(style);
 
-    function setCellValue({ rowIndex, cellIndex }: CellCoordinates, v: string) {
-        sheet.value.rows[rowIndex].cells[cellIndex].value = v;
-    }
-
-    function updateActiveCell(cell: ILuminaCell) {
-        updateCell(activeCell.value, cell);
-    }
-
-    function updateActiveCellStyle(style: ILuminaCellStyle) {
-        updateActiveCell({ ...ActiveCell.value, style: { ...ActiveCell.value.style, ...style } });
-    }
-
-    function setActiveCellValue(v: string) {
-        setCellValue(activeCell.value, v);
-    }
-
-    function updateStyle(style: ILuminaCellStyle) {
-        hasSelection.value ?
-            updateSelectionStyle(style) :
-            updateActiveCellStyle(style);
-    }
-
-    function addRow(index?: number) {
-        if (index) {
-            sheet.value.rows.splice(index, 0, emptyRow(columnCount.value));
-        } else {
-            sheet.value.rows.push(emptyRow(columnCount.value));
-        }
-    }
-
-    function addColumn(index?: number) {
+    /** Row / Columns */
+    const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
+    const addColumn = (index?: number) => {
         for (let i = 0; i < rowCount.value; i++) {
-            if (index) {
-                sheet.value.rows[i].cells.splice(index, 0, emptyCell());
-            } else {
+            index ?
+                sheet.value.rows[i].cells.splice(index, 0, emptyCell()) :
                 sheet.value.rows[i].cells.push(emptyCell());
-            }
         }
-
-        return true;
-    }
-
-    function deleteRow(index: number) {
+    };
+    const deleteRow = (index: number) => {
         sheet.value.rows.splice(index, 1);
 
-        if (!rowCount.value) addRow();
-    }
-
-    function deleteColumn(index: number) {
+        !rowCount.value && addRow();
+    };
+    const deleteColumn = (index: number) => {
         for (let i = 0; i < rowCount.value; i++) {
             sheet.value.rows[i].cells.splice(index, 1);
         }
 
-        if (!columnCount.value) addColumn();
-    }
+        !columnCount.value && addColumn();
+    };
 
     return {
         file,
