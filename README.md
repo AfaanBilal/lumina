@@ -25,6 +25,15 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Open
   - [X] Save
   - [X] Print
+- [X] Settings
+  - [X] Autofocus
+- [X] View
+  - [X] Style bar
+  - [X] Formula bar
+  - [X] Gridlines
+  - [X] Stripes
+  - [X] Row band
+  - [X] Column band
 - [X] Help menu
 - [X] Reference: operators, functions and constants
 - [X] Formula bar
