@@ -89,35 +89,35 @@ export const useStore = defineStore("lumina", () => {
     const selectRow = (rowIndex: number) => setSelectedCells({ start: { rowIndex, cellIndex: 0 }, end: { rowIndex, cellIndex: columnCount.value - 1 } });
     const selectColumn = (cellIndex: number) => setSelectedCells({ start: { rowIndex: 0, cellIndex }, end: { rowIndex: rowCount.value - 1, cellIndex } });
     const selectSheet = () => setSelectedCells({ start: { rowIndex: 0, cellIndex: 0 }, end: { rowIndex: rowCount.value - 1, cellIndex: columnCount.value - 1 } });
-    const selectActiveCell = () => setSelectedCells({ start: Object.assign({}, activeCell.value), end: Object.assign({}, activeCell.value) });
+    const selectActiveCell = () => setSelectedCells({ start: Object.assign({}, activeCellCoordinates.value), end: Object.assign({}, activeCellCoordinates.value) });
 
     /** Active cell */
-    const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
-    const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
-    const ActiveCellName = computed(() => indexToColumn(activeCell.value.cellIndex) + (activeCell.value.rowIndex + 1));
+    const activeCellCoordinates = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
+    const ActiveCell = computed(() => sheet.value.rows[activeCellCoordinates.value.rowIndex].cells[activeCellCoordinates.value.cellIndex]);
+    const ActiveCellName = computed(() => indexToColumn(activeCellCoordinates.value.cellIndex) + (activeCellCoordinates.value.rowIndex + 1));
 
-    const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCell.value = { rowIndex, cellIndex };
+    const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCellCoordinates.value = { rowIndex, cellIndex };
 
-    const setActiveCellUp = () => activeCell.value.rowIndex > 0 && (activeCell.value.rowIndex -= 1);
+    const setActiveCellUp = () => activeCellCoordinates.value.rowIndex > 0 && (activeCellCoordinates.value.rowIndex -= 1);
     const setActiveCellRight = () => {
-        activeCell.value.cellIndex >= columnCount.value - 1 && addColumn();
-        activeCell.value.cellIndex += 1;
+        activeCellCoordinates.value.cellIndex >= columnCount.value - 1 && addColumn();
+        activeCellCoordinates.value.cellIndex += 1;
         selectActiveCell();
     };
 
     const setActiveCellDown = () => {
-        activeCell.value.rowIndex >= rowCount.value - 1 && addRow();
-        activeCell.value.rowIndex += 1;
+        activeCellCoordinates.value.rowIndex >= rowCount.value - 1 && addRow();
+        activeCellCoordinates.value.rowIndex += 1;
         selectActiveCell();
     };
 
-    const setActiveCellLeft = () => activeCell.value.cellIndex > 0 && (activeCell.value.cellIndex -= 1);
+    const setActiveCellLeft = () => activeCellCoordinates.value.cellIndex > 0 && (activeCellCoordinates.value.cellIndex -= 1);
 
     const updateCell = ({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) => sheet.value.rows[rowIndex].cells[cellIndex] = cell;
-    const updateActiveCell = (cell: ILuminaCell) => updateCell(activeCell.value, cell);
+    const updateActiveCell = (cell: ILuminaCell) => updateCell(activeCellCoordinates.value, cell);
 
     const setCellValue = ({ rowIndex, cellIndex }: CellCoordinates, v: string) => sheet.value.rows[rowIndex].cells[cellIndex].value = v;
-    const setActiveCellValue = (v: string) => setCellValue(activeCell.value, v);
+    const setActiveCellValue = (v: string) => setCellValue(activeCellCoordinates.value, v);
 
     /** Cell Style */
     const updateCellStyle = (coords: CellCoordinates, style: ILuminaCellStyle) => sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
@@ -178,7 +178,7 @@ export const useStore = defineStore("lumina", () => {
         updateColStyle,
         updateRowStyle,
 
-        activeCell,
+        activeCellCoordinates,
         ActiveCell,
         ActiveCellName,
         setActiveCell,

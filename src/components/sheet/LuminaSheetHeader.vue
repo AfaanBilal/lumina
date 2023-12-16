@@ -6,7 +6,7 @@
     <div v-for="i in store.columnCount" :key="i"
         class="text-sm flex flex-shrink-0 items-center justify-center font-medium h-6 border p-0.5 bg-slate-100 group cursor-pointer select-none sticky top-0"
         :class="{
-            'bg-slate-200': i - 1 === store.activeCell.cellIndex,
+            'bg-slate-200': i - 1 === store.activeCellCoordinates.cellIndex,
             'bg-blue-100 border-x-blue-700 border-t-blue-700': store.selectedCells.start.cellIndex === i - 1 && store.selectedCells.end.cellIndex === i - 1
         }" @click="store.selectColumn(i - 1)">
         <button

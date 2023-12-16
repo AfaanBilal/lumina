@@ -1,8 +1,8 @@
 <template>
     <div class="flex items-center border animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'bg-slate-100': store.file.settings.stripes && rowIndex % 2 == 1,
-        'border-y-slate-400': store.file.settings.rowBand && store.activeCell.rowIndex === rowIndex && store.activeCell.cellIndex > cellIndex,
-        'border-x-slate-400': store.file.settings.colBand && store.activeCell.cellIndex === cellIndex && store.activeCell.rowIndex > rowIndex,
+        'border-y-slate-400': store.file.settings.rowBand && store.activeCellCoordinates.rowIndex === rowIndex && store.activeCellCoordinates.cellIndex > cellIndex,
+        'border-x-slate-400': store.file.settings.colBand && store.activeCellCoordinates.cellIndex === cellIndex && store.activeCellCoordinates.rowIndex > rowIndex,
 
         '!border-2 !border-blue-500': isActive,
         'border-dashed border-blue-400': isHovered && !isActive,
@@ -60,7 +60,7 @@ const store = useStore();
 const input = ref<HTMLInputElement | null>(null);
 const focusInput = () => nextTick(() => input.value?.focus());
 
-const isActive = computed(() => store.activeCell.rowIndex === props.rowIndex && store.activeCell.cellIndex === props.cellIndex);
+const isActive = computed(() => store.activeCellCoordinates.rowIndex === props.rowIndex && store.activeCellCoordinates.cellIndex === props.cellIndex);
 const isHovered = computed(() => store.hoverCellCoordinates.rowIndex === props.rowIndex && store.hoverCellCoordinates.cellIndex === props.cellIndex);
 
 const isSelected = computed(() => {
