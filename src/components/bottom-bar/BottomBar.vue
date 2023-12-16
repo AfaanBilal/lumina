@@ -31,7 +31,7 @@
                 </Dropdown>
             </div>
         </div>
-        <div class="flex items-center gap-2 p-2 my-auto rounded-full cursor-pointer hover:bg-slate-200" title="Add Sheet"
+        <div class="flex items-center gap-2 p-2 my-auto rounded-full cursor-pointer hover:bg-slate-200" title="Add sheet"
             @click="store.addSheet">
             <IconPlus :size="20" />
         </div>
