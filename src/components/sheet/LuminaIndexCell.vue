@@ -10,7 +10,7 @@
 
         <Dropdown class="absolute right-0 !flex items-center justify-center">
             <template #trigger>
-                <button class="p-0.5 items-center justify-center hidden rounded group-hover:flex hover:bg-slate-300">
+                <button class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
                     <IconDotsVertical :size="10" />
                 </button>
             </template>

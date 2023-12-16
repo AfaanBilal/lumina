@@ -12,8 +12,8 @@
         }" :style="(store.sheet.style.cols?.[i - 1]?.frozen ? `left: ${store.getFrozenLeft(i - 1)}px;` : '')"
         @click="store.selectColumn(i - 1)">
         <button
-            class="absolute items-center justify-center p-0.5 left-1 bg-slate-300 hidden rounded group-hover:flex hover:bg-slate-400"
-            title="Add a colum to the left" @click="store.addColumn(i - 1)">
+            class="absolute items-center justify-center p-0.5 left-1 hidden rounded-full group-hover:flex hover:bg-slate-300"
+            title="Insert column left" @click="store.addColumn(i - 1)">
             <IconPlus :size="10" />
         </button>
 
@@ -21,7 +21,8 @@
 
         <Dropdown class="absolute right-1 !flex items-center justify-center">
             <template #trigger>
-                <button class="p-0.5 items-center justify-center hidden rounded group-hover:flex hover:bg-slate-300">
+                <button
+                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
                     <IconDotsVertical :size="10" />
                 </button>
             </template>
