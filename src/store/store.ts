@@ -42,6 +42,23 @@ export const useStore = defineStore("counter", () => {
     /** Settings */
     const updateSettings = (key: keyof Settings, value: boolean) => file.value.settings[key] = value;
 
+    /** Sheets */
+    const activeSheetIndex = ref<number>(0);
+    const sheet = computed({ get() { return file.value.sheets[activeSheetIndex.value]; }, set(v: ILuminaSheet) { file.value.sheets[activeSheetIndex.value] = v; } });
+    const rowCount = computed(() => sheet.value.rows.length);
+    const columnCount = computed(() => sheet.value.rows[0].cells.length);
+    const setActiveSheet = (index: number) => activeSheetIndex.value = index;
+    const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
+    const addSheet = () => file.value.sheets.push(emptySheet(file.value.sheets.length));
+    const deleteSheet = (index: number) => {
+        file.value.sheets.splice(index, 1);
+        if (!file.value.sheets.length) addSheet();
+    };
+
+    /** Sheet style */
+    const updateRowStyle = (index: number, style: ILuminaRowStyle) => sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
+    const updateColStyle = (index: number, style: ILuminaColStyle) => sheet.value.style.cols[index] = { ...sheet.value.style.cols[index], ...style };
+
     /** Hover */
     const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
     const setHoverCellCoordinates = ({ rowIndex, cellIndex }: CellCoordinates) => {
@@ -56,8 +73,8 @@ export const useStore = defineStore("counter", () => {
         if (selectedCells.value.start.rowIndex != 0) return false;
         if (selectedCells.value.start.cellIndex != 0) return false;
 
-        if (selectedCells.value.end.rowIndex != maxRows.value - 1) return false;
-        if (selectedCells.value.end.cellIndex != maxColumns.value - 1) return false;
+        if (selectedCells.value.end.rowIndex != rowCount.value - 1) return false;
+        if (selectedCells.value.end.cellIndex != columnCount.value - 1) return false;
 
         return true;
     });
@@ -69,40 +86,17 @@ export const useStore = defineStore("counter", () => {
         setActiveCell(Object.assign({}, selectedCells.value.start));
     };
 
-    const selectRow = (rowIndex: number) => setSelectedCells({ start: { rowIndex, cellIndex: 0 }, end: { rowIndex, cellIndex: maxColumns.value - 1 } });
-    const selectColumn = (cellIndex: number) => setSelectedCells({ start: { rowIndex: 0, cellIndex }, end: { rowIndex: maxRows.value - 1, cellIndex } });
-    const selectSheet = () => setSelectedCells({ start: { rowIndex: 0, cellIndex: 0 }, end: { rowIndex: maxRows.value - 1, cellIndex: maxColumns.value - 1 } });
+    const selectRow = (rowIndex: number) => setSelectedCells({ start: { rowIndex, cellIndex: 0 }, end: { rowIndex, cellIndex: columnCount.value - 1 } });
+    const selectColumn = (cellIndex: number) => setSelectedCells({ start: { rowIndex: 0, cellIndex }, end: { rowIndex: rowCount.value - 1, cellIndex } });
+    const selectSheet = () => setSelectedCells({ start: { rowIndex: 0, cellIndex: 0 }, end: { rowIndex: rowCount.value - 1, cellIndex: columnCount.value - 1 } });
     const selectActiveCell = () => setSelectedCells({ start: Object.assign({}, activeCell.value), end: Object.assign({}, activeCell.value) });
 
+    /** Active cell */
     const activeCell = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const ActiveCell = computed(() => sheet.value.rows[activeCell.value.rowIndex].cells[activeCell.value.cellIndex]);
     const ActiveCellName = computed(() => indexToColumn(activeCell.value.cellIndex) + (activeCell.value.rowIndex + 1));
 
-    /** Sheets */
-    const activeSheetIndex = ref<number>(0);
-    const sheet = computed({ get() { return file.value.sheets[activeSheetIndex.value]; }, set(v: ILuminaSheet) { file.value.sheets[activeSheetIndex.value] = v; } });
-    const setActiveSheet = (index: number) => activeSheetIndex.value = index;
-    const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
-    const addSheet = () => file.value.sheets.push(emptySheet(file.value.sheets.length));
-    const deleteSheet = (index: number) => {
-        file.value.sheets.splice(index, 1);
-        if (!file.value.sheets.length) addSheet();
-    };
-
-    function updateRowStyle(index: number, style: ILuminaRowStyle) {
-        sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
-    }
-    function updateColStyle(index: number, style: ILuminaColStyle) {
-        sheet.value.style.cols[index] = { ...sheet.value.style.cols[index], ...style };
-    }
-
-    const maxColumns = computed(() => Math.max(...sheet.value.rows.map(r => r.cells.length)));
-    const maxRows = computed(() => sheet.value.rows.length);
-
-    function setActiveCell({ rowIndex, cellIndex }: CellCoordinates) {
-        activeCell.value.rowIndex = rowIndex;
-        activeCell.value.cellIndex = cellIndex;
-    }
+    const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCell.value = { rowIndex, cellIndex };
 
     function setActiveCellUp() {
         if (activeCell.value.rowIndex <= 0) return;
@@ -111,7 +105,7 @@ export const useStore = defineStore("counter", () => {
     }
 
     function setActiveCellRight() {
-        if (activeCell.value.cellIndex >= maxColumns.value - 1) {
+        if (activeCell.value.cellIndex >= columnCount.value - 1) {
             addColumn();
         }
 
@@ -119,7 +113,7 @@ export const useStore = defineStore("counter", () => {
     }
 
     function setActiveCellDown() {
-        if (activeCell.value.rowIndex >= maxRows.value - 1) {
+        if (activeCell.value.rowIndex >= rowCount.value - 1) {
             addRow();
         }
 
@@ -173,14 +167,14 @@ export const useStore = defineStore("counter", () => {
 
     function addRow(index?: number) {
         if (index) {
-            sheet.value.rows.splice(index, 0, emptyRow(maxColumns.value));
+            sheet.value.rows.splice(index, 0, emptyRow(columnCount.value));
         } else {
-            sheet.value.rows.push(emptyRow(maxColumns.value));
+            sheet.value.rows.push(emptyRow(columnCount.value));
         }
     }
 
     function addColumn(index?: number) {
-        for (let i = 0; i < sheet.value.rows.length; i++) {
+        for (let i = 0; i < rowCount.value; i++) {
             if (index) {
                 sheet.value.rows[i].cells.splice(index, 0, emptyCell());
             } else {
@@ -192,15 +186,15 @@ export const useStore = defineStore("counter", () => {
     function deleteRow(index: number) {
         sheet.value.rows.splice(index, 1);
 
-        if (!sheet.value.rows.length) addRow();
+        if (!rowCount.value) addRow();
     }
 
     function deleteColumn(index: number) {
-        for (let i = 0; i < sheet.value.rows.length; i++) {
+        for (let i = 0; i < rowCount.value; i++) {
             sheet.value.rows[i].cells.splice(index, 1);
         }
 
-        if (!sheet.value.rows[0].cells.length) addColumn();
+        if (!columnCount.value) addColumn();
     }
 
     return {
@@ -251,11 +245,10 @@ export const useStore = defineStore("counter", () => {
         setSheetName,
 
         sheet,
-        maxRows,
+        rowCount,
+        columnCount,
         addRow,
-        maxColumns,
         addColumn,
-
         deleteRow,
         deleteColumn,
     };
