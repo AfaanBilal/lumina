@@ -55,6 +55,7 @@ export interface ILuminaRow {
 
 export interface ILuminaRowStyle {
     height?: number;
+    frozen?: boolean;
 }
 
 export interface ILuminaColStyle {
