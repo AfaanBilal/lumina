@@ -47,6 +47,9 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Vertical alignment
   - [X] Font family
   - [X] Font size
+  - [X] Borders
+  - [X] Border color
+  - [X] Border type
 - [X] Selection
   - [X] Select a cell
   - [X] Select a series of cells (column)
