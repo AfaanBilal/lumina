@@ -2,54 +2,55 @@
     <div class="flex gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.bold }" title="Bold" @click="toggleBold">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.bold }" title="Bold"
+                @click="toggleBold">
                 <IconBold :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.italic }" title="Italic" @click="setItalic">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.italic }" title="Italic" @click="setItalic">
                 <IconItalic :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.underline }" title="Underline"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.underline }" title="Underline"
                 @click="toggleUnderline">
                 <IconUnderline :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.strikethrough }" title="Strikethrough"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.strikethrough }" title="Strikethrough"
                 @click="toggleStrikethrough">
                 <IconStrikethrough :size="18" />
             </div>
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'left' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'left' }"
                 title="Text align left" @click="setTextAlign('left')">
                 <IconAlignLeft :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'center' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'center' }"
                 title="Text align center" @click="setTextAlign('center')">
                 <IconAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.textAlignment === 'right' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'right' }"
                 title="Text align right" @click="setTextAlign('right')">
                 <IconAlignRight :size="18" />
             </div>
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'top' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'top' }"
                 title="Vertical align top" @click="setVerticalAlign('top')">
                 <IconLayoutAlignTop :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'middle' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'middle' }"
                 title="Vertical align middle" @click="setVerticalAlign('middle')">
                 <IconLayoutAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': store.ActiveCell.style?.verticalAlignment === 'bottom' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'bottom' }"
                 title="Vertical align bottom" @click="setVerticalAlign('bottom')">
                 <IconLayoutAlignBottom :size="18" />
             </div>
@@ -91,44 +92,44 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.all }" title="Border" @click="border = { all: !border?.all };">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.all }" title="Border" @click="border = { all: !border?.all };">
                 <IconBorderAll :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.top }" title="Border top"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.top }" title="Border top"
                 @click="border = { ...border, all: false, top: !border?.top };">
                 <IconBorderTop :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.right }" title="Border right"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.right }" title="Border right"
                 @click="border = { ...border, all: false, right: !border?.right };">
                 <IconBorderRight :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.bottom }" title="Border bottom"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.bottom }" title="Border bottom"
                 @click="border = { ...border, all: false, bottom: !border?.bottom };">
                 <IconBorderBottom :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': border?.left }" title="Border left"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': border?.left }" title="Border left"
                 @click="border = { ...border, all: false, left: !border?.left };">
                 <IconBorderLeft :size="18" />
             </div>
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': borderType === 'solid' }"
-                title="Border solid" @click="borderType = 'solid'">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': borderType === 'solid' }" title="Border solid"
+                @click="borderType = 'solid'">
                 <IconSlash class="rotate-12" :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': borderType === 'dashed' }"
-                title="Border dashed" @click="borderType = 'dashed'">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': borderType === 'dashed' }" title="Border dashed"
+                @click="borderType = 'dashed'">
                 <IconLineDashed class="-rotate-45" :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white': borderType === 'dotted' }"
-                title="Border dotted" @click="borderType = 'dotted'">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': borderType === 'dotted' }" title="Border dotted"
+                @click="borderType = 'dotted'">
                 <IconLineDotted class="-rotate-45" :size="18" />
             </div>
         </div>
