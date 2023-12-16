@@ -12,7 +12,8 @@
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
-    }" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
+    }" :style="commonStyle" @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })"
+        @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
