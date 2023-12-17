@@ -8,13 +8,13 @@
             </template>
 
             <div class="flex flex-col text-sm print:hidden">
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
-                    <IconFile :size="16" /> Open
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="exportJSON">
+                    <IconJson :size="16" /> Export JSON
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="importJSON">
+                    <IconJson :size="16" /> Import JSON
                     <input ref="inputJSON" type="file" accept=".json" class="hidden"
                         @change="(e: Event) => onFileSelected(e, 'json')">
-                </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
-                    <IconDeviceFloppy :size="16" /> Save
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="exportCSV">
@@ -179,7 +179,7 @@
 
 import { computed, ref } from "vue";
 import {
-    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconCsv,
+    IconJson, IconFile, IconSettings, IconEye, IconPrinter, IconCsv,
     IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
     IconZoomIn, IconHelp,
 } from "@tabler/icons-vue";
@@ -197,8 +197,8 @@ const fileDropdown = ref();
 const inputJSON = ref<HTMLInputElement>();
 const inputCSV = ref<HTMLInputElement>();
 
-const open = () => { inputJSON.value!.click(); fileDropdown.value!.close(); };
-const save = () => { download(store.file.name + ".json", JSON.stringify(store.file)); fileDropdown.value!.close(); };
+const exportJSON = () => { download(store.file.name + ".json", JSON.stringify(store.file)); fileDropdown.value!.close(); };
+const importJSON = () => { inputJSON.value!.click(); fileDropdown.value!.close(); };
 const exportCSV = () => { downloadCSV(store.file.name + ".csv", store.sheet); fileDropdown.value!.close(); };
 const importCSV = () => { inputCSV.value!.click(); fileDropdown.value!.close(); };
 const print = () => { window.print(); fileDropdown.value!.close(); };
