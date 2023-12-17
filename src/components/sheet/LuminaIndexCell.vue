@@ -4,7 +4,7 @@
             'bg-blue-300': isSelected,
             'sticky bg-slate-300 z-50': store.sheet.style.rows?.[index]?.frozen,
         }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')"
-        @click="store.selectRow(index)">
+        @click="ram.selectRow(index)">
         {{ index + 1 }}
 
         <Dropdown class="absolute right-0 !flex items-center justify-center">
@@ -75,11 +75,13 @@ import {
     IconRowRemove, IconArrowMoveUp, IconArrowMoveDown,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
+import { useRAM } from "../../store/ram";
 
 const props = defineProps<{ index: number }>();
 
 const store = useStore();
+const ram = useRAM();
 
-const isSelected = computed(() => store.selectedCells.start.rowIndex <= props.index && store.selectedCells.end.rowIndex >= props.index);
+const isSelected = computed(() => ram.selectedCells.start.rowIndex <= props.index && ram.selectedCells.end.rowIndex >= props.index);
 const frozen = computed({ get() { return store.sheet.style.rows?.[props.index]?.frozen || false; }, set(v: boolean) { store.updateRowStyle(props.index, { frozen: v }); } });
 </script>

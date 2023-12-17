@@ -2,8 +2,8 @@
     <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'border': store.file.settings.showGridlines,
         'bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
-        'border-y-slate-400': store.file.settings.showRowBand && store.activeCellCoordinates.rowIndex === rowIndex && store.activeCellCoordinates.cellIndex > cellIndex,
-        'border-x-slate-400': store.file.settings.showColumnBand && store.activeCellCoordinates.cellIndex === cellIndex && store.activeCellCoordinates.rowIndex > rowIndex,
+        'border-y-slate-400': store.file.settings.showRowBand && ram.activeCellCoordinates.rowIndex === rowIndex && ram.activeCellCoordinates.cellIndex > cellIndex,
+        'border-x-slate-400': store.file.settings.showColumnBand && ram.activeCellCoordinates.cellIndex === cellIndex && ram.activeCellCoordinates.rowIndex > rowIndex,
 
         '!border-2 !border-blue-500': isActive,
         'border-dashed border-blue-400': isHovered && !isActive,
@@ -16,7 +16,7 @@
 
         'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
     }" :style="commonStyle + styleFrozen + styleMerged"
-        @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
+        @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
             'font-bold': props.cell.style?.bold,
             'italic': props.cell.style?.italic,
@@ -56,10 +56,12 @@ import { useStore } from "../../store/store";
 import type { ILuminaCell, TLuminaCellValue } from "../../App.d";
 import { isFormula } from "../../utils/helpers";
 import { calculateValue } from "../../utils/computer";
+import { useRAM } from "../../store/ram";
 
 const props = defineProps<{ rowIndex: number; cellIndex: number; cell: ILuminaCell; }>();
 
 const store = useStore();
+const ram = useRAM();
 
 const input = ref<HTMLInputElement | null>(null);
 const focusInput = () => nextTick(() => input.value?.focus());
@@ -106,12 +108,12 @@ const styleMerged = computed(() => {
     return `grid-row: span ${mergeRowCount}; grid-column: span ${mergeColumnCount};`;
 });
 
-const isActive = computed(() => store.activeCellCoordinates.rowIndex === props.rowIndex && store.activeCellCoordinates.cellIndex === props.cellIndex);
-const isHovered = computed(() => store.hoverCellCoordinates.rowIndex === props.rowIndex && store.hoverCellCoordinates.cellIndex === props.cellIndex);
+const isActive = computed(() => ram.activeCellCoordinates.rowIndex === props.rowIndex && ram.activeCellCoordinates.cellIndex === props.cellIndex);
+const isHovered = computed(() => ram.hoverCellCoordinates.rowIndex === props.rowIndex && ram.hoverCellCoordinates.cellIndex === props.cellIndex);
 
 const isSelected = computed(() => {
-    const start = store.selectedCells.start;
-    const end = store.selectedCells.end;
+    const start = ram.selectedCells.start;
+    const end = ram.selectedCells.end;
 
     if (props.rowIndex < start.rowIndex) return false;
     if (props.cellIndex < start.cellIndex) return false;
@@ -126,13 +128,13 @@ watch(isActive, v => {
     if (!v) return;
 
     store.file.settings.autofocus && focusInput();
-    store.selectActiveCell();
+    ram.selectActiveCell();
 });
 
-const onSelectionTopEdge = computed(() => props.rowIndex === store.selectedCells.start.rowIndex);
-const onSelectionRightEdge = computed(() => props.cellIndex === store.selectedCells.end.cellIndex);
-const onSelectionBottomEdge = computed(() => props.rowIndex === store.selectedCells.end.rowIndex);
-const onSelectionLeftEdge = computed(() => props.cellIndex === store.selectedCells.start.cellIndex);
+const onSelectionTopEdge = computed(() => props.rowIndex === ram.selectedCells.start.rowIndex);
+const onSelectionRightEdge = computed(() => props.cellIndex === ram.selectedCells.end.cellIndex);
+const onSelectionBottomEdge = computed(() => props.rowIndex === ram.selectedCells.end.rowIndex);
+const onSelectionLeftEdge = computed(() => props.cellIndex === ram.selectedCells.start.cellIndex);
 const onSheetTopEdge = computed(() => props.rowIndex === 0);
 const onSheetLeftEdge = computed(() => props.cellIndex === 0);
 
@@ -165,7 +167,7 @@ const value = computed<TLuminaCellValue>({
 const calculatedValue = computed(() => isFormula(props.cell.value) ? calculateValue(props.cell.value) : props.cell.value);
 
 const mouseEnter = (e: MouseEvent) => {
-    store.setHoverCellCoordinates({ rowIndex: props.rowIndex, cellIndex: props.cellIndex });
-    e.buttons === 1 && store.endSelection();
+    ram.setHoverCellCoordinates({ rowIndex: props.rowIndex, cellIndex: props.cellIndex });
+    e.buttons === 1 && ram.endSelection();
 };
 </script>

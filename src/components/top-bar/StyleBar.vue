@@ -2,62 +2,62 @@
     <div v-show="store.file.settings.showStyleBar" class="flex flex-wrap gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.bold }" title="Bold"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.bold }" title="Bold"
                 @click="toggleBold">
                 <IconBold :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.italic }" title="Italic"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.italic }" title="Italic"
                 @click="setItalic">
                 <IconItalic :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.underline }"
-                title="Underline" @click="toggleUnderline">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.underline }" title="Underline"
+                @click="toggleUnderline">
                 <IconUnderline :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.strikethrough }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.strikethrough }"
                 title="Strikethrough" @click="toggleStrikethrough">
                 <IconStrikethrough :size="18" />
             </div>
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'left' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'left' }"
                 title="Text align left" @click="setTextAlign('left')">
                 <IconAlignLeft :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'center' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'center' }"
                 title="Text align center" @click="setTextAlign('center')">
                 <IconAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.textAlignment === 'right' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'right' }"
                 title="Text align right" @click="setTextAlign('right')">
                 <IconAlignRight :size="18" />
             </div>
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'top' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'top' }"
                 title="Vertical align top" @click="setVerticalAlign('top')">
                 <IconLayoutAlignTop :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'middle' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'middle' }"
                 title="Vertical align middle" @click="setVerticalAlign('middle')">
                 <IconLayoutAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.verticalAlignment === 'bottom' }"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'bottom' }"
                 title="Vertical align bottom" @click="setVerticalAlign('bottom')">
                 <IconLayoutAlignBottom :size="18" />
             </div>
         </div>
         <div class="flex items-center justify-center border rounded">
-            <select class="w-full outline-none" :value="store.ActiveCell.style?.fontFamily || 'Manrope'"
+            <select class="w-full outline-none" :value="ram.ActiveCell.style?.fontFamily || 'Manrope'"
                 @change="setFontFamily">
                 <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
             </select>
@@ -65,15 +65,15 @@
         <div class="flex items-center justify-center">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-100"
                 title="Decrease font size"
-                @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) - 1 })">
+                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 11) - 1 })">
                 <IconMinus :size="18" />
             </div>
-            <input type="number" min="8" max="200" :value="store.ActiveCell.style?.fontSize || 11"
+            <input type="number" min="8" max="200" :value="ram.ActiveCell.style?.fontSize || 11"
                 class="outline-none text-center p-0.5 w-6 border-y [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 title="Font size" @change="setFontSize">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-100"
                 title="Increase font size"
-                @click="store.updateStyle({ fontSize: (store.ActiveCell.style?.fontSize || 11) + 1 })">
+                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 11) + 1 })">
                 <IconPlus :size="18" />
             </div>
         </div>
@@ -137,7 +137,7 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded" :class="{
-                'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.merged,
+                'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.merged,
                 'cursor-pointer hover:bg-slate-200': isMergeAvailable,
             }" title="Merge cells" @click="toggleMerge">
                 <IconFocusCentered :size="18" :class="{ 'text-slate-400': !isMergeAvailable }" />
@@ -167,34 +167,36 @@ import {
     IconBorderOuter, IconLineDashed, IconLineDotted, IconSlash, IconFocusCentered,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
+import { useRAM } from "../../store/ram";
 
 const store = useStore();
+const ram = useRAM();
 
 const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
 const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
-const toggleBold = () => store.updateStyle({ bold: !store.ActiveCell.style?.bold });
-const toggleStrikethrough = () => store.updateStyle({ strikethrough: !store.ActiveCell.style?.strikethrough });
-const setItalic = () => store.updateStyle({ italic: !store.ActiveCell.style?.italic });
-const toggleUnderline = () => store.updateStyle({ underline: !store.ActiveCell.style?.underline });
+const toggleBold = () => store.updateStyle({ bold: !ram.ActiveCell.style?.bold });
+const toggleStrikethrough = () => store.updateStyle({ strikethrough: !ram.ActiveCell.style?.strikethrough });
+const setItalic = () => store.updateStyle({ italic: !ram.ActiveCell.style?.italic });
+const toggleUnderline = () => store.updateStyle({ underline: !ram.ActiveCell.style?.underline });
 
-const backgroundColor = computed({ get() { return store.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
-const textColor = computed({ get() { return store.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
-const borderColor = computed({ get() { return store.ActiveCell.style?.borderColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ borderColor: color }); } });
+const backgroundColor = computed({ get() { return ram.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
+const textColor = computed({ get() { return ram.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
+const borderColor = computed({ get() { return ram.ActiveCell.style?.borderColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ borderColor: color }); } });
 
-const border = computed({ get() { return store.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
-const borderType = computed({ get() { return store.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
+const border = computed({ get() { return ram.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
+const borderType = computed({ get() { return ram.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
 
-const isMergeAvailable = computed(() => store.ActiveCell.style?.merged || !(store.selectedCells.start.rowIndex === store.selectedCells.end.rowIndex && store.selectedCells.start.cellIndex === store.selectedCells.end.cellIndex));
+const isMergeAvailable = computed(() => ram.ActiveCell.style?.merged || !(ram.selectedCells.start.rowIndex === ram.selectedCells.end.rowIndex && ram.selectedCells.start.cellIndex === ram.selectedCells.end.cellIndex));
 
 const toggleMerge = () => {
-    if (store.ActiveCell.style?.merged) {
-        for (let i = store.activeCellCoordinates.rowIndex; i < store.rowCount; i++) {
-            for (let j = store.activeCellCoordinates.cellIndex; j < store.columnCount; j++) {
+    if (ram.ActiveCell.style?.merged) {
+        for (let i = ram.activeCellCoordinates.rowIndex; i < store.rowCount; i++) {
+            for (let j = ram.activeCellCoordinates.cellIndex; j < store.columnCount; j++) {
                 const merged = store.sheet.rows[i].cells[j].style?.merged;
 
-                if (merged && merged.rowIndex === store.activeCellCoordinates.rowIndex && merged.cellIndex === store.activeCellCoordinates.cellIndex) {
+                if (merged && merged.rowIndex === ram.activeCellCoordinates.rowIndex && merged.cellIndex === ram.activeCellCoordinates.cellIndex) {
                     store.updateCellStyle({ rowIndex: i, cellIndex: j }, { merged: false });
                 }
             }
@@ -203,7 +205,7 @@ const toggleMerge = () => {
         return;
     }
 
-    store.updateStyle({ merged: Object.assign({}, store.activeCellCoordinates) });
+    store.updateStyle({ merged: Object.assign({}, ram.activeCellCoordinates) });
 };
 
 const fontList = [

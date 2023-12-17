@@ -43,19 +43,19 @@
 
             <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
+                    @click="store.addRow(ram.activeCellCoordinates.rowIndex); insertDropdown.close();">
                     <IconRowInsertTop :size="16" /> Insert row above
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="store.addRow(store.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
+                    @click="store.addRow(ram.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
                     <IconRowInsertBottom :size="16" /> Insert row below
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="store.addColumn(store.activeCellCoordinates.cellIndex); insertDropdown.close();">
+                    @click="store.addColumn(ram.activeCellCoordinates.cellIndex); insertDropdown.close();">
                     <IconColumnInsertLeft :size="16" /> Insert column left
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
+                    @click="store.addColumn(ram.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
                     <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
@@ -232,8 +232,10 @@ import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
 import { download, downloadCSV } from "../../utils/helpers";
 import { Settings } from "../../App.d";
+import { useRAM } from "../../store/ram";
 
 const store = useStore();
+const ram = useRAM();
 
 const settings = computed<Settings>({ get() { return store.file.settings; }, set(s: Settings) { console.log(s); store.updateSettings(s); } });
 
@@ -315,7 +317,7 @@ const operators = [
 ];
 
 const insertFunctionOp = (f: string) => {
-    const v = store.ActiveCell.value;
+    const v = ram.ActiveCell.value;
     store.setActiveCellValue(v.includes("=") ? v + f : "=" + f + v);
 };
 

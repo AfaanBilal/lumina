@@ -1,16 +1,16 @@
 <template>
     <div class="sticky top-0 left-0 z-20 border-b-4 border-r-4 cursor-pointer border-slate-300 bg-slate-200"
-        :class="{ 'bg-blue-100 border-blue-600': store.isSheetSelected }" @click="store.selectSheet()">
+        :class="{ 'bg-blue-100 border-blue-600': ram.isSheetSelected }" @click="ram.selectSheet()">
         &nbsp;
     </div>
     <div v-for="(_, i) in store.columnCount" :key="i"
         class="text-sm flex flex-shrink-0 items-center justify-center font-medium h-6 border p-0.5 bg-slate-100 group cursor-pointer select-none sticky top-0"
         :class="{
-            'bg-slate-200': i === store.activeCellCoordinates.cellIndex,
-            'bg-blue-300': store.selectedCells.start.cellIndex <= i && store.selectedCells.end.cellIndex >= i,
+            'bg-slate-200': i === ram.activeCellCoordinates.cellIndex,
+            'bg-blue-300': ram.selectedCells.start.cellIndex <= i && ram.selectedCells.end.cellIndex >= i,
             'bg-slate-300 z-50': store.sheet.style.cols?.[i]?.frozen,
         }" :style="(store.sheet.style.cols?.[i]?.frozen ? `left: ${store.getFrozenLeft(i)}px;` : '')"
-        @click="store.selectColumn(i)">
+        @click="ram.selectColumn(i)">
         <button
             class="absolute items-center justify-center p-0.5 left-1 hidden rounded-full group-hover:flex hover:bg-slate-300"
             title="Insert column left" @click="store.addColumn(i)">
@@ -89,6 +89,8 @@ import {
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { indexToColumn } from "../../utils/helpers";
+import { useRAM } from "../../store/ram";
 
 const store = useStore();
+const ram = useRAM();
 </script>

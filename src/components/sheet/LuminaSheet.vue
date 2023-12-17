@@ -34,10 +34,12 @@ import type { ILuminaSheet } from "../../App.d";
 import LuminaSheetHeader from "./LuminaSheetHeader.vue";
 import LuminaCell from "./LuminaCell.vue";
 import LuminaIndexCell from "./LuminaIndexCell.vue";
+import { useRAM } from "../../store/ram";
 
 defineProps<{ sheet: ILuminaSheet }>();
 
 const store = useStore();
+const ram = useRAM();
 const grid = ref();
 
 const rowTemplate = computed(() => {
@@ -75,7 +77,7 @@ const navKeyListener = (e: KeyboardEvent) => {
                 break;
             case "Enter":
                 e.preventDefault();
-                store.setActiveCellDown();
+                ram.setActiveCellDown();
                 break;
         }
 
@@ -85,19 +87,19 @@ const navKeyListener = (e: KeyboardEvent) => {
     switch (e.key) {
         case "ArrowUp":
             e.preventDefault();
-            store.setActiveCellUp();
+            ram.setActiveCellUp();
             break;
         case "ArrowDown":
             e.preventDefault();
-            store.setActiveCellDown();
+            ram.setActiveCellDown();
             break;
         case "ArrowLeft":
             e.preventDefault();
-            store.setActiveCellLeft();
+            ram.setActiveCellLeft();
             break;
         case "ArrowRight":
             e.preventDefault();
-            store.setActiveCellRight();
+            ram.setActiveCellRight();
             break;
         case "Delete":
         case "Backspace":
@@ -107,8 +109,8 @@ const navKeyListener = (e: KeyboardEvent) => {
     }
 };
 
-const onMouseDown = () => store.startSelection();
-const onMouseUp = () => store.endSelection();
+const onMouseDown = () => ram.startSelection();
+const onMouseUp = () => ram.endSelection();
 
 onMounted(() => window.addEventListener("keydown", navKeyListener));
 onUnmounted(() => window.removeEventListener("keydown", navKeyListener));

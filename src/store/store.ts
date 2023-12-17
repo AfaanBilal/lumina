@@ -12,8 +12,8 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import { ulid } from "ulid";
 import { parse as PapaParse } from "papaparse";
-import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
-import { coordinatesToName } from "../utils/helpers";
+import { CellCoordinates, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
+import { useRAM } from "./ram";
 
 const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
@@ -30,6 +30,8 @@ const emptySheet = (index: number = 0, rowCount: number = INITIAL_ROW_COUNT, col
     ({ id: "sheet_" + ulid(), name: "Sheet " + (index + 1), style: { rows: {}, cols: {}, }, rows: [...Array(rowCount).keys()].map(() => emptyRow(columnCount)) });
 
 export const useStore = defineStore("lumina", () => {
+    const RAM = useRAM();
+
     const file = ref<ILuminaFile>({
         id: "lumina_" + ulid(),
         name: "Lumina",
@@ -177,75 +179,23 @@ export const useStore = defineStore("lumina", () => {
         }
     };
 
-    /** Hover */
-    const hoverCellCoordinates = ref<CellCoordinates>({ rowIndex: -1, cellIndex: -1 });
-    const setHoverCellCoordinates = ({ rowIndex, cellIndex }: CellCoordinates) => {
-        hoverCellCoordinates.value.rowIndex = rowIndex;
-        hoverCellCoordinates.value.cellIndex = cellIndex;
-    };
-
-    /** Selection */
-    const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
-    const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
-    const SelectionName = computed(() => coordinatesToName(selectedCells.value.start) + ":" + coordinatesToName(selectedCells.value.end));
-    const isSheetSelected = computed(() => {
-        if (selectedCells.value.start.rowIndex != 0) return false;
-        if (selectedCells.value.start.cellIndex != 0) return false;
-
-        if (selectedCells.value.end.rowIndex != rowCount.value - 1) return false;
-        if (selectedCells.value.end.cellIndex != columnCount.value - 1) return false;
-
-        return true;
-    });
-
-    const setSelectedCells = (selection: CellSelection) => selectedCells.value = selection;
-    const startSelection = () => setSelectedCells({ start: Object.assign({}, hoverCellCoordinates.value), end: Object.assign({}, hoverCellCoordinates.value) });
-    const endSelection = () => {
-        selectedCells.value.end = Object.assign({}, hoverCellCoordinates.value);
-        setActiveCell(Object.assign({}, selectedCells.value.start));
-    };
-
-    const selectRow = (rowIndex: number) => setSelectedCells({ start: { rowIndex, cellIndex: 0 }, end: { rowIndex, cellIndex: columnCount.value - 1 } });
-    const selectColumn = (cellIndex: number) => setSelectedCells({ start: { rowIndex: 0, cellIndex }, end: { rowIndex: rowCount.value - 1, cellIndex } });
-    const selectSheet = () => setSelectedCells({ start: { rowIndex: 0, cellIndex: 0 }, end: { rowIndex: rowCount.value - 1, cellIndex: columnCount.value - 1 } });
-    const selectActiveCell = () => setSelectedCells({ start: Object.assign({}, activeCellCoordinates.value), end: Object.assign({}, activeCellCoordinates.value) });
-
-    /** Active cell */
-    const activeCellCoordinates = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
-    const ActiveCell = computed(() => sheet.value.rows[activeCellCoordinates.value.rowIndex].cells[activeCellCoordinates.value.cellIndex]);
-    const ActiveCellName = computed(() => coordinatesToName(activeCellCoordinates.value));
-
-    const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCellCoordinates.value = { rowIndex, cellIndex };
-
-    const setActiveCellUp = () => activeCellCoordinates.value.rowIndex > 0 && (activeCellCoordinates.value.rowIndex -= 1);
-    const setActiveCellRight = () => {
-        activeCellCoordinates.value.cellIndex >= columnCount.value - 1 && addColumn();
-        activeCellCoordinates.value.cellIndex += 1;
-        selectActiveCell();
-    };
-    const setActiveCellDown = () => {
-        activeCellCoordinates.value.rowIndex >= rowCount.value - 1 && addRow();
-        activeCellCoordinates.value.rowIndex += 1;
-        selectActiveCell();
-    };
-    const setActiveCellLeft = () => activeCellCoordinates.value.cellIndex > 0 && (activeCellCoordinates.value.cellIndex -= 1);
-
+    /** Update cells */
     const updateCell = ({ rowIndex, cellIndex }: CellCoordinates, cell: ILuminaCell) => sheet.value.rows[rowIndex].cells[cellIndex] = cell;
-    const updateActiveCell = (cell: ILuminaCell) => updateCell(activeCellCoordinates.value, cell);
+    const updateActiveCell = (cell: ILuminaCell) => updateCell(RAM.activeCellCoordinates, cell);
     const setCellValue = ({ rowIndex, cellIndex }: CellCoordinates, v: string) => sheet.value.rows[rowIndex].cells[cellIndex].value = v;
-    const setActiveCellValue = (v: string) => setCellValue(activeCellCoordinates.value, v);
+    const setActiveCellValue = (v: string) => setCellValue(RAM.activeCellCoordinates, v);
 
     /** Cell Style */
     const updateCellStyle = (coords: CellCoordinates, style: ILuminaCellStyle) => sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
     const updateSelectionStyle = (style: ILuminaCellStyle) => {
-        for (let row = selectedCells.value.start.rowIndex; row <= selectedCells.value.end.rowIndex; row++) {
-            for (let col = selectedCells.value.start.cellIndex; col <= selectedCells.value.end.cellIndex; col++) {
+        for (let row = RAM.selectedCells.start.rowIndex; row <= RAM.selectedCells.end.rowIndex; row++) {
+            for (let col = RAM.selectedCells.start.cellIndex; col <= RAM.selectedCells.end.cellIndex; col++) {
                 updateCellStyle({ rowIndex: row, cellIndex: col }, { ...sheet.value.rows[row].cells[col].style, ...style });
             }
         }
     };
-    const updateActiveCellStyle = (style: ILuminaCellStyle) => updateActiveCell({ ...ActiveCell.value, style: { ...ActiveCell.value.style, ...style } });
-    const updateStyle = (style: ILuminaCellStyle) => hasSelection.value ? updateSelectionStyle(style) : updateActiveCellStyle(style);
+    const updateActiveCellStyle = (style: ILuminaCellStyle) => updateActiveCell({ ...RAM.ActiveCell, style: { ...RAM.ActiveCell.style, ...style } });
+    const updateStyle = (style: ILuminaCellStyle) => RAM.hasSelection ? updateSelectionStyle(style) : updateActiveCellStyle(style);
 
     return {
         file,
@@ -282,32 +232,6 @@ export const useStore = defineStore("lumina", () => {
         moveRowDown,
         moveColumnLeft,
         moveColumnRight,
-
-        hoverCellCoordinates,
-        setHoverCellCoordinates,
-
-        selectedCells,
-        hasSelection,
-        SelectionName,
-        isSheetSelected,
-
-        setSelectedCells,
-        startSelection,
-        endSelection,
-        selectRow,
-        selectColumn,
-        selectSheet,
-        selectActiveCell,
-
-        activeCellCoordinates,
-        ActiveCell,
-        ActiveCellName,
-
-        setActiveCell,
-        setActiveCellUp,
-        setActiveCellRight,
-        setActiveCellDown,
-        setActiveCellLeft,
 
         updateCell,
         updateActiveCell,
