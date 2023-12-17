@@ -106,7 +106,8 @@
             </div>
         </Dropdown>
 
-        <div class="flex items-center justify-center px-2 py-1 ml-auto border-l" title="Zoom">
+        <div class="flex items-center gap-1 px-2 py-1 ml-auto border-l" title="Zoom">
+            <IconZoomIn :size="18" />
             <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
                 <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
             </select>
@@ -163,8 +164,9 @@
 
 import { computed, ref } from "vue";
 import {
-    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconHelp,
+    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter,
     IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
+    IconZoomIn, IconHelp,
 } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
