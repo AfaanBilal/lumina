@@ -17,7 +17,7 @@
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="exportCSV">
-                    <IconCsv :size="18" /> Export as CSV
+                    <IconCsv :size="18" /> Export CSV
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="print">
                     <IconPrinter :size="18" /> Print
