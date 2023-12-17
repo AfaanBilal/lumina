@@ -152,9 +152,9 @@
                     <div class="px-1">Function call</div>
                     <div class="px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=SUM(A1:D4)</div>
                 </div>
-                <div class="flex justify-between p-2 cursor-pointer bg-slate-900 text-slate-200 hover:bg-slate-600"
+                <div class="flex justify-between gap-2 p-2 cursor-pointer bg-slate-800 text-slate-200 hover:bg-slate-600"
                     @click="showReference">
-                    <div>Operators, functions and constants</div>
+                    <div>Reference</div>
                     <div>&rarr;</div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <template>
     <div v-if="store.file.settings.referenceVisible"
-        class="fixed z-50 flex flex-col max-w-sm bg-white border-2 rounded-lg shadow-2xl border-slate-300 bottom-4 right-4">
+        class="fixed z-50 flex flex-col max-w-sm bg-white border-2 rounded-lg shadow-2xl border-slate-300 bottom-2 right-2">
         <div class="flex justify-between p-2">
             <div class="">Reference</div>
             <div class="p-1 rounded cursor-pointer hover:bg-slate-200"
