@@ -82,7 +82,7 @@
                     class="flex items-center cursor-pointer hover:bg-slate-100">
                     <template #trigger>
                         <div class="flex items-center gap-2 px-2 py-1 border-b select-none">
-                            <IconMathFunction :size="16" /> Insert operator
+                            <IconMath :size="16" /> Insert operator
                         </div>
                     </template>
 
@@ -222,6 +222,7 @@ import { useStore } from "../../store/store";
 import { download, downloadCSV } from "../../utils/helpers";
 import { Settings } from "../../App.d";
 import { IconMathFunction } from "@tabler/icons-vue";
+import { IconMath } from "@tabler/icons-vue";
 
 const store = useStore();
 
