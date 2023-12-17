@@ -54,10 +54,15 @@ export const calculateValue = (v: string) => {
 
     const values: HashMap<number | number[]> = {};
 
+    let finalFormula = formula;
+
     const ranges = getRanges(formula);
     if (ranges) {
         for (let i = 0; i < ranges.length; i++) {
             values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
+
+            const rangeParts = ranges[i].split(":");
+            finalFormula = finalFormula.replace(ranges[i], rangeParts[0] + "_" + rangeParts[1]);
         }
     }
 
@@ -72,10 +77,9 @@ export const calculateValue = (v: string) => {
         }
     }
 
-    const finalFormula = formula.toLowerCase()
+    finalFormula = finalFormula.toLowerCase()
         .replace("roundto", "roundTo")
-        .replace("indexof", "indexOf")
-        .replace(":", "_");
+        .replace("indexof", "indexOf");
 
     try {
         return parser.parse(finalFormula).evaluate(values as Values);

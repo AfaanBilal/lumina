@@ -242,13 +242,13 @@ const functions = [
     { label: "max", func: "max(1,2,3)" },
     { label: "hypot", func: "hypot(3,4)" },
     { label: "pow", func: "pow(2,3)" },
-    { label: "atan2", func: "atan2(1,2)" },
+    { label: "atan2", func: "atan2(1,1)" },
     { label: "roundTo", func: "roundTo(3.14159,2)" },
     { label: "map", func: "map(square, [1,2,3])" },
     { label: "fold", func: "fold(doublesum(y, x) = y + 2 * x, 0, [1,2,3,4,5])" },
     { label: "filter", func: "filter(odd(v) = v % 2 == 1, [1,2,3,4])" },
     { label: "indexOf", func: "indexOf('world', 'hello world')" },
-    { label: "join", func: "join(',', [1,2,3,4])" },
+    { label: "join", func: "join(':', [1,2,3,4])" },
     { label: "if", func: "if(1 > 2, '1 is greater than 2', '1 is not greater than 2')" },
 ];
 const insertFunction = (f: string) => {
