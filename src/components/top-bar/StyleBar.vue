@@ -135,6 +135,14 @@
                 <IconLineDotted class="-rotate-45" :size="18" />
             </div>
         </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded" :class="{
+                'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.merged,
+                'cursor-pointer hover:bg-slate-200': isMergeAvailable,
+            }" title="Merge cells" @click="store.updateStyle({ merged: !store.ActiveCell.style?.merged })">
+                <IconFocusCentered :size="18" :class="{ 'text-slate-400': !isMergeAvailable }" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -156,12 +164,9 @@ import {
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconMinus, IconPlus, IconBucketDroplet, IconTextColor,
     IconBorderLeft, IconBorderBottom, IconBorderRight, IconBorderTop, IconBorderAll,
+    IconBorderOuter, IconLineDashed, IconLineDotted, IconSlash, IconFocusCentered,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
-import { IconBorderOuter } from "@tabler/icons-vue";
-import { IconLineDashed } from "@tabler/icons-vue";
-import { IconLineDotted } from "@tabler/icons-vue";
-import { IconSlash } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -180,6 +185,13 @@ const borderColor = computed({ get() { return store.ActiveCell.style?.borderColo
 
 const border = computed({ get() { return store.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
 const borderType = computed({ get() { return store.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
+
+const isMergeAvailable = computed(() => {
+    if (store.selectedCells.start.cellIndex === store.selectedCells.end.cellIndex) return false;
+    if (store.selectedCells.start.rowIndex !== store.selectedCells.end.rowIndex) return false;
+
+    return true;
+});
 
 const fontList = [
     "Manrope",

@@ -207,8 +207,7 @@ export const useStore = defineStore("lumina", () => {
     const updateSelectionStyle = (style: ILuminaCellStyle) => {
         for (let row = selectedCells.value.start.rowIndex; row <= selectedCells.value.end.rowIndex; row++) {
             for (let col = selectedCells.value.start.cellIndex; col <= selectedCells.value.end.cellIndex; col++) {
-                const cellStyle = sheet.value.rows[row].cells[col].style;
-                updateCellStyle({ rowIndex: row, cellIndex: col }, { ...cellStyle, ...style });
+                updateCellStyle({ rowIndex: row, cellIndex: col }, { ...sheet.value.rows[row].cells[col].style, ...style });
             }
         }
     };

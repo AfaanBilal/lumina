@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
+    <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
         'border': store.file.settings.showGridlines,
         'bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
         'border-y-slate-400': store.file.settings.showRowBand && store.activeCellCoordinates.rowIndex === rowIndex && store.activeCellCoordinates.cellIndex > cellIndex,
@@ -16,7 +16,7 @@
 
         'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
     }"
-        :style="commonStyle + (store.sheet.style.rows?.[rowIndex]?.frozen ? `top: ${store.getFrozenTop(rowIndex)}px;` : '') + (store.sheet.style.cols?.[cellIndex]?.frozen ? `left: ${store.getFrozenLeft(cellIndex)}px;` : '')"
+        :style="commonStyle + styleFrozen + styleMerged"
         @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
             'font-bold': props.cell.style?.bold,
@@ -64,6 +64,25 @@ const store = useStore();
 
 const input = ref<HTMLInputElement | null>(null);
 const focusInput = () => nextTick(() => input.value?.focus());
+
+const showCell = computed(() => props.cellIndex === 0 || !store.sheet.rows[props.rowIndex].cells[props.cellIndex - 1].style?.merged);
+
+const styleFrozen = computed(() => (store.sheet.style.rows?.[props.rowIndex]?.frozen ? `top: ${store.getFrozenTop(props.rowIndex)}px;` : "") + (store.sheet.style.cols?.[props.cellIndex]?.frozen ? `left: ${store.getFrozenLeft(props.cellIndex)}px;` : ""));
+const styleMerged = computed(() => {
+    if (!props.cell.style?.merged) return "";
+
+    let mergeCellCount = 1;
+
+    for (let i = props.cellIndex; i < store.columnCount; i++) {
+        if (!store.sheet.rows[props.rowIndex].cells[i].style?.merged) {
+            break;
+        }
+
+        mergeCellCount++;
+    }
+
+    return `grid-column: span ${mergeCellCount};`;
+});
 
 const isActive = computed(() => store.activeCellCoordinates.rowIndex === props.rowIndex && store.activeCellCoordinates.cellIndex === props.cellIndex);
 const isHovered = computed(() => store.hoverCellCoordinates.rowIndex === props.rowIndex && store.hoverCellCoordinates.cellIndex === props.cellIndex);

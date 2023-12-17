@@ -71,6 +71,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Borders
   - [X] Border color
   - [X] Border type
+  - [X] Merge cells (same row)
 - [X] Selection
   - [X] Select a cell
   - [X] Select a series of cells (column)
