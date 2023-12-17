@@ -11,6 +11,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 ---
 
 ## Screenshots
+<img src="./screenshots/Lumina-2023-12-17.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-16.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-15.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-10-2.png" width="100%" />
