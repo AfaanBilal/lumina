@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-y">
+    <div class="flex flex-wrap border-y">
         <Dropdown ref="fileDropdown">
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">

@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <div class="flex items-center justify-between p-2">
+        <div class="flex flex-wrap items-center justify-between p-2">
             <div class="flex items-center gap-2">
                 <img src="/logo.png" alt="logo" class="w-8">
                 <h1 class="text-2xl font-semibold">Lumina</h1>

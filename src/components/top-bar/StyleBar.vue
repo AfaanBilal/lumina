@@ -1,5 +1,5 @@
 <template>
-    <div v-show="store.file.settings.showStyleBar" class="flex gap-2 px-1">
+    <div v-show="store.file.settings.showStyleBar" class="flex flex-wrap gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
                 :class="{ 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.bold }" title="Bold"
