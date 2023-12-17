@@ -1,7 +1,7 @@
 <template>
     <div v-show="store.file.settings.showFormulaBar" class="flex">
-        <div class="flex items-center justify-center w-10 p-1 font-mono font-semibold border-r border-y">
-            {{ store.ActiveCellName }}
+        <div class="flex items-center justify-center min-w-[5rem] p-1 font-mono font-semibold border-r border-y">
+            {{ store.hasSelection ? store.SelectionName : store.ActiveCellName }}
         </div>
         <div class="flex items-center justify-center px-2 py-1 border-y">
             <IconMathFunction :size="18" />

@@ -13,7 +13,7 @@ import { defineStore } from "pinia";
 import { ulid } from "ulid";
 import { parse as PapaParse } from "papaparse";
 import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
-import { indexToColumn } from "../utils/helpers";
+import { coordinatesToName } from "../utils/helpers";
 
 const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
@@ -187,6 +187,7 @@ export const useStore = defineStore("lumina", () => {
     /** Selection */
     const selectedCells = ref<CellSelection>({ start: { rowIndex: -1, cellIndex: -1 }, end: { rowIndex: -1, cellIndex: -1 } });
     const hasSelection = computed(() => selectedCells.value.start.rowIndex != selectedCells.value.end.rowIndex || selectedCells.value.start.cellIndex != selectedCells.value.end.cellIndex);
+    const SelectionName = computed(() => coordinatesToName(selectedCells.value.start) + ":" + coordinatesToName(selectedCells.value.end));
     const isSheetSelected = computed(() => {
         if (selectedCells.value.start.rowIndex != 0) return false;
         if (selectedCells.value.start.cellIndex != 0) return false;
@@ -212,7 +213,7 @@ export const useStore = defineStore("lumina", () => {
     /** Active cell */
     const activeCellCoordinates = ref<CellCoordinates>({ rowIndex: 0, cellIndex: 0 });
     const ActiveCell = computed(() => sheet.value.rows[activeCellCoordinates.value.rowIndex].cells[activeCellCoordinates.value.cellIndex]);
-    const ActiveCellName = computed(() => indexToColumn(activeCellCoordinates.value.cellIndex) + (activeCellCoordinates.value.rowIndex + 1));
+    const ActiveCellName = computed(() => coordinatesToName(activeCellCoordinates.value));
 
     const setActiveCell = ({ rowIndex, cellIndex }: CellCoordinates) => activeCellCoordinates.value = { rowIndex, cellIndex };
 
@@ -287,6 +288,7 @@ export const useStore = defineStore("lumina", () => {
 
         selectedCells,
         hasSelection,
+        SelectionName,
         isSheetSelected,
 
         setSelectedCells,
