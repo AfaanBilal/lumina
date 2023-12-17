@@ -38,7 +38,7 @@
                             @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-t">
+                <div class="flex items-center gap-2 p-2 border-t">
                     <input :id="'frozen-col-' + i" :checked="store.sheet.style.rows?.[i - 1]?.frozen" type="checkbox"
                         class="w-4 accent-slate-600"
                         @change="e => store.updateColStyle(i - 1, { frozen: (e.target as HTMLInputElement).checked })">
