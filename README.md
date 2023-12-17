@@ -11,6 +11,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 ---
 
 ## Screenshots
+<img src="./screenshots/Lumina-2023-12-17-2.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-17.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-16.png" width="100%" />
 <img src="./screenshots/Lumina-2023-12-15.png" width="100%" />
@@ -71,9 +72,6 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Borders
   - [X] Border color
   - [X] Border type
-  - [X] Merge cells (same row)
-  - [X] Merge cells (same column)
-  - [X] Merge cells (grid)
 - [X] Selection
   - [X] Select a cell
   - [X] Select a series of cells (column)
@@ -92,6 +90,10 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] Freezing
   - [X] Frozen rows
   - [X] Frozen columns
+- [X] Merging
+  - [X] Merge cells (same row)
+  - [X] Merge cells (same column)
+  - [X] Merge cells (grid)
 - [X] Sizing
   - [X] Row height
   - [X] Column width
