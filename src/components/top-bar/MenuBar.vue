@@ -3,31 +3,31 @@
         <Dropdown ref="fileDropdown">
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
-                    <IconFile :size="18" /> File
+                    <IconFile :size="16" /> File
                 </div>
             </template>
 
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
-                    <IconFile :size="18" /> Open
+                    <IconFile :size="16" /> Open
                     <input ref="inputJSON" type="file" accept=".json" class="hidden"
                         @change="(e: Event) => onFileSelected(e, 'json')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
-                    <IconDeviceFloppy :size="18" /> Save
+                    <IconDeviceFloppy :size="16" /> Save
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="exportCSV">
-                    <IconCsv :size="18" /> Export CSV
+                    <IconCsv :size="16" /> Export CSV
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="importCSV">
-                    <IconCsv :size="18" /> Import CSV
+                    <IconCsv :size="16" /> Import CSV
                     <input ref="inputCSV" type="file" accept=".csv" class="hidden"
                         @change="(e: Event) => onFileSelected(e, 'csv')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="print">
-                    <IconPrinter :size="18" /> Print
+                    <IconPrinter :size="16" /> Print
                 </div>
             </div>
         </Dropdown>
@@ -35,30 +35,30 @@
         <Dropdown ref="insertDropdown">
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
-                    <IconTablePlus :size="18" /> Insert
+                    <IconTablePlus :size="16" /> Insert
                 </div>
             </template>
 
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
-                    <IconRowInsertTop :size="18" /> Insert row above
+                    <IconRowInsertTop :size="16" /> Insert row above
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(store.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
-                    <IconRowInsertBottom :size="18" /> Insert row below
+                    <IconRowInsertBottom :size="16" /> Insert row below
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(store.activeCellCoordinates.cellIndex); insertDropdown.close();">
-                    <IconColumnInsertLeft :size="18" /> Insert column left
+                    <IconColumnInsertLeft :size="16" /> Insert column left
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(store.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
-                    <IconColumnInsertRight :size="18" /> Insert column right
+                    <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addSheet(); insertDropdown.close();">
-                    <IconTablePlus :size="18" /> Insert sheet
+                    <IconTablePlus :size="16" /> Insert sheet
                 </div>
             </div>
         </Dropdown>
@@ -66,7 +66,7 @@
         <Dropdown>
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
-                    <IconEye :size="18" /> View
+                    <IconEye :size="16" /> View
                 </div>
             </template>
 
@@ -105,7 +105,7 @@
         <Dropdown>
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
-                    <IconSettings :size="18" /> Settings
+                    <IconSettings :size="16" /> Settings
                 </div>
             </template>
 
@@ -118,7 +118,7 @@
         </Dropdown>
 
         <div class="flex items-center gap-1 px-2 py-1 ml-auto border-l" title="Zoom">
-            <IconZoomIn :size="18" />
+            <IconZoomIn :size="16" />
             <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
                 <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
             </select>
@@ -127,7 +127,7 @@
         <Dropdown ref="helpDropdown">
             <template #trigger>
                 <div class="flex items-center gap-1 px-2 py-1 border-l cursor-pointer select-none hover:bg-slate-100">
-                    <IconHelp :size="18" /> Help
+                    <IconHelp :size="16" /> Help
                 </div>
             </template>
 
