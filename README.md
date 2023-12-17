@@ -24,7 +24,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] File management
   - [X] Open
   - [X] Save
-  - [X] Export as CSV
+  - [X] Export CSV
   - [X] Print
 - [X] Insert
   - [X] Insert row above
