@@ -12,7 +12,7 @@ import { Parser } from "expr-eval";
 
 export const parser = new Parser({
     operators: {
-        assignment: false,
+        assignment: true,
     },
 });
 

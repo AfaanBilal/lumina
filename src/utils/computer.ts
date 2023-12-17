@@ -80,6 +80,7 @@ export const calculateValue = (v: string) => {
     try {
         return parser.parse(finalFormula).evaluate(values as Values);
     } catch (e) {
+        console.warn(e);
         return ERROR;
     }
 };

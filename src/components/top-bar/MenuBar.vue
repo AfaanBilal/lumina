@@ -8,10 +8,12 @@
             </template>
 
             <div class="flex flex-col text-sm print:hidden">
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="exportJSON">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="exportJSON">
                     <IconJson :size="16" /> Export JSON
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="importJSON">
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="importJSON">
                     <IconJson :size="16" /> Import JSON
                     <input ref="inputJSON" type="file" accept=".json" class="hidden"
                         @change="(e: Event) => onFileSelected(e, 'json')">
@@ -60,6 +62,22 @@
                     @click="store.addSheet(); insertDropdown.close();">
                     <IconTablePlus :size="16" /> Insert sheet
                 </div>
+                <Dropdown ref="insertFunctionDropdown" align="right" trigger="hover"
+                    class="flex items-center cursor-pointer hover:bg-slate-100">
+                    <template #trigger>
+                        <div class="flex items-center gap-2 px-2 py-1 border-b select-none">
+                            <IconMathFunction :size="16" /> Insert function
+                        </div>
+                    </template>
+
+                    <div class="flex flex-col overflow-scroll text-sm print:hidden max-h-64">
+                        <div v-for="f in functions" :key="f.label"
+                            class="flex items-center gap-2 px-2 py-1 uppercase border-b cursor-pointer last-of-type:border-b-0 hover:bg-slate-100"
+                            @click="insertFunction(f.func); insertFunctionDropdown.close(); insertDropdown.close();">
+                            {{ f.label }}
+                        </div>
+                    </div>
+                </Dropdown>
             </div>
         </Dropdown>
 
@@ -187,6 +205,7 @@ import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
 import { download, downloadCSV } from "../../utils/helpers";
 import { Settings } from "../../App.d";
+import { IconMathFunction } from "@tabler/icons-vue";
 
 const store = useStore();
 
@@ -212,6 +231,30 @@ const onFileSelected = (e: Event, type: "json" | "csv") => {
 };
 
 const insertDropdown = ref();
+const insertFunctionDropdown = ref();
+
+const functions = [
+    { label: "sum", func: "sum(1,2)" },
+    { label: "avg", func: "avg(1,2,3)" },
+    { label: "square", func: "square(2)" },
+    { label: "random", func: "random()" },
+    { label: "min", func: "min(1,2,3)" },
+    { label: "max", func: "max(1,2,3)" },
+    { label: "hypot", func: "hypot(3,4)" },
+    { label: "pow", func: "pow(2,3)" },
+    { label: "atan2", func: "atan2(1,2)" },
+    { label: "roundTo", func: "roundTo(3.14159,2)" },
+    { label: "map", func: "map(square, [1,2,3])" },
+    { label: "fold", func: "fold(doublesum(y, x) = y + 2 * x, 0, [1,2,3,4,5])" },
+    { label: "filter", func: "filter(odd(v) = v % 2 == 1, [1,2,3,4])" },
+    { label: "indexOf", func: "indexOf('world', 'hello world')" },
+    { label: "join", func: "join(',', [1,2,3,4])" },
+    { label: "if", func: "if(1 > 2, '1 is greater than 2', '1 is not greater than 2')" },
+];
+const insertFunction = (f: string) => {
+    const v = store.ActiveCell.value;
+    store.setActiveCellValue(v.includes("=") ? v + f : "=" + f + v);
+};
 
 const fullscreen = () => document.body.requestFullscreen();
 
