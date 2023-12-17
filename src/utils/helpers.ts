@@ -29,15 +29,23 @@ export const toNumber = (v: string): number => parseFloat(v);
 export const isFormula = (v: string): boolean => v.startsWith("=");
 
 export const REGEX_ROW = /[\d]+/g;
-export const REGEX_COLUMN = /[A-Z]{1,3}/g;
-export const REGEX_CELL = /[A-Z]{1,3}[\d]+/g;
-export const REGEX_RANGE = /[A-Z]{1,3}[\d]+[:]{1}[A-Z]{1,3}[\d]+/g;
+export const REGEX_COLUMN = /[a-z]{1,3}/g;
+export const REGEX_CELL = /[a-z]{1,3}[\d]+/g;
+export const REGEX_RANGE = /[a-z]{1,3}[\d]+[:]{1}[a-z]{1,3}[\d]+/g;
 
 export const cleanForRegex = (c: string) => {
-    c = c.toLowerCase();
-
     for (let i = 0; i < functions.length; i++) {
         c = c.replace(functions[i], "");
+    }
+
+    return c;
+};
+
+export const removeRanges = (c: string, ranges: Array<string> | null) => {
+    if (!ranges) return c;
+
+    for (let i = 0; i < ranges.length; i++) {
+        c = c.replace(ranges[i], "");
     }
 
     return c;
@@ -46,8 +54,8 @@ export const cleanForRegex = (c: string) => {
 export const cellCoordinates = (c: string): CellCoordinates | false => {
     c = cleanForRegex(c);
 
-    const row = c.toUpperCase().match(REGEX_ROW);
-    const col = c.toUpperCase().match(REGEX_COLUMN);
+    const row = c.match(REGEX_ROW);
+    const col = c.match(REGEX_COLUMN);
 
     if (!col || !row) return false;
 
@@ -57,8 +65,8 @@ export const cellCoordinates = (c: string): CellCoordinates | false => {
     };
 };
 
-export const getRanges = (v: string) => cleanForRegex(v).toUpperCase().match(REGEX_RANGE);
-export const getCells = (v: string) => cleanForRegex(v).toUpperCase().match(REGEX_CELL);
+export const getRanges = (v: string) => cleanForRegex(v).match(REGEX_RANGE);
+export const getCells = (v: string) => cleanForRegex(v).match(REGEX_CELL);
 
 export const download = (filename: string, text: string) => {
     const element = document.createElement("a");

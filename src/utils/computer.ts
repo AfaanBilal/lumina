@@ -11,7 +11,7 @@
 import { Values } from "expr-eval";
 import { HashMap } from "../App.d";
 import { useStore } from "../store/store";
-import { cellCoordinates, getCells, getRanges, isFormula, isNumeric, toNumber } from "./helpers";
+import { cellCoordinates, getCells, getRanges, isFormula, isNumeric, removeRanges, toNumber } from "./helpers";
 import { parser } from "./parser";
 
 const cellContent = (c: string): string => {
@@ -50,7 +50,7 @@ const rangeValues = (r: string): string[] => {
 const ERROR = "#ERROR";
 
 export const calculateValue = (v: string) => {
-    const formula = v.substring(1);
+    const formula = v.substring(1).toLowerCase();
 
     const values: HashMap<number | number[]> = {};
 
@@ -59,32 +59,31 @@ export const calculateValue = (v: string) => {
     const ranges = getRanges(formula);
     if (ranges) {
         for (let i = 0; i < ranges.length; i++) {
-            values[ranges[i].toLowerCase().replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
+            values[ranges[i].replace(":", "_")] = rangeValues(ranges[i]).map(toNumber);
 
             const rangeParts = ranges[i].split(":");
             finalFormula = finalFormula.replace(ranges[i], rangeParts[0] + "_" + rangeParts[1]);
         }
     }
 
-    const cells = getCells(formula);
+    const cells = getCells(removeRanges(formula, ranges));
     if (cells) {
         for (let i = 0; i < cells.length; i++) {
             const v = cellValue(cells[i]);
 
             if (!isNumeric(v)) return ERROR;
 
-            values[cells[i].toLowerCase()] = toNumber(v);
+            values[cells[i]] = toNumber(v);
         }
     }
 
-    finalFormula = finalFormula.toLowerCase()
+    finalFormula = finalFormula
         .replace("roundto", "roundTo")
         .replace("indexof", "indexOf");
 
     try {
         return parser.parse(finalFormula).evaluate(values as Values);
     } catch (e) {
-        console.warn(e);
         return ERROR;
     }
 };
