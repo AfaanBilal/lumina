@@ -186,19 +186,17 @@ const borderColor = computed({ get() { return store.ActiveCell.style?.borderColo
 const border = computed({ get() { return store.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
 const borderType = computed({ get() { return store.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
 
-const isMergeAvailable = computed(() => {
-    if (store.selectedCells.start.cellIndex === store.selectedCells.end.cellIndex) return false;
-    if (store.selectedCells.start.rowIndex !== store.selectedCells.end.rowIndex) return false;
-
-    return true;
-});
+const isMergeAvailable = computed(() => store.ActiveCell.style?.merged || !(store.selectedCells.start.rowIndex === store.selectedCells.end.rowIndex && store.selectedCells.start.cellIndex === store.selectedCells.end.cellIndex));
 
 const toggleMerge = () => {
     if (store.ActiveCell.style?.merged) {
-        for (let i = store.activeCellCoordinates.cellIndex; i < store.columnCount; i++) {
-            const merged = store.sheet.rows[store.activeCellCoordinates.rowIndex].cells[i].style?.merged;
-            if (merged && merged.rowIndex === store.activeCellCoordinates.rowIndex && merged.cellIndex === store.activeCellCoordinates.cellIndex) {
-                store.updateCellStyle({ rowIndex: store.activeCellCoordinates.rowIndex, cellIndex: i }, { merged: false });
+        for (let i = store.activeCellCoordinates.rowIndex; i < store.rowCount; i++) {
+            for (let j = store.activeCellCoordinates.cellIndex; j < store.columnCount; j++) {
+                const merged = store.sheet.rows[i].cells[j].style?.merged;
+
+                if (merged && merged.rowIndex === store.activeCellCoordinates.rowIndex && merged.cellIndex === store.activeCellCoordinates.cellIndex) {
+                    store.updateCellStyle({ rowIndex: i, cellIndex: j }, { merged: false });
+                }
             }
         }
 

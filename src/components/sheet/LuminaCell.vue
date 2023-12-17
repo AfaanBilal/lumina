@@ -65,12 +65,17 @@ const input = ref<HTMLInputElement | null>(null);
 const focusInput = () => nextTick(() => input.value?.focus());
 
 const showCell = computed(() => {
-    if (props.cellIndex === 0) return true;
-
     const selfMerged = props.cell.style?.merged;
-    const prevMerged = store.sheet.rows[props.rowIndex].cells[props.cellIndex - 1].style?.merged;
+    const upMerged = props.rowIndex > 0 && store.sheet.rows[props.rowIndex - 1].cells[props.cellIndex].style?.merged;
+    const leftMerged = props.cellIndex > 0 && store.sheet.rows[props.rowIndex].cells[props.cellIndex - 1].style?.merged;
 
-    if (selfMerged && prevMerged && selfMerged.rowIndex === prevMerged.rowIndex && selfMerged.cellIndex === prevMerged.cellIndex) return false;
+    if (
+        selfMerged &&
+        (
+            (upMerged && selfMerged.rowIndex === upMerged.rowIndex && selfMerged.cellIndex === upMerged.cellIndex) ||
+            (leftMerged && selfMerged.rowIndex === leftMerged.rowIndex && selfMerged.cellIndex === leftMerged.cellIndex)
+        )
+    ) return false;
 
     return true;
 });
@@ -78,20 +83,27 @@ const showCell = computed(() => {
 const styleFrozen = computed(() => (store.sheet.style.rows?.[props.rowIndex]?.frozen ? `top: ${store.getFrozenTop(props.rowIndex)}px;` : "") + (store.sheet.style.cols?.[props.cellIndex]?.frozen ? `left: ${store.getFrozenLeft(props.cellIndex)}px;` : ""));
 const styleMerged = computed(() => {
     if (!props.cell.style?.merged) return "";
+    if (props.cell.style?.merged.rowIndex !== props.rowIndex && props.cell.style?.merged.cellIndex !== props.cellIndex) return "";
 
-    let mergeCellCount = 1;
+    let mergeRowCount = 0;
+    for (let i = props.rowIndex; i < store.rowCount; i++) {
+        const merged = store.sheet.rows[i].cells[props.cellIndex].style?.merged;
 
-    for (let i = props.cellIndex + 1; i < store.columnCount; i++) {
-        const merged = store.sheet.rows[props.rowIndex].cells[i].style?.merged;
+        if (!merged || merged.rowIndex !== props.rowIndex || merged.cellIndex !== props.cellIndex) break;
 
-        if (!merged || merged.rowIndex !== props.rowIndex || merged.cellIndex !== props.cellIndex) {
-            break;
-        }
-
-        mergeCellCount++;
+        mergeRowCount++;
     }
 
-    return `grid-column: span ${mergeCellCount};`;
+    let mergeColumnCount = 0;
+    for (let i = props.cellIndex; i < store.columnCount; i++) {
+        const merged = store.sheet.rows[props.rowIndex].cells[i].style?.merged;
+
+        if (!merged || merged.rowIndex !== props.rowIndex || merged.cellIndex !== props.cellIndex) break;
+
+        mergeColumnCount++;
+    }
+
+    return `grid-row: span ${mergeRowCount}; grid-column: span ${mergeColumnCount};`;
 });
 
 const isActive = computed(() => store.activeCellCoordinates.rowIndex === props.rowIndex && store.activeCellCoordinates.cellIndex === props.cellIndex);
