@@ -215,14 +215,12 @@ import { computed, ref } from "vue";
 import {
     IconJson, IconFile, IconSettings, IconEye, IconPrinter, IconCsv,
     IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
-    IconZoomIn, IconHelp,
+    IconZoomIn, IconHelp, IconMathFunction, IconMath,
 } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
 import { download, downloadCSV } from "../../utils/helpers";
 import { Settings } from "../../App.d";
-import { IconMathFunction } from "@tabler/icons-vue";
-import { IconMath } from "@tabler/icons-vue";
 
 const store = useStore();
 
