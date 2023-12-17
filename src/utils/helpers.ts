@@ -38,6 +38,10 @@ export const cleanForRegex = (c: string) => {
         c = c.replace(functions[i], "");
     }
 
+    for (let i = operators.length - 1; i > 0; i--) {
+        c = c.replace(operators[i].split(" ")[0], "");
+    }
+
     return c;
 };
 

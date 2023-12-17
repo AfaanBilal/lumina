@@ -73,8 +73,24 @@
                     <div class="flex flex-col overflow-scroll text-sm print:hidden max-h-64">
                         <div v-for="f in functions" :key="f.label"
                             class="flex items-center gap-2 px-2 py-1 uppercase border-b cursor-pointer last-of-type:border-b-0 hover:bg-slate-100"
-                            @click="insertFunction(f.func); insertFunctionDropdown.close(); insertDropdown.close();">
+                            @click="insertFunctionOp(f.func); insertFunctionDropdown.close(); insertDropdown.close();">
                             {{ f.label }}
+                        </div>
+                    </div>
+                </Dropdown>
+                <Dropdown ref="insertOperatorDropdown" align="right" trigger="hover"
+                    class="flex items-center cursor-pointer hover:bg-slate-100">
+                    <template #trigger>
+                        <div class="flex items-center gap-2 px-2 py-1 border-b select-none">
+                            <IconMathFunction :size="16" /> Insert operator
+                        </div>
+                    </template>
+
+                    <div class="flex flex-col overflow-scroll text-sm print:hidden max-h-64">
+                        <div v-for="o in operators" :key="o.label"
+                            class="flex items-center gap-2 px-2 py-1 uppercase border-b cursor-pointer last-of-type:border-b-0 hover:bg-slate-100"
+                            @click="insertFunctionOp(o.op); insertOperatorDropdown.close(); insertDropdown.close();">
+                            {{ o.label }}
                         </div>
                     </div>
                 </Dropdown>
@@ -232,6 +248,7 @@ const onFileSelected = (e: Event, type: "json" | "csv") => {
 
 const insertDropdown = ref();
 const insertFunctionDropdown = ref();
+const insertOperatorDropdown = ref();
 
 const functions = [
     { label: "sum", func: "sum(1,2)" },
@@ -251,7 +268,43 @@ const functions = [
     { label: "join", func: "join(':', [1,2,3,4])" },
     { label: "if", func: "if(1 > 2, '1 is greater than 2', '1 is not greater than 2')" },
 ];
-const insertFunction = (f: string) => {
+
+const operators = [
+    { label: "-x", op: "-1" },
+    { label: "+x", op: "+1" },
+    { label: "x!", op: "5!" },
+    { label: "abs x", op: "abs (-1)" },
+    { label: "acos x", op: "acos 0.5" },
+    { label: "acosh x", op: "acosh pi" },
+    { label: "asin x", op: "asin 0.5" },
+    { label: "asinh x", op: "asinh pi" },
+    { label: "atan x", op: "atan 1" },
+    { label: "atanh x", op: "atanh 0.5" },
+    { label: "cuberoot x", op: "cbrt 8" },
+    { label: "ceil x", op: "ceil 1.23" },
+    { label: "cos x", op: "cos pi" },
+    { label: "cosh x", op: "cosh pi" },
+    { label: "exp x", op: "exp 2" },
+    { label: "expm1 x", op: "expm1 2" },
+    { label: "floor x", op: "floor 1.23" },
+    { label: "length x", op: "length 'hello'" },
+    { label: "ln x", op: "ln e" },
+    { label: "log x", op: "log e" },
+    { label: "log10 x", op: "log10 10" },
+    { label: "log2 x", op: "log2 8" },
+    { label: "log1p x", op: "log1p 1" },
+    { label: "not x", op: "not 1" },
+    { label: "round x", op: "round 1.23" },
+    { label: "sign x", op: "sign (-3)" },
+    { label: "sin x", op: "sin (pi/2)" },
+    { label: "sinh x", op: "sinh (pi/2)" },
+    { label: "sqrt x", op: "sqrt 9" },
+    { label: "tan x", op: "tan (pi/4)" },
+    { label: "tanh x", op: "tanh (pi/4)" },
+    { label: "trunc x", op: "trunc (-1.23)" },
+];
+
+const insertFunctionOp = (f: string) => {
     const v = store.ActiveCell.value;
     store.setActiveCellValue(v.includes("=") ? v + f : "=" + f + v);
 };
