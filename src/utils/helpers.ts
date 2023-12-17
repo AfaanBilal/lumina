@@ -8,7 +8,7 @@
  * @copyright   2023 Afaan Bilal
  */
 
-import { CellCoordinates } from "../App.d";
+import { CellCoordinates, ILuminaSheet } from "../App.d";
 
 export const indexToColumn = (index: number): string => {
     const res = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[index % 26];
@@ -54,4 +54,19 @@ export const download = (filename: string, text: string) => {
     element.click();
 
     document.body.removeChild(element);
+};
+
+export const downloadCSV = (filename: string, sheet: ILuminaSheet) => {
+    let csv = "";
+
+    for (let i = 0; i < sheet.rows.length; i++) {
+        for (let j = 0; j < sheet.rows[i].cells.length; j++) {
+            const v= sheet.rows[i].cells[j].value;
+            csv += (v.includes(",") ? "\"" + v + "\"" : v) + ",";
+        }
+
+        csv += "\n";
+    }
+
+    return download(filename, csv);
 };

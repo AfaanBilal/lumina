@@ -15,6 +15,10 @@
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
                     <IconDeviceFloppy :size="18" /> Save
                 </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="exportCSV">
+                    <IconCsv :size="18" /> Export as CSV
+                </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="print">
                     <IconPrinter :size="18" /> Print
                 </div>
@@ -164,13 +168,13 @@
 
 import { computed, ref } from "vue";
 import {
-    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter,
+    IconDeviceFloppy, IconFile, IconSettings, IconEye, IconPrinter, IconCsv,
     IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
     IconZoomIn, IconHelp,
 } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";
-import { download } from "../../utils/helpers";
+import { download, downloadCSV } from "../../utils/helpers";
 import { Settings } from "../../App.d";
 
 const store = useStore();
@@ -182,6 +186,7 @@ const input = ref<HTMLInputElement>();
 
 const open = () => { input.value!.click(); fileDropdown.value!.close(); };
 const save = () => { download(store.file.name + ".lumina", JSON.stringify(store.file)); fileDropdown.value!.close(); };
+const exportCSV = () => { downloadCSV(store.file.name + ".csv", store.sheet); fileDropdown.value!.close(); };
 const print = () => { window.print(); fileDropdown.value!.close(); };
 
 const onFileSelected = (e: Event) => {
