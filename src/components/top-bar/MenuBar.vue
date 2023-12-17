@@ -157,12 +157,12 @@
 
         <div class="flex gap-0.5 px-0.5 ml-auto border-l">
             <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Undo" @click="store.undo()">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Undo (Ctrl + Z)" @click="store.undo()">
                 <IconArrowBackUp :size="16" />
             </div>
             <div class="w-0 my-1 border-r">&nbsp;</div>
             <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Redo" @click="store.redo()">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Redo (Ctrl + Y)" @click="store.redo()">
                 <IconArrowForwardUp :size="16" />
             </div>
         </div>

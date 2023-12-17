@@ -106,6 +106,16 @@ const navKeyListener = (e: KeyboardEvent) => {
             e.preventDefault();
             store.setActiveCellValue("");
             break;
+        case "y":
+            if (!e.ctrlKey) break;
+            e.preventDefault();
+            store.redo();
+            break;
+        case "z":
+            if (!e.ctrlKey) break;
+            e.preventDefault();
+            store.undo();
+            break;
     }
 };
 
