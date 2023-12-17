@@ -10,7 +10,8 @@
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
                     <IconFile :size="18" /> Open
-                    <input ref="inputJSON" type="file" accept=".json" class="hidden" @change="(e: Event) => onFileSelected(e, 'json')">
+                    <input ref="inputJSON" type="file" accept=".json" class="hidden"
+                        @change="(e: Event) => onFileSelected(e, 'json')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
                     <IconDeviceFloppy :size="18" /> Save
@@ -22,7 +23,8 @@
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="importCSV">
                     <IconCsv :size="18" /> Import CSV
-                    <input ref="inputCSV" type="file" accept=".csv" class="hidden" @change="(e: Event) => onFileSelected(e, 'csv')">
+                    <input ref="inputCSV" type="file" accept=".csv" class="hidden"
+                        @change="(e: Event) => onFileSelected(e, 'csv')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="print">
                     <IconPrinter :size="18" /> Print
@@ -70,32 +72,32 @@
 
             <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="style-bar" v-model="settings.showStyleBar" type="checkbox" class="accent-slate-600">
+                    <input id="style-bar" v-model="settings.showStyleBar" type="checkbox" class="w-4 accent-slate-600">
                     <label for="style-bar" class="cursor-pointer select-none hover:font-medium">Style bar</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="formula-bar" v-model="settings.showFormulaBar" type="checkbox" class="accent-slate-600">
+                    <input id="formula-bar" v-model="settings.showFormulaBar" type="checkbox" class="w-4 accent-slate-600">
                     <label for="formula-bar" class="cursor-pointer select-none hover:font-medium">Formula bar</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="gridlines" v-model="settings.showGridlines" type="checkbox" class="accent-slate-600">
+                    <input id="gridlines" v-model="settings.showGridlines" type="checkbox" class="w-4 accent-slate-600">
                     <label for="gridlines" class="cursor-pointer select-none hover:font-medium">Gridlines</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="stripes" v-model="settings.showStripes" type="checkbox" class="accent-slate-600">
+                    <input id="stripes" v-model="settings.showStripes" type="checkbox" class="w-4 accent-slate-600">
                     <label for="stripes" class="cursor-pointer select-none hover:font-medium">Stripes</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="row-band" v-model="settings.showRowBand" type="checkbox" class="accent-slate-600">
+                    <input id="row-band" v-model="settings.showRowBand" type="checkbox" class="w-4 accent-slate-600">
                     <label for="row-band" class="cursor-pointer select-none hover:font-medium">Row band</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="accent-slate-600">
+                    <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="w-4 accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="fullscreen">
-                    <IconMaximize :size="18" /> Fullscreen
+                    <IconMaximize :size="16" /> Fullscreen
                 </div>
             </div>
         </Dropdown>

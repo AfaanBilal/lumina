@@ -18,7 +18,7 @@
             <div class="flex flex-col w-48 text-sm">
                 <div class="p-2 font-semibold border-b text-md">Row {{ index + 1 }}</div>
                 <div class="flex items-center gap-2 p-2">
-                    <IconLineHeight :size="18" />
+                    <IconLineHeight :size="16" />
                     <div class="flex-1 font-semibold">Height</div>
                     <div class="flex items-baseline gap-1">
                         <input type="number" min="20" max="1000" class="p-1 border rounded outline-none"
@@ -27,20 +27,20 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
-                    <input :id="'frozen-row-' + index" v-model="frozen" type="checkbox" class="w-5 accent-slate-600">
+                    <input :id="'frozen-row-' + index" v-model="frozen" type="checkbox" class="w-4 accent-slate-600">
                     <label :for="'frozen-row-' + index" class="font-semibold cursor-pointer select-none">Freeze</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index)">
-                    <IconRowInsertTop :size="18" /> Insert row above
+                    <IconRowInsertTop :size="16" /> Insert row above
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index + 1)">
-                    <IconRowInsertBottom :size="18" /> Insert row below
+                    <IconRowInsertBottom :size="16" /> Insert row below
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.deleteRow(index)">
-                    <IconRowRemove :size="18" /> Delete row
+                    <IconRowRemove :size="16" /> Delete row
                 </div>
             </div>
         </Dropdown>

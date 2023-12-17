@@ -30,7 +30,7 @@
             <div class="flex flex-col text-sm w-52">
                 <div class="p-2 font-semibold border-b text-md">Column {{ indexToColumn(i - 1) }}</div>
                 <div class="flex items-center gap-2 p-2">
-                    <IconArrowAutofitWidth :size="18" />
+                    <IconArrowAutofitWidth :size="16" />
                     <div class="flex-1 font-semibold">Width</div>
                     <div class="flex items-baseline gap-1">
                         <input type="number" min="40" max="2500" class="p-1 border rounded outline-none"
@@ -40,21 +40,21 @@
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b">
                     <input :id="'frozen-col-' + i" :checked="store.sheet.style.rows?.[i - 1]?.frozen" type="checkbox"
-                        class="w-5 accent-slate-600"
+                        class="w-4 accent-slate-600"
                         @change="e => store.updateColStyle(i - 1, { frozen: (e.target as HTMLInputElement).checked })">
                     <label :for="'frozen-col-' + i" class="font-semibold cursor-pointer select-none">Freeze</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(i - 1)">
-                    <IconColumnInsertLeft :size="18" /> Insert column left
+                    <IconColumnInsertLeft :size="16" /> Insert column left
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(i)">
-                    <IconColumnInsertRight :size="18" /> Insert column right
+                    <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.deleteColumn(i - 1)">
-                    <IconColumnRemove :size="18" /> Delete column
+                    <IconColumnRemove :size="16" /> Delete column
                 </div>
             </div>
         </Dropdown>
