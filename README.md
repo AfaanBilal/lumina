@@ -23,8 +23,8 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] Spreadsheet grid
 - [X] Multiple sheets
 - [X] File management
-  - [X] Open
-  - [X] Save
+  - [X] Export JSON
+  - [X] Import JSON
   - [X] Export CSV
   - [X] Import CSV
   - [X] Print
