@@ -53,7 +53,7 @@ export const useStore = defineStore("lumina", () => {
         const parsed = PapaParse(await f.text());
 
         if (parsed.errors.length) {
-            alert("Error: " + parsed.errors[0]);
+            alert("Error: " + parsed.errors[0].message);
             return;
         }
 
