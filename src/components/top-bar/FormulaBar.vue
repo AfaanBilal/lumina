@@ -7,8 +7,8 @@
             <IconMathFunction :size="18" />
         </div>
         <input v-model="activeCellValue" type="text"
-            class="self-stretch flex-1 p-1 mr-0.5 border outline-none bg-slate-50 focus:border-slate-400"
-            @keyup.enter="store.setActiveCellDown()">
+            class="self-stretch flex-1 p-1 border outline-none bg-slate-50 focus:border-slate-400"
+            :class="{ 'mr-0.5': !isFormula(activeCellValue) }" @keyup.enter="store.setActiveCellDown()">
         <div v-if="isFormula(activeCellValue)" class="flex items-center justify-center p-1 border-y bg-slate-50">
             <IconEqual :size="18" />
         </div>
