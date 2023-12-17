@@ -139,7 +139,7 @@
             <div class="flex items-center justify-center w-6 border rounded" :class="{
                 'bg-slate-800 text-white hover:bg-slate-600': store.ActiveCell.style?.merged,
                 'cursor-pointer hover:bg-slate-200': isMergeAvailable,
-            }" title="Merge cells" @click="store.updateStyle({ merged: !store.ActiveCell.style?.merged })">
+            }" title="Merge cells" @click="toggleMerge">
                 <IconFocusCentered :size="18" :class="{ 'text-slate-400': !isMergeAvailable }" />
             </div>
         </div>
@@ -192,6 +192,21 @@ const isMergeAvailable = computed(() => {
 
     return true;
 });
+
+const toggleMerge = () => {
+    if (store.ActiveCell.style?.merged) {
+        for (let i = store.activeCellCoordinates.cellIndex; i < store.columnCount; i++) {
+            const merged = store.sheet.rows[store.activeCellCoordinates.rowIndex].cells[i].style?.merged;
+            if (merged && merged.rowIndex === store.activeCellCoordinates.rowIndex && merged.cellIndex === store.activeCellCoordinates.cellIndex) {
+                store.updateCellStyle({ rowIndex: store.activeCellCoordinates.rowIndex, cellIndex: i }, { merged: false });
+            }
+        }
+
+        return;
+    }
+
+    store.updateStyle({ merged: Object.assign({}, store.activeCellCoordinates) });
+};
 
 const fontList = [
     "Manrope",

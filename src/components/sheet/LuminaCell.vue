@@ -15,8 +15,7 @@
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
         'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
-    }"
-        :style="commonStyle + styleFrozen + styleMerged"
+    }" :style="commonStyle + styleFrozen + styleMerged"
         @click="store.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
             'font-bold': props.cell.style?.bold,
@@ -65,7 +64,16 @@ const store = useStore();
 const input = ref<HTMLInputElement | null>(null);
 const focusInput = () => nextTick(() => input.value?.focus());
 
-const showCell = computed(() => props.cellIndex === 0 || !store.sheet.rows[props.rowIndex].cells[props.cellIndex - 1].style?.merged);
+const showCell = computed(() => {
+    if (props.cellIndex === 0) return true;
+
+    const selfMerged = props.cell.style?.merged;
+    const prevMerged = store.sheet.rows[props.rowIndex].cells[props.cellIndex - 1].style?.merged;
+
+    if (selfMerged && prevMerged && selfMerged.rowIndex === prevMerged.rowIndex && selfMerged.cellIndex === prevMerged.cellIndex) return false;
+
+    return true;
+});
 
 const styleFrozen = computed(() => (store.sheet.style.rows?.[props.rowIndex]?.frozen ? `top: ${store.getFrozenTop(props.rowIndex)}px;` : "") + (store.sheet.style.cols?.[props.cellIndex]?.frozen ? `left: ${store.getFrozenLeft(props.cellIndex)}px;` : ""));
 const styleMerged = computed(() => {
@@ -73,8 +81,10 @@ const styleMerged = computed(() => {
 
     let mergeCellCount = 1;
 
-    for (let i = props.cellIndex; i < store.columnCount; i++) {
-        if (!store.sheet.rows[props.rowIndex].cells[i].style?.merged) {
+    for (let i = props.cellIndex + 1; i < store.columnCount; i++) {
+        const merged = store.sheet.rows[props.rowIndex].cells[i].style?.merged;
+        console.log(i, merged);
+        if (!merged || merged.rowIndex !== props.rowIndex || merged.cellIndex !== props.cellIndex) {
             break;
         }
 
