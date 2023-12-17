@@ -7,7 +7,7 @@
                 </div>
             </template>
 
-            <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
+            <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
                     <IconFile :size="16" /> Open
                     <input ref="inputJSON" type="file" accept=".json" class="hidden"
@@ -39,7 +39,7 @@
                 </div>
             </template>
 
-            <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
+            <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(store.activeCellCoordinates.rowIndex); insertDropdown.close();">
                     <IconRowInsertTop :size="16" /> Insert row above
@@ -131,7 +131,7 @@
                 </div>
             </template>
 
-            <div class="flex flex-col text-sm print:hidden w-80">
+            <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center justify-between gap-2 p-1 border-b">
                     <div class="px-1">Start formula</div>
                     <div class="w-16 px-2 py-0.5 text-center border rounded bg-slate-700 text-slate-300">=</div>
