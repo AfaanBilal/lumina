@@ -53,6 +53,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Fullscreen
 - [X] Settings
   - [X] Autofocus
+- [X] Undo / Redo
 - [X] Zoom
 - [X] Help menu
 - [X] Reference: operators, functions and constants
