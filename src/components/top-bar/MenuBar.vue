@@ -155,7 +155,18 @@
             </div>
         </Dropdown>
 
-        <div class="flex items-center gap-1 px-2 py-1 ml-auto border-l" title="Zoom">
+        <div class="flex gap-1 px-1 ml-auto">
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Undo" @click="store.undo()">
+                <IconArrowBackUp :size="16" />
+            </div>
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': false }" title="Redo" @click="store.redo()">
+                <IconArrowForwardUp :size="16" />
+            </div>
+        </div>
+
+        <div class="flex items-center gap-1 px-2 py-1 border-l" title="Zoom">
             <IconZoomIn :size="16" />
             <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
                 <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
@@ -215,7 +226,7 @@ import { computed, ref } from "vue";
 import {
     IconJson, IconFile, IconSettings, IconEye, IconPrinter, IconCsv,
     IconTablePlus, IconRowInsertTop, IconRowInsertBottom, IconColumnInsertLeft, IconColumnInsertRight, IconMaximize,
-    IconZoomIn, IconHelp, IconMathFunction, IconMath,
+    IconZoomIn, IconHelp, IconMathFunction, IconMath, IconArrowBackUp, IconArrowForwardUp,
 } from "@tabler/icons-vue";
 import Dropdown from "v-dropdown";
 import { useStore } from "../../store/store";

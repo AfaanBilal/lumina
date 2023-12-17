@@ -20,6 +20,9 @@ dependencies:
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.3.10)
+  pinia-undo:
+    specifier: ^0.2.4
+    version: 0.2.4(pinia@2.1.7)
   ulid:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1726,6 +1729,15 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /pinia-undo@0.2.4(pinia@2.1.7):
+    resolution: {integrity: sha512-czb1fOkTBWJPYkjNTVsGa6x8drL8Kwu9pA6Vldn7pulg3Gc4G17AF5+b01uogH1g00p11T5xQt+3hnRWy4ipkQ==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.1.7(typescript@5.3.3)(vue@3.3.10)
+      undo-stacker: 0.2.1
+    dev: false
+
   /pinia@2.1.7(typescript@5.3.3)(vue@3.3.10):
     resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==}
     peerDependencies:
@@ -2065,6 +2077,10 @@ packages:
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
+
+  /undo-stacker@0.2.1:
+    resolution: {integrity: sha512-wEFIuUlJtSB0Rt/LBxPqiZqKN2AMKqjdYIr2VTIPUPOEZxAOVE4zVY+z2b2yPBL1NvLW+Sm/kbCaqeWlINPZNA==}
+    dev: false
 
   /update-browserslist-db@1.0.13(browserslist@4.22.2):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
