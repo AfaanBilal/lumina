@@ -44,10 +44,7 @@
 
 import { IconX } from "@tabler/icons-vue";
 import { useStore } from "../store/store";
+import { constants, functions, operators } from "../utils/helpers";
 
 const store = useStore();
-
-const operators = ["-x", "+x", "x!", "abs x", "acos x", "acosh x", "asin x", "asinh x", "atan x", "atanh x", "cbrt x", "ceil x", "cos x", "cosh x", "exp x", "expm1 x", "floor x", "length x", "ln x", "log x", "log10 x", "log2 x", "log1p x", "not x", "round x", "sign x", "sin x", "sinh x", "sqrt x", "tan x", "tanh x", "trunc x"];
-const functions = ["sum", "avg", "square", "random", "min", "max", "hypot", "pow", "atan2", "roundTo", "map", "fold", "filter", "indexOf", "join", "if"];
-const constants = ["pi", "e", "true", "false"];
 </script>

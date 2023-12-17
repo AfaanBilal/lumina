@@ -11,6 +11,10 @@
 import { unparse as PapaUnparse } from "papaparse";
 import { CellCoordinates, ILuminaSheet } from "../App.d";
 
+export const operators = ["-x", "+x", "x!", "abs x", "acos x", "acosh x", "asin x", "asinh x", "atan x", "atanh x", "cbrt x", "ceil x", "cos x", "cosh x", "exp x", "expm1 x", "floor x", "length x", "ln x", "log x", "log10 x", "log2 x", "log1p x", "not x", "round x", "sign x", "sin x", "sinh x", "sqrt x", "tan x", "tanh x", "trunc x"];
+export const functions = ["sum", "avg", "square", "random", "min", "max", "hypot", "pow", "atan2", "roundTo", "map", "fold", "filter", "indexOf", "join", "if"];
+export const constants = ["pi", "e", "true", "false"];
+
 export const indexToColumn = (index: number): string => {
     const res = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[index % 26];
     return index >= 26 ? indexToColumn(Math.floor(index / 26) - 1) + res : res;
@@ -25,11 +29,23 @@ export const toNumber = (v: string): number => parseFloat(v);
 export const isFormula = (v: string): boolean => v.startsWith("=");
 
 export const REGEX_ROW = /[\d]+/g;
-export const REGEX_COLUMN = /[A-Z]+/g;
-export const REGEX_CELL = /[A-Z]+[\d]+/g;
-export const REGEX_RANGE = /[A-Z]+[\d]+[:]{1}[A-Z]+[\d]+/g;
+export const REGEX_COLUMN = /[A-Z]{1,3}/g;
+export const REGEX_CELL = /[A-Z]{1,3}[\d]+/g;
+export const REGEX_RANGE = /[A-Z]{1,3}[\d]+[:]{1}[A-Z]{1,3}[\d]+/g;
+
+export const cleanForRegex = (c: string) => {
+    c = c.toLowerCase();
+
+    for (let i = 0; i < functions.length; i++) {
+        c = c.replace(functions[i], "");
+    }
+
+    return c;
+};
 
 export const cellCoordinates = (c: string): CellCoordinates | false => {
+    c = cleanForRegex(c);
+
     const row = c.toUpperCase().match(REGEX_ROW);
     const col = c.toUpperCase().match(REGEX_COLUMN);
 
@@ -41,8 +57,8 @@ export const cellCoordinates = (c: string): CellCoordinates | false => {
     };
 };
 
-export const getRanges = (v: string) => v.toUpperCase().match(REGEX_RANGE);
-export const getCells = (v: string) => v.toUpperCase().match(REGEX_CELL);
+export const getRanges = (v: string) => cleanForRegex(v).toUpperCase().match(REGEX_RANGE);
+export const getCells = (v: string) => cleanForRegex(v).toUpperCase().match(REGEX_CELL);
 
 export const download = (filename: string, text: string) => {
     const element = document.createElement("a");
