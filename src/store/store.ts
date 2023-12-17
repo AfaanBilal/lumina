@@ -96,6 +96,14 @@ export const useStore = defineStore("lumina", () => {
         file.value.sheets.splice(index, 1);
         if (!file.value.sheets.length) addSheet();
     };
+    const moveSheetLeft = (index: number) => {
+        if (index === 0) return;
+        [file.value.sheets[index - 1], file.value.sheets[index]] = [file.value.sheets[index], file.value.sheets[index - 1]];
+    };
+    const moveSheetRight = (index: number) => {
+        if (index === file.value.sheets.length - 1) return;
+        [file.value.sheets[index], file.value.sheets[index + 1]] = [file.value.sheets[index + 1], file.value.sheets[index]];
+    };
 
     /** Sheet style */
     const updateRowStyle = (index: number, style: ILuminaRowStyle) => sheet.value.style.rows[index] = { ...sheet.value.style.rows[index], ...style };
@@ -232,6 +240,8 @@ export const useStore = defineStore("lumina", () => {
         setSheetName,
         addSheet,
         deleteSheet,
+        moveSheetLeft,
+        moveSheetRight,
 
         updateColStyle,
         updateRowStyle,

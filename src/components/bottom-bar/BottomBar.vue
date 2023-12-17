@@ -24,6 +24,14 @@
                                     @change="e => store.setSheetName(i, (e.target as HTMLInputElement).value)">
                             </div>
                         </div>
+                        <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
+                            :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 0 }" @click="store.moveSheetLeft(i)">
+                            <IconArrowMoveLeft :size="18" /> Move left
+                        </div>
+                        <div class="flex items-center gap-2 p-2 font-semibold border-b text-slate-400"
+                            :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i < store.file.sheets.length - 1 }" @click="store.moveSheetRight(i)">
+                            <IconArrowMoveRight :size="18" /> Move right
+                        </div>
                         <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                             @click="store.deleteSheet(i)">
                             <IconTrash :size="18" /> Delete sheet
@@ -54,6 +62,8 @@
 import Dropdown from "v-dropdown";
 import { IconPlus, IconDotsVertical, IconTrash } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
+import { IconArrowMoveLeft } from "@tabler/icons-vue";
+import { IconArrowMoveRight } from "@tabler/icons-vue";
 
 const store = useStore();
 </script>

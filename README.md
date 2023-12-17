@@ -23,6 +23,11 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 ### Features
 - [X] Spreadsheet grid
 - [X] Multiple sheets
+  - [X] Add sheet
+  - [X] Sheet name
+  - [X] Move sheet left
+  - [X] Move sheet right
+  - [X] Delete sheet
 - [X] File management
   - [X] Export JSON
   - [X] Import JSON
