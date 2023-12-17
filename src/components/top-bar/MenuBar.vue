@@ -10,7 +10,7 @@
             <div class="flex flex-col text-sm min-w-[7rem] print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="open">
                     <IconFile :size="18" /> Open
-                    <input ref="input" type="file" class="hidden" @change="onFileSelected">
+                    <input ref="inputJSON" type="file" accept=".json" class="hidden" @change="(e: Event) => onFileSelected(e, 'json')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="save">
                     <IconDeviceFloppy :size="18" /> Save
@@ -18,6 +18,11 @@
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="exportCSV">
                     <IconCsv :size="18" /> Export CSV
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    @click="importCSV">
+                    <IconCsv :size="18" /> Import CSV
+                    <input ref="inputCSV" type="file" accept=".csv" class="hidden" @change="(e: Event) => onFileSelected(e, 'csv')">
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100" @click="print">
                     <IconPrinter :size="18" /> Print
@@ -182,18 +187,22 @@ const store = useStore();
 const settings = computed<Settings>({ get() { return store.file.settings; }, set(s: Settings) { console.log(s); store.updateSettings(s); } });
 
 const fileDropdown = ref();
-const input = ref<HTMLInputElement>();
 
-const open = () => { input.value!.click(); fileDropdown.value!.close(); };
-const save = () => { download(store.file.name + ".lumina", JSON.stringify(store.file)); fileDropdown.value!.close(); };
+const inputJSON = ref<HTMLInputElement>();
+const inputCSV = ref<HTMLInputElement>();
+
+const open = () => { inputJSON.value!.click(); fileDropdown.value!.close(); };
+const save = () => { download(store.file.name + ".json", JSON.stringify(store.file)); fileDropdown.value!.close(); };
 const exportCSV = () => { downloadCSV(store.file.name + ".csv", store.sheet); fileDropdown.value!.close(); };
+const importCSV = () => { inputCSV.value!.click(); fileDropdown.value!.close(); };
 const print = () => { window.print(); fileDropdown.value!.close(); };
 
-const onFileSelected = (e: Event) => {
+const onFileSelected = (e: Event, type: "json" | "csv") => {
     const files = (e.target as HTMLInputElement).files;
     if (!files?.length) return;
 
-    store.loadFromFile(files[0]);
+    type === "json" && store.loadFromJSON(files[0]);
+    type === "csv" && store.loadFromCSV(files[0]);
 };
 
 const insertDropdown = ref();

@@ -13,6 +13,7 @@
     "@tabler/icons-vue": "^2.42.0",
     "clsx": "^2.0.0",
     "expr-eval": "^2.0.2",
+    "papaparse": "^5.4.1",
     "pinia": "^2.1.7",
     "ulid": "^2.3.0",
     "v-dropdown": "^3.0.0",
@@ -20,6 +21,7 @@
     "vue3-colorpicker": "^2.2.3"
   },
   "devDependencies": {
+    "@types/papaparse": "^5.3.14",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "@vitejs/plugin-vue": "^4.5.0",

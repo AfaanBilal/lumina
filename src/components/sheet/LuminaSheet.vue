@@ -9,7 +9,7 @@
             <LuminaCell v-for="(cell, j) of row.cells" :key="cell.id" :cell="cell" :row-index="i" :cell-index="j" />
         </template>
 
-        <button class="flex items-center justify-center w-10 px-2 bg-slate-300 hover:bg-slate-200" title="Add row"
+        <button class="flex items-center justify-center w-10 h-6 px-2 bg-slate-300 hover:bg-slate-200" title="Add row"
             @click="addRow">
             <IconPlus :size="16" />
         </button>

@@ -8,24 +8,32 @@
  * @copyright   2023 Afaan Bilal
  */
 
-import { defineStore } from "pinia";
 import { computed, ref } from "vue";
+import { defineStore } from "pinia";
 import { ulid } from "ulid";
+import { parse as PapaParse } from "papaparse";
 import { CellCoordinates, CellSelection, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 import { indexToColumn } from "../utils/helpers";
 
 const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
 
-const emptyCell = (): ILuminaCell => ({ id: "cell_" + ulid(), value: "" });
+const IMPORT_MIN_ROW_COUNT = 25;
+const IMPORT_MIN_COLUMN_COUNT = 10;
+
+const getImportRowCount = (rowCount: number) => Math.max(rowCount, IMPORT_MIN_ROW_COUNT);
+const getImportColumnCount = (columnCount: number) => Math.max(columnCount, IMPORT_MIN_COLUMN_COUNT);
+
+const emptyCell = (value: string = ""): ILuminaCell => ({ id: "cell_" + ulid(), value });
 const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
-const emptySheet = (count: number) => ({ id: "sheet_" + ulid(), name: "Sheet " + (count + 1), style: { rows: {}, cols: {}, }, rows: [...Array(INITIAL_ROW_COUNT).keys()].map(() => emptyRow(INITIAL_COLUMN_COUNT)) });
+const emptySheet = (index: number = 0, rowCount: number = INITIAL_ROW_COUNT, columnCount: number = INITIAL_COLUMN_COUNT) =>
+    ({ id: "sheet_" + ulid(), name: "Sheet " + (index + 1), style: { rows: {}, cols: {}, }, rows: [...Array(rowCount).keys()].map(() => emptyRow(columnCount)) });
 
 export const useStore = defineStore("lumina", () => {
     const file = ref<ILuminaFile>({
         id: "lumina_" + ulid(),
         name: "Lumina",
-        sheets: [emptySheet(0)],
+        sheets: [emptySheet()],
         settings: {
             autofocus: true,
             zoom: "100%",
@@ -40,7 +48,32 @@ export const useStore = defineStore("lumina", () => {
     });
 
     /** File */
-    const loadFromFile = async (f: File) => file.value = JSON.parse(await f.text());
+    const loadFromJSON = async (f: File) => file.value = JSON.parse(await f.text());
+    const loadFromCSV = async (f: File) => {
+        const parsed = PapaParse(await f.text());
+
+        if (parsed.errors.length) {
+            alert("Error: " + parsed.errors[0]);
+            return;
+        }
+
+        const data = parsed.data as Array<Array<string>>;
+        const rowCount = data.length;
+        const columnCount = Math.max(...data.map(r => r.length));
+
+        addSheet(file.value.sheets.length, getImportRowCount(rowCount), getImportColumnCount(columnCount));
+
+        const sheetIndex = file.value.sheets.length - 1;
+        setActiveSheet(sheetIndex);
+        setSheetName(sheetIndex, f.name);
+
+        for (let i = 0; i < rowCount; i++) {
+            for (let j = 0; j < data[i].length; j++) {
+                sheet.value.rows[i].cells[j].value = data[i][j];
+            }
+        }
+    };
+
     const setFileName = (name: string) => file.value.name = name;
 
     /** Settings */
@@ -54,7 +87,10 @@ export const useStore = defineStore("lumina", () => {
 
     const setActiveSheet = (index: number) => activeSheetIndex.value = index;
     const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
-    const addSheet = () => file.value.sheets.push(emptySheet(file.value.sheets.length));
+    const addSheet = (index: number = -1, rowCount: number = INITIAL_ROW_COUNT, columnCount: number = INITIAL_COLUMN_COUNT) => {
+        if (index === -1) index = file.value.sheets.length;
+        file.value.sheets.push(emptySheet(index, rowCount, columnCount));
+    };
     const deleteSheet = (index: number) => {
         file.value.sheets.splice(index, 1);
         if (!file.value.sheets.length) addSheet();
@@ -181,7 +217,9 @@ export const useStore = defineStore("lumina", () => {
     return {
         file,
 
-        loadFromFile,
+        loadFromJSON,
+        loadFromCSV,
+
         setFileName,
         updateSettings,
 

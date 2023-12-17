@@ -8,6 +8,7 @@
  * @copyright   2023 Afaan Bilal
  */
 
+import { unparse as PapaUnparse } from "papaparse";
 import { CellCoordinates, ILuminaSheet } from "../App.d";
 
 export const indexToColumn = (index: number): string => {
@@ -57,16 +58,32 @@ export const download = (filename: string, text: string) => {
 };
 
 export const downloadCSV = (filename: string, sheet: ILuminaSheet) => {
-    let csv = "";
+    let lastNonEmptyRowIndex = 0;
 
-    for (let i = 0; i < sheet.rows.length; i++) {
-        for (let j = 0; j < sheet.rows[i].cells.length; j++) {
-            const v= sheet.rows[i].cells[j].value;
-            csv += (v.includes(",") ? "\"" + v + "\"" : v) + ",";
+    for (let i = sheet.rows.length - 1; i > 0; i--) {
+        let foundNonEmpty = false;
+
+        for (let j = sheet.rows[i].cells.length - 1; j > 0; j--) {
+            console.log(i, j, sheet.rows[i].cells[j].value, !!sheet.rows[i].cells[j].value);
+            if (sheet.rows[i].cells[j].value) {
+                lastNonEmptyRowIndex = i;
+                foundNonEmpty = true;
+                break;
+            }
         }
 
-        csv += "\n";
+        if (foundNonEmpty) break;
     }
 
-    return download(filename, csv);
+    const data: Array<Array<string>> = [];
+
+    for (let i = 0; i < lastNonEmptyRowIndex; i++) {
+        data.push([]);
+
+        for (let j = 0; j < sheet.rows[i].cells.length; j++) {
+            data[i].push(sheet.rows[i].cells[j].value);
+        }
+    }
+
+    return download(filename, PapaUnparse(data));
 };
