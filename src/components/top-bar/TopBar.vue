@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <input v-model="filename" type="text" title="Filename"
-                    class="px-1 text-sm font-semibold text-right border border-transparent rounded-sm outline-none hover:border-slate-300 focus:border-slate-400">
+                    class="px-1 text-sm font-semibold text-right border border-transparent rounded-sm outline-none hover:border-slate-300 focus:border-slate-400 focus:text-left">
             </div>
         </div>
         <Toolbar />
