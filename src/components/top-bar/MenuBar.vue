@@ -95,6 +95,10 @@
                     <input id="column-band" v-model="settings.showColumnBand" type="checkbox" class="w-4 accent-slate-600">
                     <label for="column-band" class="cursor-pointer select-none hover:font-medium">Column band</label>
                 </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="formulae" v-model="settings.showFormulae" type="checkbox" class="w-4 accent-slate-600">
+                    <label for="formulae" class="cursor-pointer select-none hover:font-medium">Show formulae</label>
+                </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="fullscreen">
                     <IconMaximize :size="16" /> Fullscreen

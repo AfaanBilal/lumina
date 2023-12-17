@@ -44,6 +44,7 @@ export const useStore = defineStore("lumina", () => {
             showStripes: false,
             showRowBand: false,
             showColumnBand: false,
+            showFormulae: false,
         },
     });
 

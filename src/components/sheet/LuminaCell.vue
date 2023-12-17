@@ -30,7 +30,7 @@
             '!items-center': props.cell.style?.verticalAlignment === 'middle',
             '!items-end': props.cell.style?.verticalAlignment === 'bottom',
         }" :style.="commonStyle">
-            {{ calculatedValue }}
+            {{ store.file.settings.showFormulae ? value : calculatedValue }}
         </div>
         <input v-if="isActive" ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
             'font-bold': props.cell.style?.bold,

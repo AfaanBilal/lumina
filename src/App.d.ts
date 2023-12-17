@@ -86,6 +86,7 @@ export interface Settings {
     showStripes: boolean;
     showRowBand: boolean;
     showColumnBand: boolean;
+    showFormulae: boolean;
 }
 
 export interface ILuminaFile {
