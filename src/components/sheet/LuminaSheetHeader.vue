@@ -38,11 +38,21 @@
                             @change="e => store.updateColStyle(i - 1, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                <div class="flex items-center gap-2 px-2 py-1 border-t">
                     <input :id="'frozen-col-' + i" :checked="store.sheet.style.rows?.[i - 1]?.frozen" type="checkbox"
                         class="w-4 accent-slate-600"
                         @change="e => store.updateColStyle(i - 1, { frozen: (e.target as HTMLInputElement).checked })">
                     <label :for="'frozen-col-' + i" class="font-semibold cursor-pointer select-none">Freeze</label>
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
+                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 1 }"
+                    @click="store.moveColumnLeft(i - 1)">
+                    <IconArrowMoveLeft :size="16" /> Move left
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-b text-slate-400"
+                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i < store.columnCount - 1 }"
+                    @click="store.moveColumnRight(i - 1)">
+                    <IconArrowMoveRight :size="16" /> Move right
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addColumn(i - 1)">
@@ -52,7 +62,7 @@
                     @click="store.addColumn(i)">
                     <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
-                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                <div class="flex items-center gap-2 p-2 font-semibold border-t cursor-pointer hover:bg-slate-100"
                     @click="store.deleteColumn(i - 1)">
                     <IconColumnRemove :size="16" /> Delete column
                 </div>
@@ -73,7 +83,10 @@
  */
 
 import Dropdown from "v-dropdown";
-import { IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove, IconColumnInsertLeft, IconColumnInsertRight } from "@tabler/icons-vue";
+import {
+    IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove,
+    IconColumnInsertLeft, IconColumnInsertRight, IconArrowMoveLeft, IconArrowMoveRight,
+} from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { indexToColumn } from "../../utils/helpers";
 

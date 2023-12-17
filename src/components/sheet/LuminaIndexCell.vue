@@ -10,7 +10,8 @@
 
         <Dropdown class="absolute right-0 !flex items-center justify-center">
             <template #trigger>
-                <button class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
+                <button
+                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
                     <IconDotsVertical :size="10" />
                 </button>
             </template>
@@ -26,9 +27,19 @@
                             @change="e => store.updateRowStyle(index + 1, { height: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                <div class="flex items-center gap-2 px-2 py-1 border-t">
                     <input :id="'frozen-row-' + index" v-model="frozen" type="checkbox" class="w-4 accent-slate-600">
                     <label :for="'frozen-row-' + index" class="font-semibold cursor-pointer select-none">Freeze</label>
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
+                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': index > 0 }"
+                    @click="store.moveRowUp(index)">
+                    <IconArrowMoveUp :size="16" /> Move up
+                </div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-b text-slate-400"
+                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': index < store.rowCount - 1 }"
+                    @click="store.moveRowDown(index)">
+                    <IconArrowMoveDown :size="16" /> Move down
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
                     @click="store.addRow(index)">
@@ -38,7 +49,7 @@
                     @click="store.addRow(index + 1)">
                     <IconRowInsertBottom :size="16" /> Insert row below
                 </div>
-                <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
+                <div class="flex items-center gap-2 p-2 font-semibold border-t cursor-pointer hover:bg-slate-100"
                     @click="store.deleteRow(index)">
                     <IconRowRemove :size="16" /> Delete row
                 </div>
@@ -60,7 +71,10 @@
 
 import Dropdown from "v-dropdown";
 import { computed } from "vue";
-import { IconDotsVertical, IconLineHeight, IconRowInsertTop, IconRowInsertBottom, IconRowRemove } from "@tabler/icons-vue";
+import {
+    IconDotsVertical, IconLineHeight, IconRowInsertTop, IconRowInsertBottom,
+    IconRowRemove, IconArrowMoveUp, IconArrowMoveDown,
+} from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 
 const props = defineProps<{ index: number }>();

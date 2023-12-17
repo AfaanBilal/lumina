@@ -91,9 +91,13 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Add row (end)
   - [X] Add row (middle)
   - [X] Delete row
+  - [X] Move row up
+  - [X] Move row down
   - [X] Add column (end)
   - [X] Add column (middle)
   - [X] Delete column
+  - [X] Move column left
+  - [X] Move column right
 - [X] Freezing
   - [X] Frozen rows
   - [X] Frozen columns

@@ -131,7 +131,7 @@ export const useStore = defineStore("lumina", () => {
         return l;
     };
 
-    /** Row / Columns */
+    /** Rows / Columns */
     const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
     const addColumn = (index?: number) => {
         for (let i = 0; i < rowCount.value; i++) {
@@ -151,6 +151,30 @@ export const useStore = defineStore("lumina", () => {
         }
 
         !columnCount.value && addColumn();
+    };
+
+    /** Move Row / Colum */
+    const moveRowUp = (index: number) => {
+        if (index === 0) return;
+        [sheet.value.rows[index - 1], sheet.value.rows[index]] = [sheet.value.rows[index], sheet.value.rows[index - 1]];
+    };
+    const moveRowDown = (index: number) => {
+        if (index === rowCount.value - 1) return;
+        [sheet.value.rows[index], sheet.value.rows[index + 1]] = [sheet.value.rows[index + 1], sheet.value.rows[index]];
+    };
+    const moveColumnLeft = (index: number) => {
+        if (index === 0) return;
+
+        for (let i = 0; i < rowCount.value; i++) {
+            [sheet.value.rows[i].cells[index - 1], sheet.value.rows[i].cells[index]] = [sheet.value.rows[i].cells[index], sheet.value.rows[i].cells[index - 1]];
+        }
+    };
+    const moveColumnRight = (index: number) => {
+        if (index === columnCount.value - 1) return;
+
+        for (let i = 0; i < rowCount.value; i++) {
+            [sheet.value.rows[i].cells[index], sheet.value.rows[i].cells[index + 1]] = [sheet.value.rows[i].cells[index + 1], sheet.value.rows[i].cells[index]];
+        }
     };
 
     /** Hover */
@@ -252,6 +276,11 @@ export const useStore = defineStore("lumina", () => {
         addColumn,
         deleteRow,
         deleteColumn,
+
+        moveRowUp,
+        moveRowDown,
+        moveColumnLeft,
+        moveColumnRight,
 
         hoverCellCoordinates,
         setHoverCellCoordinates,
