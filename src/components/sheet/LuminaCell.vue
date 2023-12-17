@@ -83,7 +83,7 @@ const styleMerged = computed(() => {
 
     for (let i = props.cellIndex + 1; i < store.columnCount; i++) {
         const merged = store.sheet.rows[props.rowIndex].cells[i].style?.merged;
-        console.log(i, merged);
+
         if (!merged || merged.rowIndex !== props.rowIndex || merged.cellIndex !== props.cellIndex) {
             break;
         }
