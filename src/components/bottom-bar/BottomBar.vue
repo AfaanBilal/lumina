@@ -19,7 +19,8 @@
                         <div class="flex items-center gap-2 p-2">
                             <div class="flex-1 font-semibold">Name</div>
                             <div class="flex items-baseline gap-1">
-                                <input type="text" class="p-1 border rounded outline-none" :value="store.file.sheets[i].name"
+                                <input type="text" class="p-1 border rounded outline-none"
+                                    :value="store.file.sheets[i].name"
                                     @change="e => store.setSheetName(i, (e.target as HTMLInputElement).value)">
                             </div>
                         </div>
@@ -31,10 +32,11 @@
                 </Dropdown>
             </div>
         </div>
-        <div class="flex items-center gap-2 p-2 my-auto rounded-full cursor-pointer hover:bg-slate-200" title="Add sheet"
-            @click="store.addSheet()">
+        <div class="flex items-center gap-2 p-2 my-auto rounded-full cursor-pointer hover:bg-slate-200 print:hidden"
+            title="Add sheet" @click="store.addSheet()">
             <IconPlus :size="20" />
         </div>
+        <span class="hidden ml-auto text-xs print:flex text-slate-400">lumina.afaan.dev</span>
     </div>
 </template>
 
