@@ -65,15 +65,15 @@
         <div class="flex items-center justify-center">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-100"
                 title="Decrease font size"
-                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 11) - 1 })">
+                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 12) - 1 })">
                 <IconMinus :size="18" />
             </div>
-            <input type="number" min="8" max="200" :value="ram.ActiveCell.style?.fontSize || 11"
+            <input type="number" min="8" max="200" :value="ram.ActiveCell.style?.fontSize || 12"
                 class="outline-none text-center p-0.5 w-6 border-y [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 title="Font size" @change="setFontSize">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-100"
                 title="Increase font size"
-                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 11) + 1 })">
+                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 12) + 1 })">
                 <IconPlus :size="18" />
             </div>
         </div>

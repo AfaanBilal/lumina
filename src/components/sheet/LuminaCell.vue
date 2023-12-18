@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none" :class="{
+    <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none text-xs" :class="{
         'border': store.file.settings.showGridlines,
         'bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
         'border-y-slate-400': store.file.settings.showRowBand && ram.activeCellCoordinates.rowIndex === rowIndex && ram.activeCellCoordinates.cellIndex > cellIndex,
