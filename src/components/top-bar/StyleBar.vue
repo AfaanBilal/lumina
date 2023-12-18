@@ -2,23 +2,21 @@
     <div v-show="store.file.settings.showStyleBar" class="flex flex-wrap gap-2 px-1">
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.bold }" title="Bold"
-                @click="toggleBold">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': bold }" title="Bold" @click="bold = !bold">
                 <IconBold :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border-r cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.italic }" title="Italic"
-                @click="setItalic">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': italic }" title="Italic" @click="italic = !italic">
                 <IconItalic :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.underline }" title="Underline"
-                @click="toggleUnderline">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': underline }" title="Underline"
+                @click="underline = !underline">
                 <IconUnderline :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.strikethrough }"
-                title="Strikethrough" @click="toggleStrikethrough">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': strikethrough }" title="Strikethrough"
+                @click="strikethrough = !strikethrough">
                 <IconStrikethrough :size="18" />
             </div>
         </div>
@@ -197,14 +195,15 @@ import { IconLock } from "@tabler/icons-vue";
 const store = useStore();
 const ram = useRAM();
 
+const bold = computed({ get() { return ram.ActiveCell.style?.bold; }, set(v) { store.updateStyle({ bold: v }); } });
+const italic = computed({ get() { return ram.ActiveCell.style?.italic; }, set(v) { store.updateStyle({ italic: v }); } });
+const underline = computed({ get() { return ram.ActiveCell.style?.underline; }, set(v) { store.updateStyle({ underline: v }); } });
+const strikethrough = computed({ get() { return ram.ActiveCell.style?.strikethrough; }, set(v) { store.updateStyle({ strikethrough: v }); } });
+
 const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
 const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
 const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
-const toggleBold = () => store.updateStyle({ bold: !ram.ActiveCell.style?.bold });
-const toggleStrikethrough = () => store.updateStyle({ strikethrough: !ram.ActiveCell.style?.strikethrough });
-const setItalic = () => store.updateStyle({ italic: !ram.ActiveCell.style?.italic });
-const toggleUnderline = () => store.updateStyle({ underline: !ram.ActiveCell.style?.underline });
 
 const backgroundColor = computed({ get() { return ram.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
 const textColor = computed({ get() { return ram.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
