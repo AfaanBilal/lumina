@@ -143,6 +143,13 @@
                 <IconFocusCentered :size="18" :class="{ 'text-slate-400': !isMergeAvailable }" />
             </div>
         </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200" :class="{
+                'bg-slate-800 text-white hover:bg-slate-600': ram.formatPainterStyle !== false,
+            }" title="Paint format" @click="ram.startPaintFormat()">
+                <IconPaint :size="18" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -168,6 +175,7 @@ import {
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
+import { IconPaint } from "@tabler/icons-vue";
 
 const store = useStore();
 const ram = useRAM();

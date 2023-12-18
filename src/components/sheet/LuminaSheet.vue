@@ -120,7 +120,10 @@ const navKeyListener = (e: KeyboardEvent) => {
 };
 
 const onMouseDown = () => ram.startSelection();
-const onMouseUp = () => ram.endSelection();
+const onMouseUp = () => {
+    ram.endSelection();
+    ram.applyPaintFormat();
+};
 
 onMounted(() => window.addEventListener("keydown", navKeyListener));
 onUnmounted(() => window.removeEventListener("keydown", navKeyListener));

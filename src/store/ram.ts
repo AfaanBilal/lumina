@@ -10,7 +10,7 @@
 
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-import { CellCoordinates, CellSelection } from "../App";
+import { CellCoordinates, CellSelection, ILuminaCellStyle } from "../App";
 import { coordinatesToName } from "../utils/helpers";
 import { useStore } from "./store";
 
@@ -70,6 +70,16 @@ export const useRAM = defineStore("lumina-ram", () => {
     };
     const setActiveCellLeft = () => activeCellCoordinates.value.cellIndex > 0 && (activeCellCoordinates.value.cellIndex -= 1);
 
+    const formatPainterStyle = ref<ILuminaCellStyle | false>(false);
+    const setFormatPainterStyle = (s: ILuminaCellStyle | false) => formatPainterStyle.value = s;
+    const startPaintFormat = () => setFormatPainterStyle(Object.assign({}, ActiveCell.value.style));
+    const applyPaintFormat = () => {
+        if (!formatPainterStyle.value) return;
+
+        store.updateStyle(formatPainterStyle.value);
+        setFormatPainterStyle(false);
+    };
+
     return {
         hoverCellCoordinates,
         setHoverCellCoordinates,
@@ -96,5 +106,10 @@ export const useRAM = defineStore("lumina-ram", () => {
         setActiveCellRight,
         setActiveCellDown,
         setActiveCellLeft,
+
+        formatPainterStyle,
+        setFormatPainterStyle,
+        startPaintFormat,
+        applyPaintFormat,
     };
 }, { undo: { disable: true } });
