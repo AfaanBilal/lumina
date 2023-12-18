@@ -1,8 +1,9 @@
 <template>
-    <div class="flex flex-wrap border-y">
+    <div class="flex flex-wrap">
         <Dropdown ref="fileDropdown">
             <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                <div
+                    class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none border-y hover:bg-slate-100">
                     <IconFile :size="16" /> File
                 </div>
             </template>
@@ -36,7 +37,8 @@
 
         <Dropdown ref="insertDropdown">
             <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                <div
+                    class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none border-y hover:bg-slate-100">
                     <IconTablePlus :size="16" /> Insert
                 </div>
             </template>
@@ -99,7 +101,8 @@
 
         <Dropdown>
             <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                <div
+                    class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none border-y hover:bg-slate-100">
                     <IconEye :size="16" /> View
                 </div>
             </template>
@@ -142,7 +145,8 @@
 
         <Dropdown>
             <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none hover:bg-slate-100">
+                <div
+                    class="flex items-center gap-1 px-2 py-1 border-r cursor-pointer select-none border-y hover:bg-slate-100">
                     <IconSettings :size="16" /> Settings
                 </div>
             </template>
@@ -155,35 +159,10 @@
             </div>
         </Dropdown>
 
-        <div class="flex gap-0.5 px-0.5 ml-auto border-l">
-            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
-                title="Print" @click="print">
-                <IconPrinter :size="16" />
-            </div>
-        </div>
-
-        <div class="flex gap-0.5 px-0.5 border-l">
-            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
-                title="Undo (Ctrl + Z)" @click="store.undo()">
-                <IconArrowBackUp :size="16" />
-            </div>
-            <div class="w-0 my-1 border-r">&nbsp;</div>
-            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
-                title="Redo (Ctrl + Y)" @click="store.redo()">
-                <IconArrowForwardUp :size="16" />
-            </div>
-        </div>
-
-        <div class="flex items-center gap-1 px-2 py-1 border-l" title="Zoom">
-            <IconZoomIn :size="16" />
-            <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
-                <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
-            </select>
-        </div>
-
         <Dropdown ref="helpDropdown">
             <template #trigger>
-                <div class="flex items-center gap-1 px-2 py-1 border-l cursor-pointer select-none hover:bg-slate-100">
+                <div
+                    class="flex items-center gap-1 px-2 py-1 cursor-pointer select-none border-y hover:bg-slate-100">
                     <IconHelp :size="16" /> Help
                 </div>
             </template>
@@ -216,6 +195,34 @@
                 </div>
             </div>
         </Dropdown>
+
+        <div class="flex-1 min-w-0 border-y">&nbsp;</div>
+
+        <div class="flex gap-0.5 px-0.5 border-l border-y">
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                title="Print" @click="print">
+                <IconPrinter :size="16" />
+            </div>
+        </div>
+
+        <div class="flex gap-0.5 px-0.5 border-l border-y">
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                title="Undo (Ctrl + Z)" @click="store.undo()">
+                <IconArrowBackUp :size="16" />
+            </div>
+            <div class="w-0 my-1 border-r">&nbsp;</div>
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                title="Redo (Ctrl + Y)" @click="store.redo()">
+                <IconArrowForwardUp :size="16" />
+            </div>
+        </div>
+
+        <div class="flex items-center gap-1 px-2 py-1 border" title="Zoom">
+            <IconZoomIn :size="16" />
+            <select v-model="settings.zoom" class="w-full outline-none cursor-pointer">
+                <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
+            </select>
+        </div>
     </div>
 </template>
 
