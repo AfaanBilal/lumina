@@ -107,6 +107,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Merge cells (same column)
   - [X] Merge cells (grid)
 - [X] Paint format
+- [X] Clear format
 - [X] Sizing
   - [X] Row height
   - [X] Column width

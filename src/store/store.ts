@@ -188,14 +188,27 @@ export const useStore = defineStore("lumina", () => {
     /** Cell Style */
     const updateCellStyle = (coords: CellCoordinates, style: ILuminaCellStyle) => sheet.value.rows[coords.rowIndex].cells[coords.cellIndex].style = style;
     const updateSelectionStyle = (style: ILuminaCellStyle) => {
-        for (let row = RAM.selectedCells.start.rowIndex; row <= RAM.selectedCells.end.rowIndex; row++) {
-            for (let col = RAM.selectedCells.start.cellIndex; col <= RAM.selectedCells.end.cellIndex; col++) {
-                updateCellStyle({ rowIndex: row, cellIndex: col }, { ...sheet.value.rows[row].cells[col].style, ...style });
+        for (let rowIndex = RAM.selectedCells.start.rowIndex; rowIndex <= RAM.selectedCells.end.rowIndex; rowIndex++) {
+            for (let cellIndex = RAM.selectedCells.start.cellIndex; cellIndex <= RAM.selectedCells.end.cellIndex; cellIndex++) {
+                updateCellStyle({ rowIndex, cellIndex }, { ...sheet.value.rows[rowIndex].cells[cellIndex].style, ...style });
             }
         }
     };
     const updateActiveCellStyle = (style: ILuminaCellStyle) => updateActiveCell({ ...RAM.ActiveCell, style: { ...RAM.ActiveCell.style, ...style } });
     const updateStyle = (style: ILuminaCellStyle) => RAM.hasSelection ? updateSelectionStyle(style) : updateActiveCellStyle(style);
+    const clearStyle = () => {
+        if (RAM.hasSelection) {
+            for (let rowIndex = RAM.selectedCells.start.rowIndex; rowIndex <= RAM.selectedCells.end.rowIndex; rowIndex++) {
+                for (let cellIndex = RAM.selectedCells.start.cellIndex; cellIndex <= RAM.selectedCells.end.cellIndex; cellIndex++) {
+                    const style = sheet.value.rows[rowIndex].cells[cellIndex].style;
+                    updateCellStyle({ rowIndex, cellIndex }, style && style.merged ? { merged: style.merged } : {});
+                }
+            }
+        } else {
+            const style = RAM.ActiveCell.style;
+            updateCellStyle(RAM.activeCellCoordinates, style && style.merged ? { merged: style.merged } : {});
+        }
+    };
 
     return {
         file,
@@ -242,5 +255,6 @@ export const useStore = defineStore("lumina", () => {
         updateSelectionStyle,
         updateActiveCellStyle,
         updateStyle,
+        clearStyle,
     };
 });

@@ -147,7 +147,13 @@
             <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200" :class="{
                 'bg-slate-800 text-white hover:bg-slate-600': ram.formatPainterStyle !== false,
             }" title="Paint format" @click="ram.startPaintFormat()">
-                <IconPaint :size="18" />
+                <IconPaint :size="16" />
+            </div>
+        </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200"
+                title="Clear format" @click="store.clearStyle()">
+                <IconPaintOff :size="16" />
             </div>
         </div>
     </div>
@@ -171,7 +177,7 @@ import {
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconMinus, IconPlus, IconBucketDroplet, IconTextColor,
     IconBorderLeft, IconBorderBottom, IconBorderRight, IconBorderTop, IconBorderAll,
-    IconBorderOuter, IconLineDashed, IconLineDotted, IconSlash, IconFocusCentered,
+    IconBorderOuter, IconLineDashed, IconLineDotted, IconSlash, IconFocusCentered, IconPaintOff,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
