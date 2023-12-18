@@ -15,28 +15,31 @@
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
         'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
+        'bg-slate-300': props.cell.style?.locked,
     }" :style="commonStyle + styleFrozen + styleMerged"
         @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
-        <div v-show="!isActive" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
-            'font-bold': props.cell.style?.bold,
-            'italic': props.cell.style?.italic,
-            'underline': props.cell.style?.underline,
-            'line-through': props.cell.style?.strikethrough,
-            '!justify-start': props.cell.style?.textAlignment === 'left',
-            '!justify-center': props.cell.style?.textAlignment === 'center',
-            '!justify-end': props.cell.style?.textAlignment === 'right',
-            '!items-start': props.cell.style?.verticalAlignment === 'top',
-            '!items-center': props.cell.style?.verticalAlignment === 'middle',
-            '!items-end': props.cell.style?.verticalAlignment === 'bottom',
-        }" :style.="commonStyle">
+        <div v-show="!isActive || props.cell.style?.locked"
+            class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
+                'font-bold': props.cell.style?.bold,
+                'italic': props.cell.style?.italic,
+                'underline': props.cell.style?.underline,
+                'line-through': props.cell.style?.strikethrough,
+                '!justify-start': props.cell.style?.textAlignment === 'left',
+                '!justify-center': props.cell.style?.textAlignment === 'center',
+                '!justify-end': props.cell.style?.textAlignment === 'right',
+                '!items-start': props.cell.style?.verticalAlignment === 'top',
+                '!items-center': props.cell.style?.verticalAlignment === 'middle',
+                '!items-end': props.cell.style?.verticalAlignment === 'bottom',
+            }" :style.="commonStyle">
             {{ store.file.settings.showFormulae ? value : calculatedValue }}
         </div>
-        <input v-if="isActive" ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
-            'font-bold': props.cell.style?.bold,
-            'italic': props.cell.style?.italic,
-            'underline': props.cell.style?.underline,
-            'line-through': props.cell.style?.strikethrough,
-        }" :style="commonStyle">
+        <input v-if="isActive && !props.cell.style?.locked" ref="input" v-model="value" type="text"
+            class="w-full h-full outline-none" :class="{
+                'font-bold': props.cell.style?.bold,
+                'italic': props.cell.style?.italic,
+                'underline': props.cell.style?.underline,
+                'line-through': props.cell.style?.strikethrough,
+            }" :style="commonStyle">
     </div>
 </template>
 

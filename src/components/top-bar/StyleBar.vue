@@ -157,6 +157,13 @@
                 <IconPaintOff :size="16" :class="{ 'text-slate-400': !hasStyleApplied }" />
             </div>
         </div>
+        <div class="flex">
+            <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': locked }" title="Lock / Unlock"
+                @click="locked = !locked">
+                <IconLock :size="16" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -185,6 +192,7 @@ import { useRAM } from "../../store/ram";
 import { IconPaint } from "@tabler/icons-vue";
 import { nonStyleProps } from "../../utils/helpers";
 import { ILuminaCellStyle } from "../../App.d";
+import { IconLock } from "@tabler/icons-vue";
 
 const store = useStore();
 const ram = useRAM();
@@ -204,6 +212,7 @@ const borderColor = computed({ get() { return ram.ActiveCell.style?.borderColor 
 
 const border = computed({ get() { return ram.ActiveCell.style?.border; }, set(v) { store.updateStyle({ border: v }); } });
 const borderType = computed({ get() { return ram.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
+const locked = computed({ get() { return ram.ActiveCell.style?.locked; }, set(v) { store.updateStyle({ locked: v }); } });
 
 const isMergeAvailable = computed(() => ram.ActiveCell.style?.merged || !(ram.selectedCells.start.rowIndex === ram.selectedCells.end.rowIndex && ram.selectedCells.start.cellIndex === ram.selectedCells.end.cellIndex));
 const hasStyleApplied = computed(() => ram.ActiveCell.style && Object.keys(ram.ActiveCell.style).filter(k => !nonStyleProps.includes(k as keyof ILuminaCellStyle)).length > 0);

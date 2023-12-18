@@ -102,6 +102,8 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] Freezing
   - [X] Frozen rows
   - [X] Frozen columns
+- [X] Locking
+  - [X] Lock cells
 - [X] Merging
   - [X] Merge cells (same row)
   - [X] Merge cells (same column)
