@@ -154,7 +154,7 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': locked }" title="Lock / Unlock"
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': locked }" :title="locked ? 'Unlock' : 'Lock'"
                 @click="locked = !locked">
                 <IconLock :size="16" />
             </div>
