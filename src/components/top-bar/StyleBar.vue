@@ -151,9 +151,10 @@
             </div>
         </div>
         <div class="flex">
-            <div class="flex items-center justify-center w-6 border rounded cursor-pointer hover:bg-slate-200"
-                title="Clear format" @click="store.clearStyle()">
-                <IconPaintOff :size="16" />
+            <div class="flex items-center justify-center w-6 border rounded"
+                :class="{ 'cursor-pointer hover:bg-slate-200': ram.ActiveCell.style }" title="Clear format"
+                @click="store.clearStyle()">
+                <IconPaintOff :size="16" :class="{ 'text-slate-400': !ram.ActiveCell.style }" />
             </div>
         </div>
     </div>
