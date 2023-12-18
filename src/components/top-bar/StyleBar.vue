@@ -39,18 +39,18 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'top' }"
-                title="Vertical align top" @click="setVerticalAlign('top')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': verticalAlignment === 'top' }"
+                title="Vertical align top" @click="verticalAlignment = 'top'">
                 <IconLayoutAlignTop :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'middle' }"
-                title="Vertical align middle" @click="setVerticalAlign('middle')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': verticalAlignment === 'middle' }"
+                title="Vertical align middle" @click="verticalAlignment = 'middle'">
                 <IconLayoutAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.verticalAlignment === 'bottom' }"
-                title="Vertical align bottom" @click="setVerticalAlign('bottom')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': verticalAlignment === 'bottom' }"
+                title="Vertical align bottom" @click="verticalAlignment = 'bottom'">
                 <IconLayoutAlignBottom :size="18" />
             </div>
         </div>
@@ -200,10 +200,10 @@ const underline = computed({ get() { return ram.ActiveCell.style?.underline; }, 
 const strikethrough = computed({ get() { return ram.ActiveCell.style?.strikethrough; }, set(v) { store.updateStyle({ strikethrough: v }); } });
 
 const textAlignment = computed({ get() { return ram.ActiveCell.style?.textAlignment; }, set(v) { store.updateStyle({ textAlignment: v }); } });
+const verticalAlignment = computed({ get() { return ram.ActiveCell.style?.verticalAlignment; }, set(v) { store.updateStyle({ verticalAlignment: v }); } });
 
 const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
-const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
 
 const backgroundColor = computed({ get() { return ram.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
 const textColor = computed({ get() { return ram.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
