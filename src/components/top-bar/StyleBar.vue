@@ -22,18 +22,18 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'left' }"
-                title="Text align left" @click="setTextAlign('left')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': textAlignment === 'left' }" title="Text align left"
+                @click="textAlignment = 'left'">
                 <IconAlignLeft :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 cursor-pointer border-y hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'center' }"
-                title="Text align center" @click="setTextAlign('center')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': textAlignment === 'center' }"
+                title="Text align center" @click="textAlignment = 'center'">
                 <IconAlignCenter :size="18" />
             </div>
             <div class="flex items-center justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-200"
-                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': ram.ActiveCell.style?.textAlignment === 'right' }"
-                title="Text align right" @click="setTextAlign('right')">
+                :class="{ 'bg-slate-800 text-white hover:bg-slate-600': textAlignment === 'right' }"
+                title="Text align right" @click="textAlignment = 'right'">
                 <IconAlignRight :size="18" />
             </div>
         </div>
@@ -199,9 +199,10 @@ const italic = computed({ get() { return ram.ActiveCell.style?.italic; }, set(v)
 const underline = computed({ get() { return ram.ActiveCell.style?.underline; }, set(v) { store.updateStyle({ underline: v }); } });
 const strikethrough = computed({ get() { return ram.ActiveCell.style?.strikethrough; }, set(v) { store.updateStyle({ strikethrough: v }); } });
 
+const textAlignment = computed({ get() { return ram.ActiveCell.style?.textAlignment; }, set(v) { store.updateStyle({ textAlignment: v }); } });
+
 const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
 const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
-const setTextAlign = (alignment: "left" | "center" | "right") => store.updateStyle({ textAlignment: alignment });
 const setVerticalAlign = (alignment: "top" | "middle" | "bottom") => store.updateStyle({ verticalAlignment: alignment });
 
 const backgroundColor = computed({ get() { return ram.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
