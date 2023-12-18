@@ -66,6 +66,7 @@ export interface ILuminaColStyle {
 }
 
 export interface ILuminaSheetStyle {
+    color?: string;
     rows: HashMap<ILuminaRowStyle>;
     cols: HashMap<ILuminaColStyle>;
 }

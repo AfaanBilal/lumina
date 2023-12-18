@@ -2,9 +2,13 @@
     <div class="flex items-center gap-2">
         <div class="flex items-center ml-10">
             <div v-for="(s, i) in store.file.sheets" :key="s.id"
-                class="flex justify-center gap-2 p-2 pl-4 border-l cursor-pointer first-of-type:border-none hover:bg-slate-300 border-slate-300 group"
+                class="relative flex justify-center gap-2 p-2 pl-4 border-l cursor-pointer first-of-type:border-none hover:bg-slate-300 border-slate-300 group"
                 :class="{ 'bg-slate-900 text-white hover:bg-slate-800': store.activeSheetIndex === i }"
+                :style="store.file.sheets[i].style.color ? `background-color: ${store.file.sheets[i].style.color};` : ''"
                 @click="store.setActiveSheet(i)">
+                <span v-show="store.activeSheetIndex === i"
+                    class="absolute w-2 h-2 rounded-full bg-slate-800 top-1 left-1">&nbsp;</span>
+
                 {{ s.name }}
 
                 <Dropdown>
@@ -23,6 +27,14 @@
                                     :value="store.file.sheets[i].name"
                                     @change="e => store.setSheetName(i, (e.target as HTMLInputElement).value)">
                             </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 p-2 font-semibold border-t hover:bg-slate-100">
+                            <div class="flex items-center gap-2">
+                                <IconBucketDroplet :size="16" />
+                                Sheet color
+                            </div>
+                            <color-picker :value:pure-color="store.file.sheets[i].style.color" :round-history="true"
+                                shape="circle" @pure-color-change="(c: string) => store.setSheetColor(i, c)" />
                         </div>
                         <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
                             :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 0 }"
@@ -62,7 +74,7 @@
  */
 
 import Dropdown from "v-dropdown";
-import { IconPlus, IconDotsVertical, IconTrash, IconArrowMoveLeft, IconArrowMoveRight } from "@tabler/icons-vue";
+import { IconPlus, IconDotsVertical, IconTrash, IconArrowMoveLeft, IconArrowMoveRight, IconBucketDroplet } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 
 const store = useStore();

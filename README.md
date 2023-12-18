@@ -25,6 +25,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] Multiple sheets
   - [X] Add sheet
   - [X] Sheet name
+  - [X] Sheet color
   - [X] Move sheet left
   - [X] Move sheet right
   - [X] Delete sheet
