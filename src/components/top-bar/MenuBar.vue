@@ -218,7 +218,7 @@
 
         <div class="flex items-center gap-1 px-2 py-1 border" title="Zoom">
             <IconZoomIn :size="16" />
-            <select v-model="settings.zoom" class="w-full outline-none cursor-pointer hover:bg-slate-100">
+            <select v-model="settings.zoom" class="w-full outline-none cursor-pointer select-none hover:bg-slate-100">
                 <option v-for="z in zoomList" :key="z" :value="z">{{ z }}</option>
             </select>
         </div>
