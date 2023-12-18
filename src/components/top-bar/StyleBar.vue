@@ -184,6 +184,7 @@ import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
 import { IconPaint } from "@tabler/icons-vue";
 import { nonStyleProps } from "../../utils/helpers";
+import { ILuminaCellStyle } from "../../App.d";
 
 const store = useStore();
 const ram = useRAM();
@@ -205,7 +206,7 @@ const border = computed({ get() { return ram.ActiveCell.style?.border; }, set(v)
 const borderType = computed({ get() { return ram.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
 
 const isMergeAvailable = computed(() => ram.ActiveCell.style?.merged || !(ram.selectedCells.start.rowIndex === ram.selectedCells.end.rowIndex && ram.selectedCells.start.cellIndex === ram.selectedCells.end.cellIndex));
-const hasStyleApplied = computed(() => ram.ActiveCell.style && Object.keys(ram.ActiveCell.style).filter(k => !nonStyleProps.includes(k)).length > 0);
+const hasStyleApplied = computed(() => ram.ActiveCell.style && Object.keys(ram.ActiveCell.style).filter(k => !nonStyleProps.includes(k as keyof ILuminaCellStyle)).length > 0);
 
 const toggleMerge = () => {
     if (ram.ActiveCell.style?.merged) {
