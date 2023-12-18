@@ -179,12 +179,11 @@ import {
     IconAlignLeft, IconAlignCenter, IconAlignRight, IconStrikethrough,
     IconLayoutAlignTop, IconLayoutAlignCenter, IconLayoutAlignBottom,
     IconMinus, IconPlus, IconBucketDroplet, IconTextColor,
-    IconBorderLeft, IconBorderBottom, IconBorderRight, IconBorderTop, IconBorderAll,
+    IconBorderLeft, IconBorderBottom, IconBorderRight, IconBorderTop, IconBorderAll, IconPaint,
     IconBorderOuter, IconLineDashed, IconLineDotted, IconSlash, IconFocusCentered, IconPaintOff, IconLock,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
-import { IconPaint } from "@tabler/icons-vue";
 import { nonStyleProps } from "../../utils/helpers";
 import { ILuminaCellStyle } from "../../App.d";
 
