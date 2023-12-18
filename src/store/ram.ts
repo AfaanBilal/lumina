@@ -11,7 +11,7 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import { CellCoordinates, CellSelection, ILuminaCellStyle } from "../App";
-import { coordinatesToName } from "../utils/helpers";
+import { coordinatesToName, nonStyleProps } from "../utils/helpers";
 import { useStore } from "./store";
 
 export const useRAM = defineStore("lumina-ram", () => {
@@ -75,6 +75,12 @@ export const useRAM = defineStore("lumina-ram", () => {
     const startPaintFormat = () => setFormatPainterStyle(Object.assign({}, ActiveCell.value.style));
     const applyPaintFormat = () => {
         if (!formatPainterStyle.value) return;
+
+        for (let i = 0; i < nonStyleProps.length; i++) {
+            if (formatPainterStyle.value[nonStyleProps[i]]) {
+                delete formatPainterStyle.value[nonStyleProps[i]];
+            }
+        }
 
         store.updateStyle(formatPainterStyle.value);
         setFormatPainterStyle(false);
