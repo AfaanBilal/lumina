@@ -55,23 +55,20 @@
             </div>
         </div>
         <div class="flex items-center justify-center border rounded">
-            <select class="w-full outline-none" :value="ram.ActiveCell.style?.fontFamily || 'Manrope'"
-                @change="setFontFamily">
+            <select v-model="fontFamily" class="w-full outline-none select-none">
                 <option v-for="f in fontList" :key="f" :value="f">{{ f }}</option>
             </select>
         </div>
         <div class="flex items-center justify-center">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-l cursor-pointer hover:bg-slate-100"
-                title="Decrease font size"
-                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 12) - 1 })">
+                title="Decrease font size" @click="fontSize -= 1">
                 <IconMinus :size="18" />
             </div>
-            <input type="number" min="8" max="200" :value="ram.ActiveCell.style?.fontSize || 12"
+            <input v-model.number="fontSize" type="number" min="8" max="200"
                 class="outline-none text-center p-0.5 w-6 border-y [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                title="Font size" @change="setFontSize">
+                title="Font size">
             <div class="flex items-center self-stretch justify-center w-6 border rounded-r cursor-pointer hover:bg-slate-100"
-                title="Increase font size"
-                @click="store.updateStyle({ fontSize: (ram.ActiveCell.style?.fontSize || 12) + 1 })">
+                title="Increase font size" @click="fontSize += 1">
                 <IconPlus :size="18" />
             </div>
         </div>
@@ -202,8 +199,8 @@ const strikethrough = computed({ get() { return ram.ActiveCell.style?.strikethro
 const textAlignment = computed({ get() { return ram.ActiveCell.style?.textAlignment; }, set(v) { store.updateStyle({ textAlignment: v }); } });
 const verticalAlignment = computed({ get() { return ram.ActiveCell.style?.verticalAlignment; }, set(v) { store.updateStyle({ verticalAlignment: v }); } });
 
-const setFontFamily = (e: Event) => store.updateStyle({ fontFamily: (e.target as HTMLInputElement).value });
-const setFontSize = (e: Event) => store.updateStyle({ fontSize: parseInt((e.target as HTMLInputElement).value) });
+const fontFamily = computed({ get() { return ram.ActiveCell.style?.fontFamily || "Manrope"; }, set(v) { store.updateStyle({ fontFamily: v }); } });
+const fontSize = computed({ get() { return ram.ActiveCell.style?.fontSize || 12; }, set(v) { store.updateStyle({ fontSize: v }); } });
 
 const backgroundColor = computed({ get() { return ram.ActiveCell.style?.backgroundColor || "rgb(255,255,255)"; }, set(color: string) { store.updateStyle({ backgroundColor: color }); } });
 const textColor = computed({ get() { return ram.ActiveCell.style?.textColor || "rgb(0,0,0)"; }, set(color: string) { store.updateStyle({ textColor: color }); } });
