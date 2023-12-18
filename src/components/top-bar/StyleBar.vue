@@ -152,9 +152,9 @@
         </div>
         <div class="flex">
             <div class="flex items-center justify-center w-6 border rounded"
-                :class="{ 'cursor-pointer hover:bg-slate-200': ram.ActiveCell.style }" title="Clear format"
+                :class="{ 'cursor-pointer hover:bg-slate-200': hasStyleApplied }" title="Clear format"
                 @click="store.clearStyle()">
-                <IconPaintOff :size="16" :class="{ 'text-slate-400': !ram.ActiveCell.style }" />
+                <IconPaintOff :size="16" :class="{ 'text-slate-400': !hasStyleApplied }" />
             </div>
         </div>
     </div>
@@ -183,6 +183,7 @@ import {
 import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
 import { IconPaint } from "@tabler/icons-vue";
+import { nonStyleProps } from "../../utils/helpers";
 
 const store = useStore();
 const ram = useRAM();
@@ -204,6 +205,7 @@ const border = computed({ get() { return ram.ActiveCell.style?.border; }, set(v)
 const borderType = computed({ get() { return ram.ActiveCell.style?.borderType; }, set(type: "solid" | "dashed" | "dotted" | undefined) { store.updateStyle({ borderType: type }); } });
 
 const isMergeAvailable = computed(() => ram.ActiveCell.style?.merged || !(ram.selectedCells.start.rowIndex === ram.selectedCells.end.rowIndex && ram.selectedCells.start.cellIndex === ram.selectedCells.end.cellIndex));
+const hasStyleApplied = computed(() => ram.ActiveCell.style && Object.keys(ram.ActiveCell.style).filter(k => !nonStyleProps.includes(k)).length > 0);
 
 const toggleMerge = () => {
     if (ram.ActiveCell.style?.merged) {
