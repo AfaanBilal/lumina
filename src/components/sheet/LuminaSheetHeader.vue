@@ -32,11 +32,15 @@
 
             <div class="flex flex-col text-sm w-52">
                 <div class="p-2 font-semibold border-b text-md">Column {{ indexToColumn(i) }}</div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-b cursor-pointer hover:bg-slate-100"
+                    @click="ram.selectColumn(i)">
+                    <IconTableColumn :size="16" /> Select column
+                </div>
                 <div class="flex items-center gap-2 p-2">
                     <IconArrowAutofitWidth :size="16" />
                     <div class="flex-1 font-semibold">Width</div>
                     <div class="flex items-baseline gap-1">
-                        <input type="number" min="40" max="2500" class="p-1 border rounded outline-none"
+                        <input type="number" min="40" max="2500" class="h-5 p-1 border rounded outline-none"
                             :value="store.sheet.style.cols?.[i]?.width || '80'"
                             @change="e => store.updateColStyle(i, { width: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
@@ -92,7 +96,7 @@
 
 import Dropdown from "v-dropdown";
 import {
-    IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove,
+    IconPlus, IconDotsVertical, IconArrowAutofitWidth, IconColumnRemove, IconTableColumn,
     IconColumnInsertLeft, IconColumnInsertRight, IconArrowMoveLeft, IconArrowMoveRight,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";

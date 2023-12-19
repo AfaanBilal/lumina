@@ -5,8 +5,7 @@
             'sticky bg-slate-300 z-50': store.sheet.style.rows?.[index]?.frozen,
             'bg-slate-300 opacity-0': store.sheet.style.rows?.[index]?.hidden && !store.file.settings.showHidden,
             'bg-slate-300 opacity-70': store.sheet.style.rows?.[index]?.hidden && store.file.settings.showHidden,
-        }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')"
-        @click="ram.selectRow(index)">
+        }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')">
         <div class="group-hover:hidden">
             {{ index + 1 }}
         </div>
@@ -22,11 +21,15 @@
 
             <div class="flex flex-col w-48 text-sm">
                 <div class="p-2 font-semibold border-b text-md">Row {{ index + 1 }}</div>
+                <div class="flex items-center gap-2 p-2 font-semibold border-b cursor-pointer hover:bg-slate-100"
+                    @click="ram.selectRow(index)">
+                    <IconTableRow :size="16" /> Select row
+                </div>
                 <div class="flex items-center gap-2 p-2">
                     <IconLineHeight :size="16" />
                     <div class="flex-1 font-semibold">Height</div>
                     <div class="flex items-baseline gap-1">
-                        <input type="number" min="20" max="1000" class="p-1 border rounded outline-none"
+                        <input type="number" min="20" max="1000" class="h-5 p-1 border rounded outline-none"
                             :value="store.sheet.style.rows?.[index + 1]?.height || '24'"
                             @change="e => store.updateRowStyle(index + 1, { height: parseInt((e.target as HTMLInputElement).value) })">px
                     </div>
@@ -81,7 +84,7 @@ import Dropdown from "v-dropdown";
 import { computed } from "vue";
 import {
     IconDotsVertical, IconLineHeight, IconRowInsertTop, IconRowInsertBottom,
-    IconRowRemove, IconArrowMoveUp, IconArrowMoveDown,
+    IconRowRemove, IconArrowMoveUp, IconArrowMoveDown, IconTableRow,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import { useRAM } from "../../store/ram";
