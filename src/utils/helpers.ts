@@ -10,11 +10,14 @@
 
 import { unparse as PapaUnparse } from "papaparse";
 import { CellCoordinates, ILuminaCellStyle, ILuminaSheet } from "../App.d";
+import { nanoid } from "nanoid";
 
 export const operators = ["-x", "+x", "x!", "abs x", "acos x", "acosh x", "asin x", "asinh x", "atan x", "atanh x", "cbrt x", "ceil x", "cos x", "cosh x", "exp x", "expm1 x", "floor x", "length x", "ln x", "log x", "log10 x", "log2 x", "log1p x", "not x", "round x", "sign x", "sin x", "sinh x", "sqrt x", "tan x", "tanh x", "trunc x"];
 export const functions = ["sum", "avg", "square", "random", "min", "max", "hypot", "pow", "atan2", "roundTo", "map", "fold", "filter", "indexOf", "join", "if"];
 export const constants = ["pi", "e", "true", "false"];
 export const nonStyleProps: Array<keyof ILuminaCellStyle> = ["merged", "locked"];
+
+export const id = (prefix: string) => prefix + nanoid(10);
 
 export const indexToColumn = (index: number): string => {
     const res = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[index % 26];

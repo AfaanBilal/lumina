@@ -10,10 +10,10 @@
 
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-import { ulid } from "ulid";
 import { parse as PapaParse } from "papaparse";
 import { CellCoordinates, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILuminaFile, ILuminaRow, ILuminaRowStyle, ILuminaSheet, Settings } from "../App.d";
 import { useRAM } from "./ram";
+import { id } from "../utils/helpers";
 
 const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
 const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
@@ -24,16 +24,16 @@ const IMPORT_MIN_COLUMN_COUNT = 10;
 const getImportRowCount = (rowCount: number) => Math.max(rowCount, IMPORT_MIN_ROW_COUNT);
 const getImportColumnCount = (columnCount: number) => Math.max(columnCount, IMPORT_MIN_COLUMN_COUNT);
 
-const emptyCell = (value: string = ""): ILuminaCell => ({ id: "cell_" + ulid(), value });
-const emptyRow = (cellCount: number): ILuminaRow => ({ id: "row_" + ulid(), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
+const emptyCell = (value: string = ""): ILuminaCell => ({ id: id("cell_"), value });
+const emptyRow = (cellCount: number): ILuminaRow => ({ id: id("row_"), cells: [...Array(cellCount).keys()].map(() => emptyCell()) });
 const emptySheet = (index: number = 0, rowCount: number = INITIAL_ROW_COUNT, columnCount: number = INITIAL_COLUMN_COUNT) =>
-    ({ id: "sheet_" + ulid(), name: "Sheet " + (index + 1), style: { rows: {}, cols: {}, }, rows: [...Array(rowCount).keys()].map(() => emptyRow(columnCount)) });
+    ({ id: id("sheet_"), name: "Sheet " + (index + 1), style: { rows: {}, cols: {}, }, rows: [...Array(rowCount).keys()].map(() => emptyRow(columnCount)) });
 
 export const useStore = defineStore("lumina", () => {
     const RAM = useRAM();
 
     const file = ref<ILuminaFile>({
-        id: "lumina_" + ulid(),
+        id: id("lumina_"),
         name: "Lumina",
         sheets: [emptySheet()],
         settings: {
