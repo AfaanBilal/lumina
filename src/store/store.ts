@@ -99,6 +99,8 @@ export const useStore = defineStore("lumina", () => {
         file.value.sheets.push(emptySheet(index, rowCount, columnCount));
     };
     const deleteSheet = (index: number) => {
+        if (activeSheetIndex.value > 0) activeSheetIndex.value -= 1;
+
         file.value.sheets.splice(index, 1);
         if (!file.value.sheets.length) addSheet();
     };
