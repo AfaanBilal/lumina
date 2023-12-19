@@ -74,6 +74,7 @@ export interface ILuminaSheetStyle {
 export interface ILuminaSheet {
     id: string;
     name: string;
+    locked?: boolean;
     style: ILuminaSheetStyle;
     rows: Array<ILuminaRow>;
 }

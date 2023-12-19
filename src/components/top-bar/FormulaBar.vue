@@ -1,5 +1,6 @@
 <template>
-    <div v-show="store.file.settings.showFormulaBar" class="flex">
+    <div v-show="store.file.settings.showFormulaBar" class="flex"
+        :class="{ 'pointer-events-none opacity-50': store.sheet.locked || ram.ActiveCell.style?.locked }">
         <div class="flex items-center justify-center min-w-[5rem] p-1 font-mono font-semibold border-r border-y">
             {{ ram.hasSelection ? ram.SelectionName : ram.ActiveCellName }}
         </div>

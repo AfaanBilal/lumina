@@ -20,6 +20,7 @@
                     class="px-1 text-sm font-semibold text-right border border-transparent rounded-sm outline-none hover:border-slate-300 focus:border-slate-400 focus:text-left">
             </div>
         </div>
+        <TopBanner />
         <Toolbar />
     </div>
 </template>
@@ -39,6 +40,7 @@ import { computed } from "vue";
 import { IconCopyright, IconBrandGithub } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 import Toolbar from "./Toolbar.vue";
+import TopBanner from "./TopBanner.vue";
 
 const store = useStore();
 

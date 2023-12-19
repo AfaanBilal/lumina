@@ -6,10 +6,15 @@
                 :class="{ 'bg-slate-900 text-white hover:bg-slate-800': store.activeSheetIndex === i }"
                 :style="store.file.sheets[i].style.color ? `background-color: ${store.file.sheets[i].style.color};` : ''"
                 @click="store.setActiveSheet(i)">
-                <span v-show="store.activeSheetIndex === i"
-                    class="absolute w-2 h-2 rounded-full bg-slate-800 top-1 left-1">&nbsp;</span>
+                <span v-show="store.activeSheetIndex === i" class="absolute w-2 h-2 rounded-full bg-slate-800 top-1 left-1">
+                    &nbsp;
+                </span>
 
-                {{ s.name }}
+                <div class="flex items-center gap-2">
+                    <IconLock v-show="store.file.sheets[i].locked" :class="{ 'text-white': store.activeSheetIndex === i }"
+                        :size="16" />
+                    {{ s.name }}
+                </div>
 
                 <Dropdown>
                     <template #trigger>
@@ -35,6 +40,10 @@
                             </div>
                             <color-picker :value:pure-color="store.file.sheets[i].style.color" :round-history="true"
                                 shape="circle" @pure-color-change="(c: string) => store.setSheetColor(i, c)" />
+                        </div>
+                        <div class="flex items-center gap-2 p-2 font-semibold border-t cursor-pointer hover:bg-slate-100"
+                            @click="store.setSheetLocked(i, !store.file.sheets[i].locked)">
+                            <IconLock :size="16" /> {{ store.file.sheets[i].locked ? 'Unlock' : 'Lock' }}
                         </div>
                         <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
                             :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 0 }"
@@ -74,7 +83,11 @@
  */
 
 import Dropdown from "v-dropdown";
-import { IconPlus, IconDotsVertical, IconTrash, IconArrowMoveLeft, IconArrowMoveRight, IconBucketDroplet } from "@tabler/icons-vue";
+import {
+    IconPlus, IconDotsVertical, IconTrash,
+    IconArrowMoveLeft, IconArrowMoveRight,
+    IconBucketDroplet, IconLock,
+} from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
 
 const store = useStore();

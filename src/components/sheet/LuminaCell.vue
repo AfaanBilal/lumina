@@ -18,28 +18,26 @@
         'bg-slate-300': props.cell.style?.locked,
     }" :style="commonStyle + styleFrozen + styleMerged"
         @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
-        <div v-show="!isActive || props.cell.style?.locked"
-            class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
-                'font-bold': props.cell.style?.bold,
-                'italic': props.cell.style?.italic,
-                'underline': props.cell.style?.underline,
-                'line-through': props.cell.style?.strikethrough,
-                '!justify-start': props.cell.style?.textAlignment === 'left',
-                '!justify-center': props.cell.style?.textAlignment === 'center',
-                '!justify-end': props.cell.style?.textAlignment === 'right',
-                '!items-start': props.cell.style?.verticalAlignment === 'top',
-                '!items-center': props.cell.style?.verticalAlignment === 'middle',
-                '!items-end': props.cell.style?.verticalAlignment === 'bottom',
-            }" :style.="commonStyle">
+        <div v-show="!isCellEditable" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
+            'font-bold': props.cell.style?.bold,
+            'italic': props.cell.style?.italic,
+            'underline': props.cell.style?.underline,
+            'line-through': props.cell.style?.strikethrough,
+            '!justify-start': props.cell.style?.textAlignment === 'left',
+            '!justify-center': props.cell.style?.textAlignment === 'center',
+            '!justify-end': props.cell.style?.textAlignment === 'right',
+            '!items-start': props.cell.style?.verticalAlignment === 'top',
+            '!items-center': props.cell.style?.verticalAlignment === 'middle',
+            '!items-end': props.cell.style?.verticalAlignment === 'bottom',
+        }" :style.="commonStyle">
             {{ store.file.settings.showFormulae ? value : calculatedValue }}
         </div>
-        <input v-if="isActive && !props.cell.style?.locked" ref="input" v-model="value" type="text"
-            class="w-full h-full outline-none" :class="{
-                'font-bold': props.cell.style?.bold,
-                'italic': props.cell.style?.italic,
-                'underline': props.cell.style?.underline,
-                'line-through': props.cell.style?.strikethrough,
-            }" :style="commonStyle">
+        <input v-if="isCellEditable" ref="input" v-model="value" type="text" class="w-full h-full outline-none" :class="{
+            'font-bold': props.cell.style?.bold,
+            'italic': props.cell.style?.italic,
+            'underline': props.cell.style?.underline,
+            'line-through': props.cell.style?.strikethrough,
+        }" :style="commonStyle">
     </div>
 </template>
 
@@ -140,6 +138,8 @@ const onSelectionBottomEdge = computed(() => props.rowIndex === ram.selectedCell
 const onSelectionLeftEdge = computed(() => props.cellIndex === ram.selectedCells.start.cellIndex);
 const onSheetTopEdge = computed(() => props.rowIndex === 0);
 const onSheetLeftEdge = computed(() => props.cellIndex === 0);
+
+const isCellEditable = computed(() => isActive.value && !props.cell.style?.locked && !store.sheet.locked);
 
 const commonStyle = computed(() => {
     if (!props.cell.style) return "";

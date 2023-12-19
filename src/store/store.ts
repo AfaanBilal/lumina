@@ -91,6 +91,7 @@ export const useStore = defineStore("lumina", () => {
     const setActiveSheet = (index: number) => activeSheetIndex.value = index;
     const setSheetName = (index: number, name: string) => file.value.sheets[index].name = name;
     const setSheetColor = (index: number, color: string) => file.value.sheets[index].style.color = color;
+    const setSheetLocked = (index: number, locked: boolean) => file.value.sheets[index].locked = locked;
 
     const addSheet = (index: number = -1, rowCount: number = INITIAL_ROW_COUNT, columnCount: number = INITIAL_COLUMN_COUNT) => {
         if (index === -1) index = file.value.sheets.length;
@@ -229,6 +230,7 @@ export const useStore = defineStore("lumina", () => {
         setActiveSheet,
         setSheetName,
         setSheetColor,
+        setSheetLocked,
 
         addSheet,
         deleteSheet,
