@@ -45,18 +45,22 @@
 
             <div class="flex flex-col text-sm print:hidden">
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked }"
                     @click="store.addRow(ram.activeCellCoordinates.rowIndex); insertDropdown.close();">
                     <IconRowInsertTop :size="16" /> Insert row above
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked }"
                     @click="store.addRow(ram.activeCellCoordinates.rowIndex + 1); insertDropdown.close();">
                     <IconRowInsertBottom :size="16" /> Insert row below
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked }"
                     @click="store.addColumn(ram.activeCellCoordinates.cellIndex); insertDropdown.close();">
                     <IconColumnInsertLeft :size="16" /> Insert column left
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked }"
                     @click="store.addColumn(ram.activeCellCoordinates.cellIndex + 1); insertDropdown.close();">
                     <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
@@ -65,7 +69,9 @@
                     <IconTablePlus :size="16" /> Insert sheet
                 </div>
                 <Dropdown ref="insertFunctionDropdown" align="right" trigger="hover"
-                    class="flex items-center cursor-pointer hover:bg-slate-100">
+                    :disabled="store.sheet.locked || ram.ActiveCell.style?.locked"
+                    class="flex items-center cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked || ram.ActiveCell.style?.locked }">
                     <template #trigger>
                         <div class="flex items-center gap-2 px-2 py-1 border-b select-none">
                             <IconMathFunction :size="16" /> Insert function
@@ -81,7 +87,9 @@
                     </div>
                 </Dropdown>
                 <Dropdown ref="insertOperatorDropdown" align="right" trigger="hover"
-                    class="flex items-center cursor-pointer hover:bg-slate-100">
+                    :disabled="store.sheet.locked || ram.ActiveCell.style?.locked"
+                    class="flex items-center cursor-pointer hover:bg-slate-100"
+                    :class="{ 'pointer-events-none opacity-50': store.sheet.locked || ram.ActiveCell.style?.locked }">
                     <template #trigger>
                         <div class="flex items-center gap-2 px-2 py-1 border-b select-none">
                             <IconMath :size="16" /> Insert operator
