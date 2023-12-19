@@ -9,7 +9,8 @@
             'bg-slate-200': i === ram.activeCellCoordinates.cellIndex,
             'bg-blue-300': ram.selectedCells.start.cellIndex <= i && ram.selectedCells.end.cellIndex >= i,
             'bg-slate-300 z-50': store.sheet.style.cols?.[i]?.frozen,
-            'bg-slate-300 opacity-70': store.sheet.style.cols?.[i]?.hidden,
+            'bg-slate-300 opacity-0': store.sheet.style.cols?.[i]?.hidden && !store.file.settings.showHidden,
+            'bg-slate-300 opacity-70': store.sheet.style.cols?.[i]?.hidden && store.file.settings.showHidden,
         }" :style="(store.sheet.style.cols?.[i]?.frozen ? `left: ${store.getFrozenLeft(i)}px;` : '')"
         @click="ram.selectColumn(i)">
         <button

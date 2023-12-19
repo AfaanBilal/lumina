@@ -3,6 +3,8 @@
         :class="{
             'bg-blue-300': isSelected,
             'sticky bg-slate-300 z-50': store.sheet.style.rows?.[index]?.frozen,
+            'bg-slate-300 opacity-0': store.sheet.style.rows?.[index]?.hidden && !store.file.settings.showHidden,
+            'bg-slate-300 opacity-70': store.sheet.style.rows?.[index]?.hidden && store.file.settings.showHidden,
         }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')"
         @click="ram.selectRow(index)">
         {{ index + 1 }}

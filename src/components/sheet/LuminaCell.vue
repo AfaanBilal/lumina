@@ -16,7 +16,9 @@
 
         'bg-slate-300': props.cell.style?.locked,
         'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
-        'bg-slate-300 opacity-70': store.sheet.style.rows?.[rowIndex]?.hidden || store.sheet.style.cols?.[cellIndex]?.hidden,
+
+        'bg-slate-300 opacity-0': isCellHidden && !store.file.settings.showHidden,
+        'bg-slate-300 opacity-70': isCellHidden && store.file.settings.showHidden,
     }" :style="commonStyle + styleFrozen + styleMerged"
         @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isCellEditable" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
@@ -141,6 +143,7 @@ const onSheetTopEdge = computed(() => props.rowIndex === 0);
 const onSheetLeftEdge = computed(() => props.cellIndex === 0);
 
 const isCellEditable = computed(() => isActive.value && !props.cell.style?.locked && !store.sheet.locked);
+const isCellHidden = computed(() => store.sheet.style.rows?.[props.rowIndex]?.hidden || store.sheet.style.cols?.[props.cellIndex]?.hidden);
 
 const commonStyle = computed(() => {
     if (!props.cell.style) return "";
