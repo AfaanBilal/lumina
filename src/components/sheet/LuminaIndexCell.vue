@@ -30,6 +30,10 @@
                     <input :id="'frozen-row-' + index" v-model="frozen" type="checkbox" class="w-4 accent-slate-600">
                     <label :for="'frozen-row-' + index" class="font-semibold cursor-pointer select-none">Freeze</label>
                 </div>
+                <div class="flex items-center gap-2 p-2 border-t">
+                    <input :id="'hidden-row-' + index" v-model="hidden" type="checkbox" class="w-4 accent-slate-600">
+                    <label :for="'hidden-row-' + index" class="font-semibold cursor-pointer select-none">Hide</label>
+                </div>
                 <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
                     :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': index > 0 }"
                     @click="store.moveRowUp(index)">
@@ -83,5 +87,7 @@ const store = useStore();
 const ram = useRAM();
 
 const isSelected = computed(() => ram.selectedCells.start.rowIndex <= props.index && ram.selectedCells.end.rowIndex >= props.index);
+
 const frozen = computed({ get() { return store.sheet.style.rows?.[props.index]?.frozen || false; }, set(v: boolean) { store.updateRowStyle(props.index, { frozen: v }); } });
+const hidden = computed({ get() { return store.sheet.style.rows?.[props.index]?.hidden || false; }, set(v: boolean) { store.updateRowStyle(props.index, { hidden: v }); } });
 </script>

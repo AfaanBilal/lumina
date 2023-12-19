@@ -43,10 +43,14 @@ const ram = useRAM();
 const grid = ref();
 
 const rowTemplate = computed(() => {
-    let r = "";
+    let r = "24px ";
 
     for (let i = 0; i < store.sheet.rows.length; i++) {
-        r += (store.sheet.style.rows?.[i]?.height || 24) + "px ";
+        if (!store.file.settings.showHidden && store.sheet.style.rows?.[i]?.hidden) {
+            r += "0 ";
+        } else {
+            r += (store.sheet.style.rows?.[i]?.height || 24) + "px ";
+        }
     }
 
     return r;
@@ -56,7 +60,11 @@ const colTemplate = computed(() => {
     let c = "2.5rem ";
 
     for (let i = 0; i < store.sheet.rows[0].cells.length; i++) {
-        c += (store.sheet.style.cols?.[i]?.width || 80) + "px ";
+        if (!store.file.settings.showHidden && store.sheet.style.cols?.[i]?.hidden) {
+            c += "0 ";
+        } else {
+            c += (store.sheet.style.cols?.[i]?.width || 80) + "px ";
+        }
     }
 
     return c;

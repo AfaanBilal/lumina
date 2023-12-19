@@ -55,14 +55,17 @@ export interface ILuminaRow {
     cells: Array<ILuminaCell>;
 }
 
-export interface ILuminaRowStyle {
-    height?: number;
+export interface ILuminaRowColStyle {
     frozen?: boolean;
+    hidden?: boolean;
 }
 
-export interface ILuminaColStyle {
+export interface ILuminaRowStyle extends ILuminaRowColStyle {
+    height?: number;
+}
+
+export interface ILuminaColStyle extends ILuminaRowColStyle {
     width?: number;
-    frozen?: boolean;
 }
 
 export interface ILuminaSheetStyle {
@@ -91,6 +94,7 @@ export interface Settings {
     showRowBand: boolean;
     showColumnBand: boolean;
     showFormulae: boolean;
+    showHidden: boolean;
 }
 
 export interface ILuminaFile {

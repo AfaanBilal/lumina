@@ -9,6 +9,7 @@
             'bg-slate-200': i === ram.activeCellCoordinates.cellIndex,
             'bg-blue-300': ram.selectedCells.start.cellIndex <= i && ram.selectedCells.end.cellIndex >= i,
             'bg-slate-300 z-50': store.sheet.style.cols?.[i]?.frozen,
+            'bg-slate-300 opacity-70': store.sheet.style.cols?.[i]?.hidden,
         }" :style="(store.sheet.style.cols?.[i]?.frozen ? `left: ${store.getFrozenLeft(i)}px;` : '')"
         @click="ram.selectColumn(i)">
         <button
@@ -43,6 +44,12 @@
                         class="w-4 accent-slate-600"
                         @change="e => store.updateColStyle(i, { frozen: (e.target as HTMLInputElement).checked })">
                     <label :for="'frozen-col-' + i" class="font-semibold cursor-pointer select-none">Freeze</label>
+                </div>
+                <div class="flex items-center gap-2 p-2 border-t">
+                    <input :id="'hidden-col-' + i" :checked="store.sheet.style.rows?.[i]?.hidden" type="checkbox"
+                        class="w-4 accent-slate-600"
+                        @change="e => store.updateColStyle(i, { hidden: (e.target as HTMLInputElement).checked })">
+                    <label :for="'hidden-col-' + i" class="font-semibold cursor-pointer select-none">Hide</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
                     :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 1 }"

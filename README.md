@@ -52,6 +52,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Row band
   - [X] Column band
   - [X] Show formulae
+  - [X] Show hidden
   - [X] Fullscreen
 - [X] Settings
   - [X] Autofocus
@@ -107,6 +108,9 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 - [X] Locking
   - [X] Lock cells
   - [X] Lock sheets
+- [X] Hiding
+  - [X] Hide rows
+  - [X] Hide columns
 - [X] Merging
   - [X] Merge cells (same row)
   - [X] Merge cells (same column)

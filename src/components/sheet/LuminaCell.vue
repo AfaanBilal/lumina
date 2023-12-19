@@ -14,8 +14,9 @@
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
-        'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
         'bg-slate-300': props.cell.style?.locked,
+        'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
+        'bg-slate-300 opacity-70': store.sheet.style.rows?.[rowIndex]?.hidden || store.sheet.style.cols?.[cellIndex]?.hidden,
     }" :style="commonStyle + styleFrozen + styleMerged"
         @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isCellEditable" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{

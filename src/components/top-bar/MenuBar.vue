@@ -144,6 +144,10 @@
                     <input id="formulae" v-model="settings.showFormulae" type="checkbox" class="w-4 accent-slate-600">
                     <label for="formulae" class="cursor-pointer select-none hover:font-medium">Show formulae</label>
                 </div>
+                <div class="flex items-center gap-2 px-2 py-1 border-b">
+                    <input id="hidden" v-model="settings.showHidden" type="checkbox" class="w-4 accent-slate-600">
+                    <label for="hidden" class="cursor-pointer select-none hover:font-medium">Show hidden</label>
+                </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
                     @click="fullscreen">
                     <IconMaximize :size="16" /> Fullscreen

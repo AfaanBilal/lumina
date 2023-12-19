@@ -47,6 +47,7 @@ export const useStore = defineStore("lumina", () => {
             showRowBand: false,
             showColumnBand: false,
             showFormulae: false,
+            showHidden: false,
         },
     });
 
