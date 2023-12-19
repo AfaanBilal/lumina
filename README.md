@@ -53,7 +53,7 @@ Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
   - [X] Column band
   - [X] Show formulae
   - [X] Show hidden
-  - [X] Fullscreen
+- [X] Fullscreen
 - [X] Settings
   - [X] Autofocus
 - [X] Undo / Redo

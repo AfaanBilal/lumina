@@ -148,10 +148,6 @@
                     <input id="hidden" v-model="settings.showHidden" type="checkbox" class="w-4 accent-slate-600">
                     <label for="hidden" class="cursor-pointer select-none hover:font-medium">Show hidden</label>
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="fullscreen">
-                    <IconMaximize :size="16" /> Fullscreen
-                </div>
             </div>
         </Dropdown>
 
@@ -208,6 +204,13 @@
         </Dropdown>
 
         <div class="flex-1 min-w-0 border-y">&nbsp;</div>
+
+        <div class="flex gap-0.5 px-0.5 border-l border-y">
+            <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
+                title="Fullscreen" @click="fullscreen">
+                <IconMaximize :size="16" />
+            </div>
+        </div>
 
         <div class="flex gap-0.5 px-0.5 border-l border-y">
             <div class="flex items-center justify-center w-6 h-6 my-auto rounded-full cursor-pointer hover:bg-slate-200"
