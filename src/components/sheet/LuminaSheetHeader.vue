@@ -24,7 +24,8 @@
         <Dropdown class="absolute right-1 !flex items-center justify-center">
             <template #trigger>
                 <button
-                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
+                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto"
+                    @click="ram.setHoverCellCoordinates({ rowIndex: 0, cellIndex: i }); ram.setActiveCell({ rowIndex: 0, cellIndex: i }); ram.selectActiveCell()">
                     <IconDotsVertical :size="10" />
                 </button>
             </template>
@@ -53,8 +54,7 @@
                     <label :for="'hidden-col-' + i" class="font-semibold cursor-pointer select-none">Hide</label>
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
-                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 1 }"
-                    @click="store.moveColumnLeft(i)">
+                    :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 1 }" @click="store.moveColumnLeft(i)">
                     <IconArrowMoveLeft :size="16" /> Move left
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold border-b text-slate-400"

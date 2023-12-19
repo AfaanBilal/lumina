@@ -14,7 +14,8 @@
         <Dropdown class="!flex items-center justify-center">
             <template #trigger>
                 <button
-                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
+                    class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto"
+                    @click="ram.setHoverCellCoordinates({ rowIndex: index, cellIndex: 0 }); ram.setActiveCell({ rowIndex: index, cellIndex: 0 }); ram.selectActiveCell()">
                     <IconDotsVertical :size="12" />
                 </button>
             </template>
