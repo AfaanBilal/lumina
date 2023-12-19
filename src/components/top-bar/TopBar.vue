@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div class="flex flex-wrap items-center justify-between p-2">
             <div class="flex items-center gap-2">
-                <img src="/logo.png" alt="logo" class="w-6">
+                <img src="/logo.png" alt="logo" class="w-5">
                 <h1 class="text-xl font-semibold">Lumina</h1>
             </div>
             <div class="flex items-center self-start justify-end gap-2 text-sm">
