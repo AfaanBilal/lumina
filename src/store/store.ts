@@ -140,10 +140,10 @@ export const useStore = defineStore("lumina", () => {
     };
 
     /** Rows / Columns */
-    const addRow = (index?: number) => index ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
+    const addRow = (index?: number) => typeof index !== "undefined" ? sheet.value.rows.splice(index, 0, emptyRow(columnCount.value)) : sheet.value.rows.push(emptyRow(columnCount.value));
     const addColumn = (index?: number) => {
         for (let i = 0; i < rowCount.value; i++) {
-            index ?
+            typeof index !== "undefined" ?
                 sheet.value.rows[i].cells.splice(index, 0, emptyCell()) :
                 sheet.value.rows[i].cells.push(emptyCell());
         }
