@@ -7,13 +7,15 @@
             'bg-slate-300 opacity-70': store.sheet.style.rows?.[index]?.hidden && store.file.settings.showHidden,
         }" :style="(store.sheet.style.rows?.[index]?.frozen ? `top: ${store.getFrozenTop(index)}px;` : '')"
         @click="ram.selectRow(index)">
-        {{ index + 1 }}
+        <div class="group-hover:hidden">
+            {{ index + 1 }}
+        </div>
 
-        <Dropdown class="absolute right-0 !flex items-center justify-center">
+        <Dropdown class="!flex items-center justify-center">
             <template #trigger>
                 <button
                     class="p-0.5 items-center justify-center hidden rounded-full group-hover:flex hover:bg-slate-300 my-auto">
-                    <IconDotsVertical :size="10" />
+                    <IconDotsVertical :size="12" />
                 </button>
             </template>
 
