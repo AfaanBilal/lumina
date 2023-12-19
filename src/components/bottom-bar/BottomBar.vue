@@ -4,14 +4,14 @@
             <div v-for="(s, i) in store.file.sheets" :key="s.id"
                 class="relative flex justify-center gap-2 p-2 pl-4 border-l cursor-pointer first-of-type:border-none hover:bg-slate-300 border-slate-300 group"
                 :class="{ 'bg-slate-900 text-white hover:bg-slate-800': store.activeSheetIndex === i }"
-                :style="store.file.sheets[i].style.color ? `background-color: ${store.file.sheets[i].style.color};` : ''"
+                :style="s.style.color ? `background-color: ${s.style.color};` : ''"
                 @click="store.setActiveSheet(i)">
                 <span v-show="store.activeSheetIndex === i" class="absolute w-2 h-2 rounded-full bg-slate-800 top-1 left-1">
                     &nbsp;
                 </span>
 
                 <div class="flex items-center gap-2">
-                    <IconLock v-show="store.file.sheets[i].locked" :class="{ 'text-white': store.activeSheetIndex === i }"
+                    <IconLock v-show="s.locked" :class="{ 'text-white': store.activeSheetIndex === i }"
                         :size="16" />
                     {{ s.name }}
                 </div>
@@ -29,7 +29,7 @@
                             <div class="flex-1 font-semibold">Name</div>
                             <div class="flex items-baseline gap-1">
                                 <input type="text" class="p-1 border rounded outline-none"
-                                    :value="store.file.sheets[i].name"
+                                    :value="s.name"
                                     @change="e => store.setSheetName(i, (e.target as HTMLInputElement).value)">
                             </div>
                         </div>
@@ -38,12 +38,12 @@
                                 <IconBucketDroplet :size="16" />
                                 Sheet color
                             </div>
-                            <color-picker :value:pure-color="store.file.sheets[i].style.color" :round-history="true"
+                            <color-picker :value:pure-color="s.style.color" :round-history="true"
                                 shape="circle" @pure-color-change="(c: string) => store.setSheetColor(i, c)" />
                         </div>
                         <div class="flex items-center gap-2 p-2 font-semibold border-t cursor-pointer hover:bg-slate-100"
-                            @click="store.setSheetLocked(i, !store.file.sheets[i].locked)">
-                            <IconLock :size="16" /> {{ store.file.sheets[i].locked ? 'Unlock' : 'Lock' }}
+                            @click="store.setSheetLocked(i, !s.locked)">
+                            <IconLock :size="16" /> {{ s.locked ? 'Unlock' : 'Lock' }}
                         </div>
                         <div class="flex items-center gap-2 p-2 font-semibold border-t text-slate-400"
                             :class="{ 'text-slate-900 cursor-pointer hover:bg-slate-100': i > 0 }"

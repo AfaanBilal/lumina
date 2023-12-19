@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col w-screen h-screen overflow-hidden">
         <TopBar />
-        <LuminaSheet :key="store.sheet.id" :sheet="store.sheet" />
+        <LuminaSheet :sheet="store.sheet" />
         <div class="flex-1 min-h-0 bg-slate-200">&nbsp;</div>
         <BottomBar />
         <ReferenceModal />
