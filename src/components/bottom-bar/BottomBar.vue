@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="flex items-center gap-2 p-2 my-auto rounded-full cursor-pointer hover:bg-slate-200 print:hidden"
-            title="Add sheet" @click="store.addSheet()">
+            title="Add sheet" @click="store.addSheet(); store.setActiveSheet(store.file.sheets.length - 1)">
             <IconPlus :size="20" />
         </div>
         <span class="hidden ml-auto text-xs print:flex text-slate-400">lumina.afaan.dev</span>

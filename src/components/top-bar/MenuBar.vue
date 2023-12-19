@@ -65,7 +65,7 @@
                     <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
                 <div class="flex items-center gap-2 px-2 py-1 border-b cursor-pointer hover:bg-slate-100"
-                    @click="store.addSheet(); insertDropdown.close();">
+                    @click="store.addSheet(); store.setActiveSheet(store.file.sheets.length - 1); insertDropdown.close();">
                     <IconTablePlus :size="16" /> Insert sheet
                 </div>
                 <Dropdown ref="insertFunctionDropdown" align="right" trigger="hover"
