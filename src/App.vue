@@ -19,6 +19,8 @@
  * @copyright   2023 Afaan Bilal
  */
 
+import "vue3-toastify/dist/index.css";
+
 import { useStore } from "./store/store";
 import LuminaSheet from "./components/sheet/LuminaSheet.vue";
 import ReferenceModal from "./components/ReferenceModal.vue";

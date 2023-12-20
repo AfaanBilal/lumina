@@ -15,7 +15,7 @@
         @click="ram.selectColumn(i)">
         <button
             class="absolute items-center justify-center p-0.5 left-1 hidden rounded-full group-hover:flex hover:bg-slate-300"
-            title="Insert column left" @click="store.addColumn(i)">
+            title="Insert column left" @click="e => { e.stopPropagation(); addColumn(i); }">
             <IconPlus :size="10" />
         </button>
 
@@ -67,11 +67,11 @@
                     <IconArrowMoveRight :size="16" /> Move right
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
-                    @click="store.addColumn(i)">
+                    @click="addColumn(i)">
                     <IconColumnInsertLeft :size="16" /> Insert column left
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold cursor-pointer hover:bg-slate-100"
-                    @click="store.addColumn(i + 1)">
+                    @click="addColumn(i + 1)">
                     <IconColumnInsertRight :size="16" /> Insert column right
                 </div>
                 <div class="flex items-center gap-2 p-2 font-semibold border-t cursor-pointer hover:bg-slate-100"
@@ -100,9 +100,14 @@ import {
     IconColumnInsertLeft, IconColumnInsertRight, IconArrowMoveLeft, IconArrowMoveRight,
 } from "@tabler/icons-vue";
 import { useStore } from "../../store/store";
-import { indexToColumn } from "../../utils/helpers";
+import { indexToColumn, toast } from "../../utils/helpers";
 import { useRAM } from "../../store/ram";
 
 const store = useStore();
 const ram = useRAM();
+
+const addColumn = (i: number) => {
+    toast("Adding column...");
+    setTimeout(() => store.addColumn(i), 50);
+};
 </script>

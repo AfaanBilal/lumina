@@ -8,9 +8,6 @@ dependencies:
   '@tabler/icons-vue':
     specifier: ^2.42.0
     version: 2.42.0(vue@3.3.10)
-  clsx:
-    specifier: ^2.0.0
-    version: 2.0.0
   expr-eval:
     specifier: ^2.0.2
     version: 2.0.2
@@ -35,6 +32,9 @@ dependencies:
   vue3-colorpicker:
     specifier: ^2.2.3
     version: 2.2.3(@aesoper/normal-utils@0.1.5)(@popperjs/core@2.11.8)(@vueuse/core@10.7.0)(gradient-parser@1.0.2)(lodash-es@4.17.21)(tinycolor2@1.6.0)(vue-types@4.2.1)(vue@3.3.10)
+  vue3-toastify:
+    specifier: ^0.1.14
+    version: 0.1.14(vue@3.3.10)
 
 devDependencies:
   '@types/papaparse':
@@ -1001,11 +1001,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
-
-  /clsx@2.0.0:
-    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
-    engines: {node: '>=6'}
-    dev: false
 
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -2229,6 +2224,18 @@ packages:
       tinycolor2: 1.6.0
       vue: 3.3.10(typescript@5.3.3)
       vue-types: 4.2.1(vue@3.3.10)
+    dev: false
+
+  /vue3-toastify@0.1.14(vue@3.3.10):
+    resolution: {integrity: sha512-2wyzMhWq8IjTclL25tqKWknDFdFI1vPueMGZpHNlPWf6TBfxBycBANS+2n4W1xD7tHhX4G6HhCe31sle6OpwYQ==}
+    engines: {node: '>=16', npm: '>=7'}
+    peerDependencies:
+      vue: '>=3.2.0'
+    peerDependenciesMeta:
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.3.10(typescript@5.3.3)
     dev: false
 
   /vue@3.3.10(typescript@5.3.3):

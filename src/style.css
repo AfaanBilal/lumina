@@ -55,3 +55,7 @@
     width: 18px !important;
     height: 18px !important;
 }
+
+.Toastify__toast {
+    min-height: auto !important;
+}
