@@ -19,7 +19,7 @@ export const constants = ["pi", "e", "true", "false"];
 export const nonStyleProps: Array<keyof ILuminaCellStyle> = ["merged", "locked"];
 
 export const toast = (text: string, options?: ToastOptions) => showToast(
-    text, { hideProgressBar: true, autoClose: 30000, theme: "dark", transition: "zoom", toastClassName: "min-h-0", ...options }
+    text, { hideProgressBar: true, autoClose: 300, theme: "dark", transition: "zoom", toastClassName: "min-h-0", ...options }
 );
 
 export const id = (prefix: string) => prefix + nanoid(10);
