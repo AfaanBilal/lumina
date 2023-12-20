@@ -15,8 +15,8 @@ import { CellCoordinates, ILuminaCell, ILuminaCellStyle, ILuminaColStyle, ILumin
 import { useRAM } from "./ram";
 import { id } from "../utils/helpers";
 
-const INITIAL_ROW_COUNT = Math.floor(window.innerHeight / 24);
-const INITIAL_COLUMN_COUNT = Math.floor(window.innerWidth / 75);
+const INITIAL_ROW_COUNT = 40;
+const INITIAL_COLUMN_COUNT = 26;
 
 const IMPORT_MIN_ROW_COUNT = 25;
 const IMPORT_MIN_COLUMN_COUNT = 10;

@@ -1,5 +1,5 @@
 <template>
-    <div ref="grid" class="relative grid overflow-auto" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
+    <div ref="grid" class="relative grid overflow-auto bg-slate-100" :onmousedown="onMouseDown" :onmouseup="onMouseUp" :style="`
             grid-template-rows: ${rowTemplate}; grid-template-columns: ${colTemplate}; zoom: ${store.file.settings.zoom};
         `">
         <LuminaSheetHeader />

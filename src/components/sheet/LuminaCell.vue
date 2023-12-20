@@ -1,24 +1,24 @@
 <template>
-    <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none text-xs" :class="{
+    <div v-if="showCell" class="flex items-center animate-[fadeIn_.3s_ease-in-out] select-none text-xs bg-white" :class="{
         'border': store.file.settings.showGridlines,
-        'bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
+        '!bg-slate-100': store.file.settings.showStripes && rowIndex % 2 == 1,
         'border-y-slate-400': store.file.settings.showRowBand && ram.activeCellCoordinates.rowIndex === rowIndex && ram.activeCellCoordinates.cellIndex > cellIndex,
         'border-x-slate-400': store.file.settings.showColumnBand && ram.activeCellCoordinates.cellIndex === cellIndex && ram.activeCellCoordinates.rowIndex > rowIndex,
 
         '!border-2 !border-blue-500': isActive,
         'border-dashed border-blue-400': isHovered && !isActive,
 
-        'bg-blue-200': isSelected,
+        '!bg-blue-200': isSelected,
         'border-t-blue-700': isSelected && onSelectionTopEdge && !onSheetTopEdge,
         'border-r-blue-700': isSelected && onSelectionRightEdge,
         'border-b-blue-700': isSelected && onSelectionBottomEdge,
         'border-l-blue-700': isSelected && onSelectionLeftEdge && !onSheetLeftEdge,
 
-        'bg-slate-300': props.cell.style?.locked,
-        'sticky bg-slate-300 z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
+        '!bg-slate-300': props.cell.style?.locked,
+        '!bg-slate-300 sticky z-40': store.sheet.style.rows?.[rowIndex]?.frozen || store.sheet.style.cols?.[cellIndex]?.frozen,
 
-        'bg-slate-300 opacity-0': isCellHidden && !store.file.settings.showHidden,
-        'bg-slate-300 opacity-70': isCellHidden && store.file.settings.showHidden,
+        '!bg-slate-300 opacity-0': isCellHidden && !store.file.settings.showHidden,
+        '!bg-slate-300 opacity-70': isCellHidden && store.file.settings.showHidden,
     }" :style="commonStyle + styleFrozen + styleMerged"
         @click="ram.setActiveCell({ rowIndex: props.rowIndex, cellIndex: props.cellIndex })" @mouseenter="mouseEnter">
         <div v-show="!isCellEditable" class="flex items-center justify-start w-full h-full p-0.5 truncate" :class="{
