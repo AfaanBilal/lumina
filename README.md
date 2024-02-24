@@ -8,6 +8,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 
 Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 
+<img src="./screenshots/lumina-hero.png" width="100%" />
+
 #### 🚧 Lumina is a work in progress.
 
 ---
