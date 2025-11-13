@@ -6,6 +6,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 ## Introduction
 **Lumina** is a spreadsheet app written in Vue and Typescript with Pinia and Tailwind.
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/AfaanBilal/lumina)
+
 Try it here: **[lumina.afaan.dev](https://lumina.afaan.dev/)**
 
 <img src="./screenshots/lumina-hero.png" width="100%" />
